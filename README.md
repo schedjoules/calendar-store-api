@@ -1,15 +1,14 @@
-SchedJoules Calendar Store API
-==================
+#SchedJoules Calendar Store API
 
 The all-new Calendar Store API
 
-JSON
-----
+##JSON
 
-Authentication
---------------
 
-Help Us
--------
+###Authentication
 
+
+####Help Us
+
+> Trying some markdown
 
