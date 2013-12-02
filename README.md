@@ -8,14 +8,14 @@ With this API you can get access to the SchedJoules Public Calendar Library. Sch
 
 ##Requests
 * All URLs start with https://api.schedjoules.com/
-* You can appende URLs can be by .json but that is not mandatory
+* You can append URLs can be by .json but that is not mandatory
 * We use REST methodology for the API
 * All output  is in JSON format
 * The API only accepts HTTPS requests
 
 ###Headers
 ####Versioning
-The API version needs to be set in de request header. Current version is: v1. If don't set headers and the default version is bumped your application might not function. If we change the API in backward-incompatible ways, we'll bump the version marker and maintain stable support for the old URLs. Labels can be added without version change so provision for that. Follow our [twitter feed](http://twitter.com/schedjoules) for latest SchedJoules' news also on the API. We'll email you with API changes as well once you are set up.
+The API version needs to be set in de request header. Current version is: v1. If you don't set headers and the default version is bumped your application might not function. If we change the API in backward-incompatible ways, we'll bump the version marker and maintain stable support for the old URLs. Labels can be added without version change so make your client flexible enough to handle that. Follow our [twitter feed](http://twitter.com/schedjoules) for latest SchedJoules' news also on the API. We'll email you with API changes as well once you are set up.
 
 ####Authentication
 You will need an API key to use this API. You can get your API key by contacting us at info@schedjoules.com. You need to set the API key in the header
@@ -35,15 +35,13 @@ A item class calendar is where the magic happens. This is where the users get to
 GET /pages/{PAGE_ID}&locale={[ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)}&location={[ISO_3166 code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)}
 
 Required GET parameters
-* PAGE_ID_
+* page_id
 
 Optional GET paramaters
 * locale - Default is 'en'
 * location - Default is 'us'
 
 If you use the locale and location parameter you will redirected to the correct page_id. So have you application detect the users locale and location and the API will return the page with the calendars that are most relevant to the user in his preferred language ;-)
-
-The JSON resonses are localised. The default is English. To get another locale append the request with '&locale={[ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)}. 
 
 ##Just to make sure there is no misunderstandig ... 
 By using our API it is clear to you that all the data you access is proprietary. The data and images can not be used for any other purpose then agreed on. Data can't be stored in any database other than on a users client for speed purposes.
@@ -53,7 +51,7 @@ Do your clients, yourself and us a favor and cache where you can. It will speed 
 * All json responses support Etag and last modified so use If-Modified-Since and If-None-Matched.
 * Icons are are in the JSON have their etag mentioned in de response.
 
-##Rate limiting
+##Rate limits
 There are no rate limits. We do count requests. If we think we can help you improve we will contact you.
 
 ##Help Us
