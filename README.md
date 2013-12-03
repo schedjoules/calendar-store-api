@@ -5,8 +5,9 @@ With this API you can get access to the SchedJoules Public Calendar Library. Sch
 1. Mail us at info@schedjoules.com for an API key
 2. Try from your terminal.
 
+```
     curl -L 'https://api.schedjoules.com/pages/115676?locale=en&location=ar' -v -H 'Authorization: Token token="{api_key}"'
-
+```
 If you get data you are good to go. Else contact us so we can help you out.
 
 ##Making a request
@@ -16,14 +17,16 @@ If you get data you are good to go. Else contact us so we can help you out.
 * Appending URLs with .json is not mandatory
 * The API only accepts HTTPS requests
 
-```GET /pages/{page_id}&locale={[ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)}&location={[ISO_3166 code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)}
+```
+GET /pages/{page_id}&locale={[ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)}&location={[ISO_3166 code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)}
 
 Required GET parameters
 * page_id
    
 Optional GET parameters
 * locale - Default is 'en'
-* location - Default is 'us'```
+* location - Default is 'us'
+```
 
 If you use the locale and location parameter you will overwrite the page\_id and you will be redirected to the correct page_id. So have you application detect the users locale and location and the API will return the page with the calendars that are most relevant to the user in his preferred language ;-)
 
