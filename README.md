@@ -24,12 +24,14 @@ Required GET parameters
 * page_id
 
 Optional GET parameters
-* locale - Default is 'en'
-* location - Default is 'us'
+* locale
+* location
 ```
 If you use the locale and location parameter you will overwrite the page\_id and you will be redirected to the correct page_id. So have you application detect the users locale and location and the API will return the page with the calendars that are most relevant to the user in his preferred language ;-)
 
-[Check](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) for ISO 639-1 language codes 
+Default language code is 'en'. Default country code is 'us'.
+
+[Check](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) for ISO 639-1 language codes
 [Check](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) for ISO_3166 country codes
 
 ###Headers
@@ -62,4 +64,4 @@ Do your clients, yourself and us a favor and cache where you can. It will speed 
 There are no rate limits. We do count requests. If we think we can help you improve we will contact you.
 
 ##Help Us
-Please tell us how we can make the API better. If you have a specific feature request or if you found a bug, please use GitHub issues or send us an email.
+Please tell us how we can make the API better. If you have a specific feature request or if you found a bug, please use GitHub issues or send us an email at info@schedjoules.com.
