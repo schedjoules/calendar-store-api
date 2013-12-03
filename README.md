@@ -21,24 +21,24 @@ If you get data you are good to go. Else contact us so we can help you out.
 GET /pages/{page\_id}&locale={ISO 639-1 code}&location={ISO_3166 code}
 
 Required GET parameters
-* page_id
+- page_id
 
 Optional GET parameters
-* locale
-* location
+- locale
+- location
 ```
 If you use the locale and location parameter you will overwrite the page\_id and you will be redirected to the correct page_id. So have you application detect the users locale and location and the API will return the page with the calendars that are most relevant to the user in his preferred language ;-)
 
 Default language code is 'en'. Default country code is 'us'.
 
-[Check](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) for ISO 639-1 language codes
-[Check](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) for ISO_3166 country codes
+[ISO 639-1 language codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
+[ISO_3166 country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) 
 
 ###Headers
 ####Versioning
 The API version needs to be set in the request header. Current version is: `v1`. If you don't set headers and the default version is bumped your application might not function. Labels can be added without version change so make your client flexible enough to handle that. Follow our [twitter feed](http://twitter.com/schedjoules) for latest SchedJoules' news also on the API. We'll email you with API changes as well once you are set up.
 
-This API is in Beta. That means that the structure and labels will remain as-is unless there are moyor reasons to change them. As of January 1st 2014 the API will be production ready. One thing that we do need to make to big progress on is the documentation. So hack away and keep those questions coming.
+This API is in Beta. That means that the structure and labels will remain as-is unless there are moyor reasons to change them. As of January 1st 2014 the API will be production ready. One thing that we do need to make to big progress on is the documentation. There might be some downtime or unexpected behaviour between now and January 1st.
 
 ####Authentication
 You will need an API key to use this API. You can get your API key by contacting us at info@schedjoules.com. You need to set the API key in the header.
