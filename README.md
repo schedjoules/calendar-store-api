@@ -31,8 +31,8 @@ If you use the locale and location parameter you will overwrite the page\_id and
 
 Default language code is 'en'. Default country code is 'us'.
 
-[ISO 639-1 language codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
-[ISO_3166 country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) 
+[ISO 639-1 language codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)  
+[ISO_3166 country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
 
 ###Headers
 ####Versioning
