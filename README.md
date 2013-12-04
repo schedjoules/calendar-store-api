@@ -18,7 +18,7 @@ If you get data, you're good to go. Otherwise contact us so we can help you out.
 * The API only accepts HTTPS requests
 
 ```
-GET /pages/{page\_id}&locale={ISO 639-1 code}&location={ISO_3166 code}
+GET /pages/{page_id}&locale={ISO 639-1 code}&location={ISO_3166 code}
 
 Required GET parameters
 - page_id
