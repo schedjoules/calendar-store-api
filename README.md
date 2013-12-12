@@ -60,6 +60,13 @@ Do your clients, yourself and us a favor and cache where you can. It will speed 
 * All requests we return will include an `ETag` or `Last-Modified` header so use `If-Modified-Since` and `If-None-Matched` in you requests.
 * Icon urls that are in the JSON have their ETag mentioned in de response.
 
+##More Information
+Check out the following page for more information:
+[Weather](https://github.com/schedjoules/calendar-store-api/blob/master/details/weather.md)
+[In App Purchases](https://github.com/schedjoules/calendar-store-api/blob/master/details/in_app_purchases.md)
+[FAQ](https://github.com/schedjoules/calendar-store-api/blob/master/details/faq.md)
+
+
 ##Rate limits
 There are no rate limits. We do count requests. If we think we can help you improve we will contact you.
 
