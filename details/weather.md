@@ -1,26 +1,20 @@
-#Weather API
+#Weather
 
-In the JSON returned by the API yo'll notice a url that looks like
+In the JSON returned by the [pages resource](https://github.com/schedjoules/calendar-store-api/) you'll notice a url that looks like
 ```
-http://{your_name}.schedjoules.com/cities/full/%TEMP%/%LANGUAGE%/%RAIN%/%WIND%/%TIME%/%CITY%.ics&x={your_app_code}
+http://{your_name}.schedjoules.com/cities/full/%TEMP%/%LANGUAGE%/%RAIN%/%WIND%/%TIME%/%CITY%.ics?x={your_app_code}
 ```
 
-The parameters 
+All parameters except for the %CITY% can be set by your users in your app.
 
-Temp
-
-Language
-
-Rain
-
-Wind
-
-Time
-
-City
-
-Parameters can be found at:
-
+The localised parameters can be accessed via:
 ```
-http://{your_name}.schedjoules.com/cities/full/%TEMP%/%LANGUAGE%/%RAIN%/%WIND%/%TIME%/%CITY%.ics&x={your_app_code}
+https://api.schedjoules.com/cities/weather_settings
 ```
+Your app can access the %CITY% parameter by making a request to 
+```
+https://api.schedjoules.com/cities/cities_within_bounds?ne=4.363991,-1.150881&sw=-1.567068,8.39353
+```
+whereby the ne and sw parameters should be replaced by the north­east and south­west coordinates of the users screen. Your request will be repsonded with the 30 most popular weather station in the users view. This response provides the location_name, the location_coordinates and a location_id.
+
+We are working on API method that will return the closest location based on the user home or work address

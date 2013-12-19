@@ -61,7 +61,7 @@ Do your clients, yourself and us a favor and cache where you can. It will speed 
 * Icon urls that are in the JSON have their ETag mentioned in de response.
 
 ##More Information
-Check out the following page for more information:
+Check out the following pages for more information:
 * [Weather](https://github.com/schedjoules/calendar-store-api/blob/master/details/weather.md)  
 * [In App Purchases](https://github.com/schedjoules/calendar-store-api/blob/master/details/in_app_purchases.md)  
 * [FAQ](https://github.com/schedjoules/calendar-store-api/blob/master/details/faq.md)
