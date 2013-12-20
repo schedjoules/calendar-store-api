@@ -60,8 +60,7 @@ Do your clients, yourself and us a favor and cache where you can. It will speed 
 Check out the following pages for more information:
 * [Pages](https://github.com/schedjoules/calendar-store-api/blob/master/details/pages.md)
 * [Weather](https://github.com/schedjoules/calendar-store-api/blob/master/details/weather.md)  
-* [In App Purchases and Subscriptions](https://github
-.com/schedjoules/calendar-store-api/blob/master/details/in_app_purchases.md)
+* [In App Purchases and Subscriptions](https://github.com/schedjoules/calendar-store-api/blob/master/details/in_app_purchases.md)
 * [Questions and Answers](https://github.com/schedjoules/calendar-store-api/blob/master/details/faq.md)
 
 
