@@ -1,4 +1,4 @@
-#SchedJoules Calendar Store API
+#SchedJoules Calendar Store API (BETA)
 With this API you can get access to the SchedJoules Public Calendar Library. SchedJoules delivers the most comprehensive public desktop, web and mobile calendar store in the world. We currently deliver over 180.000 complete, accurate and timely public calendars for holidays, sports, weather and financial events. We do so in 40 languages.
 
 ##Set yourself up
@@ -61,9 +61,11 @@ Do your clients, yourself and us a favor and cache where you can. It will speed 
 
 ##More Information
 Check out the following pages for more information:
+* [Pages](https://github.com/schedjoules/calendar-store-api/blob/master/details/pages.md)
 * [Weather](https://github.com/schedjoules/calendar-store-api/blob/master/details/weather.md)  
-* [In App Purchases](https://github.com/schedjoules/calendar-store-api/blob/master/details/in_app_purchases.md)  
-* [FAQ](https://github.com/schedjoules/calendar-store-api/blob/master/details/faq.md)
+* [In App Purchases and Subscriptions](https://github
+.com/schedjoules/calendar-store-api/blob/master/details/in_app_purchases.md)
+* [Questions and Answers](https://github.com/schedjoules/calendar-store-api/blob/master/details/faq.md)
 
 
 ##Rate limits

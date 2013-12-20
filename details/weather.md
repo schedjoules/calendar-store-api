@@ -7,14 +7,24 @@ http://{your_name}.schedjoules.com/cities/full/%TEMP%/%LANGUAGE%/%RAIN%/%WIND%/%
 
 All parameters except for the %CITY% can be set by your users in your app.
 
-The localised parameters can be accessed via:
+These parameters can be accessed via:
+
 ```
-https://api.schedjoules.com/cities/weather_settings
+GET /cities/weather_settings
+
+Optional GET parameters
+- locale (if omitted defaults to 'en')
 ```
-Your app can access the %CITY% parameter by making a request to 
+
+Your app can access the %CITY% parameter by making a request to
+
 ```
-https://api.schedjoules.com/cities/cities_within_bounds?ne=4.363991,-1.150881&sw=-1.567068,8.39353
+GET /cities/cities_within_bounds?ne=4.363991,-1.150881&sw=-1.567068,8.39353
+
+Required GET parameters
+- ne
+- sw
 ```
-whereby the ne and sw parameters should be replaced by the north­east and south­west coordinates of the users screen. Your request will be repsonded with the 30 most popular weather station in the users view. This response provides the location_name, the location_coordinates and a location_id.
+whereby the ne and sw parameters should be replaced by the north-east and south-west coordinates of the user's screen. Your request will be responded with the 30 most popular weather station in the users view. This response provides the location_name, the location_coordinates and a location_id.
 
 We are working on API method that will return the closest location based on the user home or work address
