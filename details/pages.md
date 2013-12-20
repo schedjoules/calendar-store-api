@@ -69,7 +69,7 @@ Optional labels
 
 ```
 
-####Page_sections
+####Page Sections
 ```
 Required labels
 - name                              string (may be nil)
