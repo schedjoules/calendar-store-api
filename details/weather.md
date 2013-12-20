@@ -1,4 +1,4 @@
-#Weather
+##Weather
 
 In the JSON returned by the [pages resource](https://github.com/schedjoules/calendar-store-api/) you'll notice a url that looks like
 ```

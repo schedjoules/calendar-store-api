@@ -1,4 +1,4 @@
-#SchedJoules Calendar Store API (BETA)
+##SchedJoules Calendar Store API (BETA)
 With this API you can get access to the SchedJoules Public Calendar Library. SchedJoules delivers the most comprehensive public desktop, web and mobile calendar store in the world. We currently deliver over 180.000 complete, accurate and timely public calendars for holidays, sports, weather and financial events. We do so in 40 languages.
 
 ##Set yourself up
@@ -51,9 +51,6 @@ A page is, not very surprisingly, a child page of the page the user is looking a
 
 An item\_class calendar is where the magic happens. This is where the user gets to see the actual data in the calendar file and can add that calendar to his of her calendar application.
 
-##Just to make sure there is no misunderstanding ... 
-By using our API it is clear to you that all the data you access is proprietary. The data and images can not be used for any other purpose then agreed upon. Data can't be stored in any database other than on a users client for performance purposes.
-
 ##Caching
 Do your clients, yourself and us a favor and cache where you can. It will speed up your app and save bandwidth.
 * All requests we return will include an `ETag` or `Last-Modified` header so use `If-Modified-Since` and `If-None-Matched` in you requests.
@@ -70,6 +67,9 @@ Check out the following pages for more information:
 
 ##Rate limits
 There are no rate limits. We do count requests. If we think we can help you improve we will contact you.
+
+##Just to make sure there is no misunderstanding ...
+By using our API it is clear to you that all the data you access is proprietary. The data and images can not be used for any other purpose then agreed upon. Data can't be stored in any database other than on a users client for performance purposes.
 
 ##Help Us
 Please tell us how we can make the API better. If you have a specific feature request or if you find a bug, please use GitHub issues or send us an email at info@schedjoules.com.
