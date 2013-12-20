@@ -59,61 +59,61 @@ When requesting a page the response might look like:
 ###Elements
 ####Page
 ```
-**Required labels**
-- item_id                           _integer_
-- name                              _string_
-- app_subscription_identifier       _string_
-- page_sections                     _array_
+Required labels
+- item_id                           integer
+- name                              string
+- app_subscription_identifier       string
+- page_sections                     array
 
-**Optional labels**
+Optional labels
 
 ```
 
 ####Page_sections
 ```
-**Required labels**
-- name                              _string (may be nil)_
-- items                             _array_
+Required labels
+- name                              string (may be nil)
+- items                             array
 
-**Optional labels**
+Optional labels
 ```
 
 ####Items
 ```
-**Required labels**
-- item_class                        _string ('page' or 'calendar')_
-- item                              _hash_
+Required labels
+- item_class                        string ('page' or 'calendar')
+- item                              hash
 
-**Optional labels**
+Optional labels
 ```
 
 ####Page item
 ```
-**Required labels**
-- item_id                           _integer_
-- name                              _string_
-- icon                              _string (url)_
-- icon_etag                         _string
-- url                               _string (url to child page)_
+Required labels
+- item_id                           integer
+- name                              string
+- icon                              string (url)
+- icon_etag                         string
+- url                               string (url to child page)
 
-**Optional labels**
-- sport                             _string_
-- country                           _string_
-- season                            _string_
+Optional labels
+- sport                             string
+- country                           string
+- season                            string
 ```
 
 ####Calendar item
 ```
-**Required labels**
-- item_id                           _integer_
-- name                              _string_
-- identifier                        _string_
-- url                               _string (url to ics file)_
+Required labels
+- item_id                           integer
+- name                              string
+- identifier                        string
+- url                               string (url to ics file)
 
-**Optional labels**
-- icon                              _string (url)_
-- icon_etag                         _string_
-- sport                             _string_
-- country                           _string_
-- season                            _string_
+Optional labels
+- icon                              string (url)
+- icon_etag                         string
+- sport                             string
+- country                           string
+- season                            string
 ```
