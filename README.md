@@ -2,13 +2,11 @@
 With this API you can get access to the SchedJoules Public Calendar Library. SchedJoules delivers the most comprehensive public desktop, web and mobile calendar store in the world. We currently deliver over 180.000 complete, accurate and timely public calendars for holidays, sports, weather and financial events. We do so in 40 languages.
 
 ##Set yourself up
-1. Mail us at info@schedjoules.com for an API key
-2. Try from your terminal.
-
+You can take a peek at the API by using our test user API key and visiting the US calendar library via
 ```
-curl -L 'https://api.schedjoules.com/pages?locale=en&location=ar' -v -H 'Authorization: Token token="{api_key}"'
+curl -L 'https://api.schedjoules.com/pages/115673' -v -H 'Authorization: Token token="0443a55244bb2b6224fd48e0416f0d9c"'
 ```
-If you get data, you're good to go. Otherwise contact us so we can help you out.
+If you like what you see and want to get full access to the API and our content mail us at info@schedjoules.com and we'll provide you with your API key.
 
 ##Making a request
 * All requests start with https://api.schedjoules.com/
