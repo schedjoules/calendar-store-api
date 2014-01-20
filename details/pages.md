@@ -62,10 +62,10 @@ When requesting a page the response might look like:
 Required labels
 - item_id                           integer
 - name                              string
-- app_subscription_identifier       string
 - page_sections                     array
 
 Optional labels
+- app_subscription_identifier       string
 
 ```
 
@@ -107,10 +107,10 @@ Optional labels
 Required labels
 - item_id                           integer
 - name                              string
-- identifier                        string
 - url                               string (url to ics file)
 
 Optional labels
+- identifier                        string
 - icon                              string (url)
 - icon_etag                         string
 - sport                             string
