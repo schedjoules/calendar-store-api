@@ -4,7 +4,7 @@ Pages are the foundation of the API. Pages are the scaffolds of the views your u
 to add the UX and UI for the pages.
 
 Pages are localised so all items on the page that can be translated will be shown translated.
-When requesting a page the response might look like:
+When requesting a page the response might look like this:
 
 ```
 {
