@@ -14,7 +14,7 @@ For Apple applications Connect is your friend as we are sure you know. We will p
 For Android apps we'll provice you with csv will that you need to upload.
 
 ###Other
-Allthough we are less experienced on other web or mobile OSs we'll help you get started.
+Although we are less experienced on other web or mobile OSs we'll help you get started.
 
 You can review your in-app purchases via:
 
