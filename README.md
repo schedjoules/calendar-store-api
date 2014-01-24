@@ -24,12 +24,14 @@ Optional GET parameters
 - page_id
 ```
 
-If you use the location parameter you will overwrite the page\_id and you will be redirected to the page_id of the specific country you requested in the locale. So have your application detect the users locale and location and the API will return the page with the calendars that are most relevant to the user in his preferred language ;-)
+If you use the location parameter you will overwrite the page_id and you will be redirected to the page_id of the specific country you requested in the locale. So have your application detect the users locale and location and the API will return the page with the calendars that are most relevant to the user in his preferred language ;-)
 
 Default language code is 'en'. Default country code is 'us'.
 
 [ISO 639-1 language codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)  
 [ISO_3166 country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+
+Using the user's region setting for setting the locale is accepted but only the language part (for 'de_DE' => 'de') is used to return the correct language.  
 
 ###Headers
 ####Versioning
@@ -43,11 +45,11 @@ You will need an API key to use this API. You can get your API key by contacting
 ###Pages
 The API is mainly build around the concept of pages. Visualise a page in your application for eg football.That page would have all the names of all the teams in a league from which users can select their favourite team of which to want to add all matches to their calendar.
 
-A page has a name and meta data like its name and page\_section. Think of page sections as headers or paragraphes. A page section has a name. Within the page\_section are the items wich have an item\_class. And item\_ class is either a 'calendar' or a 'page'.
+A page has a name and meta data like its name and page_section. Think of page sections as headers or paragraphes. A page section has a name. Within the page_section are the items wich have an item_class. And item_class is either a 'calendar' or a 'page'.
 
 A page is, not very surprisingly, a child page of the page the user is looking at. Think of English Football being a (sub)page of All Football and Premier League being a (sub)page of English Football.
 
-An item\_class calendar is where the magic happens. This is where the user gets to see the actual data in the calendar file and can add that calendar to his of her calendar application.
+An item_class calendar is where the magic happens. This is where the user gets to see the actual data in the calendar file and can add that calendar to his of her calendar application.
 
 ##Caching
 Do your clients, yourself and us a favor and cache where you can. It will speed up your app and save bandwidth.
