@@ -37,6 +37,6 @@ to = "Kuala Lumpur";
 ty = i;
 }
 ```
-This response provides the location_name (to), the location_coordinates(la,lo) and the location_id (fo). The ty label tells you if the returned marker is (c)lustered or (i)ndividual. Clustered markers can be zooomed into and will show more markers. 
+This response provides the location_name (to), the location_coordinates(la,lo) and the location_id (fo). The ty label tells you if the returned marker is (c)lustered or (i)ndividual. Clustered markers can be zoomed into and will show more markers. 
 
 We are working on API method that will return the closest location based on the user home or work address
