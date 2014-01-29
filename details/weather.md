@@ -27,15 +27,24 @@ Required GET parameters
 ```
 whereby the ne and sw parameters should be replaced by the north-east and south-west coordinates of the user's screen. 
 
-Your request will be responded with the 30 most popular weather station in the users view. The response might look like:
+Your request will be responded with the 30 most popular weather station in the users view. The response might contain:
 ```
+...
 {
-fo = 101735161;
-la = "3.17";
-lo = "101.7";
-to = "Kuala Lumpur";
-ty = i;
+	la: -1.4,
+	lo: 31.73,
+	fo: 100158179,
+	ty: "c",
+	to: "Katerero"
+},
+{
+	la: 2.57,
+	lo: -72.64,
+	fo: 103828545,
+	ty: "i",
+	to: "San Jose del Guaviare"
 }
+...
 ```
 This response provides the location_name (to), the location_coordinates(la,lo) and the location_id (fo). The ty label tells you if the returned marker is (c)lustered or (i)ndividual. Clustered markers can be zoomed into and will show more markers. 
 
