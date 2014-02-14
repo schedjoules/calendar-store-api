@@ -1,5 +1,5 @@
 ##Countries
-A list of supported and localised country names can be retrieevd via:
+A list of supported and localised country names can be retrieved via:
 ```
 GET /countries
 
@@ -26,6 +26,6 @@ Required labels
 	- country_name_translation	string
 ```
 
-You can use the coutrny list to let your users overwrite their default calendar store based on their device's regions setting and switch to a calendar store from a different country.
+You can use the country list to let your users overwrite their default calendar store based on their device's region setting and switch to a calendar store from a different country.
 
 All country names are currently available in English. We are working on translation all country names to the the top 20 languages in the world. If you miss translation please let us know.
