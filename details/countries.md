@@ -10,6 +10,8 @@ Optional GET parameters
 Required labels
 - country_id					integer
 - country_name					string
+- country_icon					string (url)
+- country_icon_etag				string
 - iso_3166						string
 - country_name_translation		string
 - country_translation_url		string (url)
@@ -20,6 +22,8 @@ Countries can also be called to view all available translations by following the
 Required labels
 - country_id					integer
 - country_name					string
+- country_icon					string (url)
+- country_icon_etag				string
 - iso_3166						string
 - locales						array
 	- locale					string
