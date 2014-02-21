@@ -9,25 +9,25 @@ Optional GET parameters
 
 Required labels
 - country_id					integer
-- country_name					string
-- country_icon					string (url)
-- country_icon_etag				string
+- name							string
+- icon							string (url)
+- icon_etag						string
 - iso_3166						string
-- country_name_translation		string
-- country_translation_url		string (url)
+- name_translation				string
+- translation_url				string (url)
 ```
 
 Countries can also be called to view all available translations by following the country_translation_url.
 ```
 Required labels
 - country_id					integer
-- country_name					string
-- country_icon					string (url)
-- country_icon_etag				string
+- name							string
+- icon							string (url)
+- icon_etag						string
 - iso_3166						string
 - locales						array
 	- locale					string
-	- country_name_translation	string
+	- name_translation			string
 ```
 
 You can use the country list to let your users overwrite their default calendar store based on their device's region setting and switch to a calendar store from a different country.
