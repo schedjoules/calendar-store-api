@@ -15,18 +15,27 @@ If you like what you see and want to get full access to the API and our content 
 * Appending URLs with .json is not mandatory
 * The API only accepts HTTPS requests
 
+
+Use the user's location as an entry point:
 ```
-GET /pages/{page_id}&locale={ISO 639-1 code}&location={ISO_3166 code}
+GET /pages?locale={ISO 639-1 code}&location={ISO_3166 code}
 
 Optional GET parameters
 - locale (if omitted defaults to 'en')
 - location (if omitted defaults to 'us' unless page_id is used)
+```
+
+Or if you know the page_id go directly to that page
+```
+GET /pages/{page_id}&locale={ISO 639-1 code}
+
+Optional GET parameters
+- locale (if omitted defaults to 'en')
+- location
 - page_id
 ```
 
-If you use the location parameter you will overwrite the page_id and you will be redirected to the page_id of the specific country you requested in the locale. So have your application detect the users locale and location and the API will return the page with the calendars that are most relevant to the user in his preferred language ;-)
 
-Default language code is 'en'. Default country code is 'us'.
 
 [ISO 639-1 language codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)  
 [ISO_3166 country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
