@@ -1,6 +1,8 @@
 ##SchedJoules Calendar Store API (BETA)
 With this API you can get access to the SchedJoules Public Calendar Library. SchedJoules delivers the most comprehensive public desktop, web and mobile calendar store in the world. We currently deliver over 180.000 complete, accurate and timely public calendars for holidays, sports, weather and financial events. We do so in 40 languages.
 
+For iOS we have a **SDK** that uses all the API goodies. For the 5 minute SDK install [check out](http://schedjoules.com/resources/developer-resources/ios/CalendarStoreDocumentation/index.html) the documentation. Of course you are more than welcome to implement the API without using the SDK. If so please read on.
+
 ##Set yourself up
 You can take a peek at the API by using our test user API key and visiting the US calendar library via
 ```
@@ -34,8 +36,6 @@ Optional GET parameters
 - location
 - page_id
 ```
-
-
 
 [ISO 639-1 language codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)  
 [ISO_3166 country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
