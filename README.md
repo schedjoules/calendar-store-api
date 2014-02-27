@@ -4,11 +4,11 @@ With this API you can get access to the SchedJoules Public Calendar Library. Sch
 For iOS we have a **SDK** that uses all the API goodies. For the 5 minute SDK install [check out](http://schedjoules.com/resources/developer-resources/ios/CalendarStoreDocumentation/index.html) the documentation. Of course you are more than welcome to implement the API without using the SDK. If so please read on.
 
 ##Set yourself up
-You can take a peek at the API by using our test user API key and visiting the US calendar library via
+You can take a peek at the API by using our test user API key:
 ```
 curl -L 'https://api.schedjoules.com/pages/115673' -v -H 'Authorization: Token token="0443a55244bb2b6224fd48e0416f0d9c"'
 ```
-If you like what you see and want to get full access to the API and our content mail us at info@schedjoules.com and we'll provide you with your API key.
+The test API key gives you access to the complete API but the calendar urls will contain dummy data. If you like what you see and want full access to the calendar content as well mail us at info@schedjoules.com and we'll provide you with your API key.
 
 ##Making a request
 * All requests start with https://api.schedjoules.com/
@@ -17,8 +17,7 @@ If you like what you see and want to get full access to the API and our content 
 * Appending URLs with .json is not mandatory
 * The API only accepts HTTPS requests
 
-
-Use the user's location as an entry point:
+Use the user's current location as an entry point:
 ```
 GET /pages?locale={ISO 639-1 code}&location={ISO_3166 code}
 
