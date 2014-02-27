@@ -1,5 +1,6 @@
 ##Weather
 
+### Calendar requests
 In the JSON returned by the [pages resource](https://github.com/schedjoules/calendar-store-api/) you'll notice a url that looks like: *
 
 ```
@@ -14,8 +15,11 @@ GET /cities/weather_settings
 
 Optional GET parameters
 - locale (if omitted defaults to 'en')
+- location
 ```
+By using the location parameter the defaults for that location are returned. For example when requesting location=us the default temprature setting will be returned as Fahrenheit.
 
+###Plot locations based on the user's location
 Your app can access the {location} parameter by making a request to
 
 ```
