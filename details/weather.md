@@ -19,6 +19,15 @@ Optional GET parameters
 ```
 By using the location parameter the defaults for that location are returned. For example when requesting location=us the default temprature setting will be returned as Fahrenheit.
 
+The weather information that is available is:
+* Daily max/min temprature for the day
+* Daily rainfall + chance
+* Daily sunrise & sunset times
+* Daily UV index
+* Per 6 hours: temprature, windspeed, winddirection
+
+We provide data for 150.000 locations worldwide; 14 days ahead. Since the information is used in the calendar the information is all flat text.
+
 ###Plot locations based on the user's location
 Your app can access the {location} parameter by making a request to
 
