@@ -30,10 +30,11 @@ Or if you know the page_id go directly to that page
 ```
 GET /pages/{page_id}&locale={ISO 639-1 code}
 
+Required GET parameters
+- page_id
+
 Optional GET parameters
 - locale (if omitted defaults to 'en')
-- location
-- page_id
 ```
 
 [ISO 639-1 language codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)  
