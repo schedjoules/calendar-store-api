@@ -68,6 +68,10 @@ Optional labels
 - app_subscription_identifier       string
 
 ```
+The item_id is unique for the page.
+A page can have one or more page_sections.
+The app_subscription_identifier is unique for the api_key and can be used for applications using the subscription price model.
+
 
 ####Page Sections
 ```
@@ -92,15 +96,20 @@ Optional labels
 Required labels
 - item_id                           integer
 - name                              string
-- icon                              string (url)
-- icon_etag                         string
 - url                               string (url to child page)
 
 Optional labels
+- icon                              string (url)
+- icon_etag                         string
+- page_identifier					string
 - sport                             string
 - country                           string
 - season                            string
+- related_identifiers				array of strings
 ```
+An item can have a icon and related icon_etag.
+The page_identifier indicates that all children of this page item have the mentioned page_identifier as identifier.
+An identifier is unique for the combination of api_key and page. If identifiers need to shared accross different api_keys these identifiers are mentioned as related_identifiers.
 
 ####Calendar item
 ```
