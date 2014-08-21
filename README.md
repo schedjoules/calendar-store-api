@@ -8,7 +8,7 @@ You can take a peek at the API by using our test user API key:
 ```
 curl -L 'https://api.schedjoules.com/pages/115673' -v -H 'Authorization: Token token="0443a55244bb2b6224fd48e0416f0d9c"'
 ```
-The test API key gives you access to the complete API but the calendar urls will contain dummy data. If you like what you see and want full access to the calendar content as well mail us at info@schedjoules.com and we'll provide you with your API key.
+The test API key gives you access to the complete API but the calendar urls will contain dummy data. If you like what you see and want full access to the calendar content as well mail us at support@schedjoules.com and we'll provide you with your API key.
 
 ##Making a request
 * All requests start with https://api.schedjoules.com/
@@ -47,7 +47,7 @@ Using the user's region setting for setting the locale is accepted but only the 
 The API version needs to be set in the request header. Current version is: `v1`. If you don't set headers and the default version is bumped your application might not function. Labels can be added without version change so make your client flexible enough to handle that. Follow our [twitter feed](http://twitter.com/schedjoules) for latest SchedJoules' news, also on the API. We'll email you with API changes as well once you are set up.
 
 ####Authentication
-You will need an API key to use this API. You can get your API key by contacting us at info@schedjoules.com. You need to set the API key in the header.
+You will need an API key to use this API. You can get your API key by contacting us at support@schedjoules.com. You need to set the API key in the header.
 
 ###Pages
 The API is mainly build around the concept of pages. Visualise a page in your application for eg football.That page would have all the names of all the teams in a league from which users can select their favourite team of which to want to add all matches to their calendar.
@@ -68,7 +68,8 @@ Check out the following pages for more information:
 * [Pages](https://github.com/schedjoules/calendar-store-api/blob/master/details/pages.md)
 * [Weather](https://github.com/schedjoules/calendar-store-api/blob/master/details/weather.md)
 * [In App Purchases and Subscriptions](https://github.com/schedjoules/calendar-store-api/blob/master/details/in_app_purchases.md)
-* [Countries](https://github.com/schedjoules/calendar-store-api/blob/master/details/countries.md)  
+* [Countries](https://github.com/schedjoules/calendar-store-api/blob/master/details/countries.md)
+* [Search](https://github.com/schedjoules/calendar-store-api/blob/master/details/search.md) 
 * [Questions and Answers](https://github.com/schedjoules/calendar-store-api/blob/master/details/faq.md)
 
 ##Rate limits
