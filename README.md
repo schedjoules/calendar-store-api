@@ -1,4 +1,4 @@
-##SchedJoules Calendar Store API (BETA)
+##SchedJoules Calendar Store API
 With this API you can get access to the SchedJoules Public Calendar Library. SchedJoules delivers the most comprehensive public desktop, web and mobile calendar store in the world. We currently deliver over 180.000 complete, accurate and timely public calendars for holidays, sports, weather and financial events. We do so in 40 languages.
 
 For iOS we have a **SDK** that uses all the API goodies. For the 5 minute SDK install [check out](http://schedjoules.com/resources/developer-resources/ios/CalendarStoreDocumentation/index.html) the documentation. Of course you are more than welcome to implement the API without using the SDK. If so please read on.
@@ -45,8 +45,6 @@ Using the user's region setting for setting the locale is accepted but only the 
 ###Headers
 ####Versioning
 The API version needs to be set in the request header. Current version is: `v1`. If you don't set headers and the default version is bumped your application might not function. Labels can be added without version change so make your client flexible enough to handle that. Follow our [twitter feed](http://twitter.com/schedjoules) for latest SchedJoules' news, also on the API. We'll email you with API changes as well once you are set up.
-
-This API is in Beta. That means that the structure and labels will remain as-is unless there are moyor reasons to change them. One thing that we do need to make progress on is the documentation. There also might be some downtime or unexpected behaviour between now and January 1st. As of January 1, 2014 the API will be production ready. 
 
 ####Authentication
 You will need an API key to use this API. You can get your API key by contacting us at info@schedjoules.com. You need to set the API key in the header.
