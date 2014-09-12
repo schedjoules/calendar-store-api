@@ -14,7 +14,7 @@ Required GET parameters
 - calendar_name					string
 
 Optional GET parameters
-- locale 						string
+- locale 						string  (if omitted defaults to 'en')
 ```
 
 ###By product identifier
@@ -29,5 +29,5 @@ Required GET parameters
 - identifier					string
 
 Optional GET parameters
-- locale						string
+- locale						string  (if omitted defaults to 'en')
 ```
