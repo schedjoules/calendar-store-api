@@ -1,9 +1,9 @@
-##Top, next, new
+##Top, new, next
 
 There are three calls returning the in-app purchases that:
 * are most populair
-* will start next
 * are newly added
+* will start next
 
 All three calls return the [pages](https://github.com/schedjoules/calendar-store-api/blob/master/details/pages.md) JSON structure. For all three calls the maximum number of In App Purchases returned is 50.
 
@@ -21,12 +21,11 @@ Optional GET parameters
 - location 						string  (if omitted defaults to 'us')
 ```
 
-
-###Next
-The 'next' call will return the in-app purchases that start next. The in-app purchase that starts first is at the top. An extra label 'first_event' shows the date and time (UTC) of the first event of that in-app purchase.
+###New
+The 'new' call will return the in-app purchases that were added latest. The in-app purchase that was added latest is at the top. An extra label 'first_event' shows the date and time (UTC) of the first event of that in-app purchase.
 
 ```
-GET /pages?next={nr_of_IAPs}
+GET /pages?new={nr_of_IAPs}
 
 Required GET parameters
 - nr_of_IAPs					integer
@@ -35,12 +34,11 @@ Optional GET parameters
 - locale 						string  (if omitted defaults to 'en')
 ```
 
-
-###New
-The 'new' call will return the in-app purchases that were added latest. The in-app purchase that was added latest is at the top. An extra label 'first_event' shows the date and time (UTC) of the first event of that in-app purchase.
+###Next
+The 'next' call will return the in-app purchases that start next. The in-app purchase that starts first is at the top. An extra label 'first_event' shows the date and time (UTC) of the first event of that in-app purchase.
 
 ```
-GET /pages?new={nr_of_IAPs}
+GET /pages?next={nr_of_IAPs}
 
 Required GET parameters
 - nr_of_IAPs					integer
