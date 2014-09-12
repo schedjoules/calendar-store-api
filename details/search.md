@@ -12,6 +12,9 @@ eg /pages/search?q=Warriors
 
 Required GET parameters
 - calendar_name					string
+
+Optional GET parameters
+- locale 						string
 ```
 
 ###By product identifier
@@ -24,4 +27,7 @@ eg /pages/search?i=xxxxxxx_92047_united_states_holidays
 
 Required GET parameters
 - identifier					string
+
+Optional GET parameters
+- locale						string
 ```
