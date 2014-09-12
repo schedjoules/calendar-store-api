@@ -34,7 +34,7 @@ Required GET parameters
 - page_id
 
 Optional GET parameters
-- locale (if omitted defaults to 'en')
+- locale 					string (if omitted defaults to 'en')
 ```
 
 [ISO 639-1 language codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)  
@@ -66,7 +66,7 @@ Do your clients, yourself and us a favor and cache where you can. It will speed 
 ##More Information
 Check out the following pages for more information:
 * [Pages](https://github.com/schedjoules/calendar-store-api/blob/master/details/pages.md)
-* [In App Purchases and Subscriptions](https://github.com/schedjoules/calendar-store-api/blob/master/details/in_app_purchases.md)
+* [In-app Purchases and Subscriptions](https://github.com/schedjoules/calendar-store-api/blob/master/details/in_app_purchases.md)
 * [Countries](https://github.com/schedjoules/calendar-store-api/blob/master/details/countries.md)
 * [Search](https://github.com/schedjoules/calendar-store-api/blob/master/details/search.md)
 * [Top, next, new](https://github.com/schedjoules/calendar-store-api/blob/master/details/top_next_new.md)
