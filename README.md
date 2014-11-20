@@ -60,7 +60,7 @@ An item_class calendar is where the magic happens. This is where the user gets t
 
 ##Caching
 Do your clients, yourself and us a favor and cache where you can. It will speed up your app and save bandwidth.
-* All requests we return will include an `ETag` or `Last-Modified` header so use `If-Modified-Since` and `If-None-Matched` in you requests.
+* All requests we return will include an `ETag` or `Last-Modified` header so use `If-Modified-Since` and `If-None-Match` in you requests.
 * Icon urls that are in the JSON have their ETag mentioned in de response.
 
 ##More Information
