@@ -80,4 +80,4 @@ There are no rate limits. We do count requests. If we think we can help you impr
 By using our API it is clear to you that all the data you access is proprietary. The data and images can not be used for any other purpose then agreed upon. Data can't be stored in any database other than on a users client for performance purposes.
 
 ##Help Us
-Please tell us how we can make the API better. If you have a specific feature request or if you find a bug, please use GitHub issues or send us an email at info@schedjoules.com.
+Please tell us how we can make the API better. If you have a specific feature request or if you find a bug, please use GitHub issues or send us an email at support@schedjoules.com.

@@ -75,4 +75,4 @@ Your users remain your users. They buy from you; we service them.
 You can check out [schedjoules.com](http://schedjoules.com) or send us an email at info@schedjoules.com
 
 ####What if my question is still unanswered?
-Send us an email at info@schedjoules.com
+Send us an email at support@schedjoules.com
