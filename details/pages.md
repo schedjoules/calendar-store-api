@@ -35,7 +35,7 @@ When requesting a page the response might look like this:
                     identifier: "xxx_moonphases",
                     icon: "http://images.schedjoules.com/images/moonphases.png",
                     icon_etag: "562b4-2502-4ec94215e8480",
-                    url: "http://xxx.schedjoules.com/calendars/moon_phases/calendar.ics?l=en&x=xxx"
+                    url: "http://xxx.schedjoules.com/calendars/moon_phases/calendar.ics?l=en&x=xxx&u=uuu"
                 }
             },
             .......
@@ -107,6 +107,9 @@ Optional labels
 - season                            string
 - related_identifiers				array of strings
 ```
+
+You need to append the calendar url client side with a unique anonymous user identifier: &u={unigue_anonymous_identifier}.
+
 An item can have a icon and related icon_etag.
 The page_identifier indicates that all children of this page item have the mentioned page_identifier as identifier.
 An identifier is unique for the combination of api_key and page. If identifiers need to shared accross different api_keys these identifiers are mentioned as related_identifiers.

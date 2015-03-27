@@ -63,6 +63,11 @@ Do your clients, yourself and us a favor and cache where you can. It will speed 
 * All requests we return will include an `ETag` or `Last-Modified` header so use `If-Modified-Since` and `If-None-Match` in you requests.
 * Icon urls that are in the JSON have their ETag mentioned in de response.
 
+##Calendars
+The calendars are by default in the iCalendar data format ([RFC5545](https://tools.ietf.org/html/rfc5545)) but we also provide calendars in jCal ([RFC7265](https://tools.ietf.org/html/rfc7265)) and xCal ([RFC6321](https://tools.ietf.org/html/rfc6321)). Many OS's and calendar client parse calendar files but you can also write your won parser.
+
+Before you can offer calendar to your users you need to append the calendar url client side with a unique anonymous user identifier: &u={unigue_anonymous_identifier}. We use this for statistical purposes and for detecting and preventing of misuse of our content.
+
 ##More Information
 Check out the following pages for more information:
 * [Pages](https://github.com/schedjoules/calendar-store-api/blob/master/details/pages.md)
