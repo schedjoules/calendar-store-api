@@ -76,6 +76,7 @@ Check out the following pages for more information:
 * [Search](https://github.com/schedjoules/calendar-store-api/blob/master/details/search.md)
 * [Top, new, next](https://github.com/schedjoules/calendar-store-api/blob/master/details/top_new_next.md)
 * [Weather](https://github.com/schedjoules/calendar-store-api/blob/master/details/weather.md)
+* [Alarms](https://github.com/schedjoules/calendar-store-api/blob/master/details/alarms.md)
 * [Questions and Answers](https://github.com/schedjoules/calendar-store-api/blob/master/details/faq.md)
 
 ##Rate limits
