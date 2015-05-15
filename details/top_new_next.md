@@ -17,8 +17,8 @@ Required GET parameters
 - nr_of_IAPs					integer
 
 Optional GET parameters
-- locale 						string  (if omitted defaults to 'en')
-- location 						string  (if omitted defaults to 'us')
+- locale 						string  (default: 'en')
+- location 						string  (default: 'us')
 ```
 
 ###New
@@ -31,7 +31,7 @@ Required GET parameters
 - nr_of_IAPs					integer
 
 Optional GET parameters
-- locale 						string  (if omitted defaults to 'en')
+- locale 						string  (default: 'en')
 ```
 
 ###Next
@@ -44,5 +44,5 @@ Required GET parameters
 - nr_of_IAPs					integer
 
 Optional GET parameters
-- locale 						string  (if omitted defaults to 'en')
+- locale 						string  (default: 'en')
 ```

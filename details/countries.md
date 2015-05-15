@@ -4,7 +4,7 @@ A list of supported and localised country names can be retrieved via:
 GET /countries
 
 Optional GET parameters
-- locale (if omitted defaults to 'en')
+- locale (default: 'en')
 - location
 
 Required labels

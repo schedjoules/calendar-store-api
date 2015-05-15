@@ -20,7 +20,7 @@ Optional GET parameters
 - nr_results 					integer (default: 20)
 ```
 
-See [countries](https://github.com/schedjoules/calendar-store-api/blob/master/details/countries.md) for the country_id
+See [countries](https://github.com/schedjoules/calendar-store-api/blob/master/details/countries.md) for the country_id.
 The categories to choose from are: 1. Holidays, 2. Sports, 3. Weather, 4. Finance, 5. Miscellaneous, 6. TV
 
 ###By product identifier

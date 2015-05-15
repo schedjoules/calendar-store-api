@@ -14,7 +14,7 @@ These parameters can be accessed via:
 GET /cities/weather_settings
 
 Optional GET parameters
-- locale (if omitted defaults to 'en')
+- locale (default: 'en')
 - location
 ```
 By using the location parameter the defaults for that location are returned. For example when requesting location=us the default temprature setting will be returned as Fahrenheit.
