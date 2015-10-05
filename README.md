@@ -44,7 +44,11 @@ Using the user's region setting for setting the locale is accepted but only the 
 
 ###Headers
 ####Versioning
-The API version needs to be set in the request header. Current version is: `v1`. If you don't set headers and the default version is bumped your application might not function. Labels can be added without version change so make your client flexible enough to handle that. Follow our [twitter feed](http://twitter.com/schedjoules) for latest SchedJoules' news, also on the API. We'll email you with API changes as well once you are set up.
+The API version needs to be set in the request header. Current version is: `v1`. If you don't set headers the API will presume that you use version 1. 
+```
+curl 'https://api.schedjoules.com/pages/115673' -v -H 'Authorization: Token token="0443a55244bb2b6224fd48e0416f0d9c"' -H "Accept: application/vnd.schedjoules; version=1"
+```
+Labels can be added without version change so make your client flexible enough to handle that. Follow our [twitter feed](http://twitter.com/schedjoules) for latest SchedJoules' news, also on the API. We'll email you with API changes as well once you are set up.
 
 ####Authentication
 You will need an API key to use this API. You can get your API key by contacting us at support@schedjoules.com. You need to set the API key in the header.
