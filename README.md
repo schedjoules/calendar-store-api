@@ -6,7 +6,7 @@ For iOS we have a **SDK** that uses all the API goodies. For the 5 minute SDK in
 ##Set yourself up
 You can take a peek at the API by using our test user API key:
 ```
-curl -L 'https://api.schedjoules.com/pages/115673' -v -H 'Authorization: Token token="0443a55244bb2b6224fd48e0416f0d9c"'
+curl 'https://api.schedjoules.com/pages/115673' -v -H 'Authorization: Token token="0443a55244bb2b6224fd48e0416f0d9c"'
 ```
 The test API key gives you access to the complete API but the calendar urls will contain dummy data. If you like what you see and want full access to the calendar content as well mail us at support@schedjoules.com and we'll provide you with your API key.
 
