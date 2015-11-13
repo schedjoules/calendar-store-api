@@ -78,6 +78,7 @@ Check out the following pages for more information:
 * [Pages](https://github.com/schedjoules/calendar-store-api/blob/master/details/pages.md)
 * [In-app Purchases and Subscriptions](https://github.com/schedjoules/calendar-store-api/blob/master/details/in_app_purchases.md)
 * [Countries](https://github.com/schedjoules/calendar-store-api/blob/master/details/countries.md)
+* [Languages/locales](https://github.com/schedjoules/calendar-store-api/blob/master/details/languages.md)
 * [Search](https://github.com/schedjoules/calendar-store-api/blob/master/details/search.md)
 * [Top, new, next](https://github.com/schedjoules/calendar-store-api/blob/master/details/top_new_next.md)
 * [Weather](https://github.com/schedjoules/calendar-store-api/blob/master/details/weather.md)

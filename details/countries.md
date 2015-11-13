@@ -1,5 +1,5 @@
 ##Countries
-A list of supported and localised country names can be retrieved via:
+You can retreive the list of supported and localised country names via:
 ```
 GET /countries
 
