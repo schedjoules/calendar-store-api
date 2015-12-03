@@ -1,5 +1,5 @@
 ##SchedJoules Calendar Store API
-With this API you can get access to the SchedJoules Public Calendar Library. SchedJoules delivers the most comprehensive public desktop, web and mobile calendar store in the world. We currently deliver over 180.000 complete, accurate and timely public calendars for holidays, sports, weather and financial events. We do so in 40 languages.
+With this API you can get access to the SchedJoules Public Calendar Service. SchedJoules delivers the most comprehensive public calendar service in the world for desktop, web and mobile applications. We currently deliver over 580.000 complete, accurate and timely public calendars for holidays, sports, weather and financial events. We do so in 16 languages.
 
 For iOS we have a **SDK** that uses all the API goodies. For the 5 minute SDK install [check out](http://schedjoules.com/resources/developer-resources/ios/CalendarStoreDocumentation/index.html) the documentation. Of course you are more than welcome to implement the API without using the SDK. If so please read on.
 
