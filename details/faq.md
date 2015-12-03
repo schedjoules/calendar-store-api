@@ -2,44 +2,40 @@
 
 ####What content do you offer via your API?
 We offer calendar content for:
-*  Holidays
-*  Sports schedules
-*  TV Shows
-*  Weather forecasts
-*  Company Events
-*  Lifestyle
+* Holidays
+* Sports schedules
+* TV Shows
+* Weather forecasts
+* Company Events
+* Lifestyle
 
 #####Holidays
-250 countries (13 with school holidays), 360 regions, official and notable days, 8 religions and UN, including background of holidays (if available). 
+250 countries (13 with school holidays), 360 regions, official and notable days, 8 religions and UN, including background of holidays (if available).
 
 #####Sports schedules
-31 sports, 600+ competitions, 20.000+ calendars (teams, athletes), including results, scorers, lineups, substitutions, referee, tables (if and when available). 
+31 sports, 600+ competitions, 20.000+ calendars (teams, athletes), including results, scorers, lineups, substitutions, referee, tables (if and when available).
 
 #####TV Shows
-20k+ channels, 700k+ calendars available for North America and Western Europe, including show details (episode descriptions, cast lists and premiers/rerun). 
+20k+ channels, 700k+ calendars available for North America and Western Europe, including show details (episode descriptions, cast lists and premiers/rerun).
 
 #####Weather forecasts
-150.000 cities, always 14 days ahead, including weather details (temperature, description, wind speed, precipitation, sunset/sunrise, uv index). 
+150.000 cities, always 14 days ahead, including weather details (temperature, description, wind speed, precipitation, sunset/sunrise, uv index).
 
 #####Company Events
 28 indices and 2000 companies. GSMs, publications, results, including company information (website, IR page, IR contact), presentations, webcasts (if and when available).
 
 #####Lifestyle
-Moon Phases, Name Days, Week Numbers
-
+Moon Phases, Name Days, Week Numbers.
 
 ####What makes your content better/different from public calendars that are available?
-We started SchedJoules because the quality of public calendars around the web is crappy. End users rely on the
-data in their calendar so that information needs to be complete, accurate and timely. Those components often lack in
-publicly available calendars. We offer the most comprehensive public calendar service worldwide. *** end of marketing
-talk
+The quality and quantity of our content, the number of supported languages, the ease of implementation on all major platforms with the available API and SDK’s and the passionate editorial and customer support are just a few of the reasons that differentiate us from others.
 
 If there is an error in the content we fix it as soon as possible. You can actually talk to someone ;-)
 
 ####Why would I add public calendars to my mobile or web application?
-From your users perspective: you offer a great service which save them time and gives them more control of their
+From your users' perspective: you offer a great service which saves them time and gives them more control over their
 calendar.
-From your perspective: you offer your user a great service. You add an extra revenue stream.
+From your perspective: you offer your user a great service and you add an extra revenue stream.
 
 ####What do I need to do to get a calendar service to work?
 1. Request an API key
@@ -48,8 +44,7 @@ From your perspective: you offer your user a great service. You add an extra rev
 4. Test
 5. Publish
 
-To be honest that is the very short version. Especially step 2 will take your 'usual' time of developing a part of an
- application.
+To be honest that is the very short version. Especially step 2 will take your 'usual' time of developing a part of an application.
 
 ####Where do you get the calendar content?
 We collect content ourselves and work with 3rd parties that collect data for us.
