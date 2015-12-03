@@ -1,7 +1,13 @@
-##SchedJoules Calendar Store API
-With this API you can get access to the SchedJoules Public Calendar Service. SchedJoules delivers the most comprehensive public calendar service in the world for desktop, web and mobile applications. We currently deliver over 580.000 complete, accurate and timely public calendars for holidays, sports, weather and financial events. We do so in 16 languages.
+##SchedJoules Calendar Service API
+With this API you can get access to the SchedJoules Public Calendar Service. SchedJoules delivers the most comprehensive public calendar service in the world for desktop, web and mobile applications. We currently deliver over 560.000 complete, accurate and timely public calendars for holidays, sports, weather and financial events. We do so in 16 languages.
 
-For iOS we have a **SDK** that uses all the API goodies. For the 5 minute SDK install [check out](http://schedjoules.com/resources/developer-resources/ios/CalendarStoreDocumentation/index.html) the documentation. Of course you are more than welcome to implement the API without using the SDK. If so please read on.
+
+##SDKs
+We provide 3 SDK's:
+* [iOS](http://schedjoules.com/resources/developer-resources/ios/CalendarStoreDocumentation/index.html)
+* [Android](https://github.com/schedjoules/Android-SDK)
+* [js](https://github.com/schedjoules/Web-js-SDK)
+For the 5 minute SDK install check out the relevant documentation. Of course you are more than welcome to implement the API without using the SDK. If so please read on.
 
 ##Set yourself up
 You can take a peek at the API by using our test user API key:
@@ -83,7 +89,7 @@ Check out the following pages for more information:
 * [Top, new, next](https://github.com/schedjoules/calendar-store-api/blob/master/details/top_new_next.md)
 * [Weather](https://github.com/schedjoules/calendar-store-api/blob/master/details/weather.md)
 * [Alarms](https://github.com/schedjoules/calendar-store-api/blob/master/details/alarms.md)
-* [Questions and Answers](https://github.com/schedjoules/calendar-store-api/blob/master/details/faq.md)
+* [FAQ](https://github.com/schedjoules/calendar-store-api/blob/master/details/faq.md)
 
 ##Rate limits
 There are no rate limits. We do count requests. If we think we can help you improve we will contact you.
