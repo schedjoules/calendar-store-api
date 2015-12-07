@@ -7,7 +7,8 @@ We provide 3 SDK's:
 * [iOS](http://schedjoules.com/resources/developer-resources/ios/CalendarStoreDocumentation/index.html)
 * [Android](https://github.com/schedjoules/Android-SDK)
 * [js](https://github.com/schedjoules/Web-js-SDK)
-For the 5 minute SDK install check out the relevant documentation. Of course you are more than welcome to implement the API without using the SDK. If so please read on.
+
+For the 5 minute SDK install check out the relevant documentation.
 
 ##Set yourself up
 You can take a peek at the API by using our test user API key:
