@@ -4,7 +4,7 @@ With this API you can get access to the SchedJoules Public Calendar Service. Sch
 
 ##SDKs
 We provide 3 SDK's:
-* [iOS](http://schedjoules.com/resources/developer-resources/ios/CalendarStoreDocumentation/index.html)
+* [iOS](https://github.com/schedjoules/iOS-SDK)
 * [Android](https://github.com/schedjoules/Android-SDK)
 * [js](https://github.com/schedjoules/Web-js-SDK)
 
