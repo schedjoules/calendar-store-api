@@ -8,7 +8,7 @@ We provide 3 SDK's:
 * [Android](https://github.com/schedjoules/Android-SDK)
 * [js](https://github.com/schedjoules/Web-js-SDK)
 
-For the 5 minute SDK install check out the relevant documentation.
+Follow the links above for the 5-minute-install documentation.
 
 ##Set yourself up
 You can take a peek at the API by using our test user API key:
@@ -20,7 +20,7 @@ The test API key gives you access to the complete API but the calendar urls will
 ##Making a request
 * All requests start with https://api.schedjoules.com/
 * We use REST methodology for the API
-* All output  is in JSON format
+* All output is in JSON format
 * Appending URLs with .json is not mandatory
 * The API only accepts HTTPS requests
 
@@ -44,10 +44,10 @@ Optional GET parameters
 - locale 					string (if omitted defaults to 'en')
 ```
 
-[ISO 639-1 language codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)  
+[ISO 639-1 language codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) 
 [ISO_3166 country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
 
-Using the user's region setting for setting the locale is accepted but only the language part (for 'de_DE' => 'de') is used to return the correct language.  
+Using the user's region setting for setting the locale is accepted but only the language part (for 'de_DE' => 'de') is used to return the correct language.
 
 ###Headers
 ####Versioning
@@ -75,7 +75,12 @@ Do your clients, yourself and us a favor and cache where you can. It will speed 
 * Icon urls that are in the JSON have their ETag mentioned in de response.
 
 ##Calendars
-The calendars are by default in the iCalendar data format ([RFC5545](https://tools.ietf.org/html/rfc5545)) but we also provide calendars in jCal ([RFC7265](https://tools.ietf.org/html/rfc7265)) and xCal ([RFC6321](https://tools.ietf.org/html/rfc6321)). Many OS's and calendar client parse calendar files but you can also write your own parser.
+The calendars are by default in the iCalendar data format ([RFC5545](https://tools.ietf.org/html/rfc5545)) but we also provide calendars in jCal ([RFC7265](https://tools.ietf.org/html/rfc7265)) and xCal ([RFC6321](https://tools.ietf.org/html/rfc6321)). Many OS's and calendar clients parse calendar files but, of course, you can also write your own parser.
+
+As said the default calendar format is .ics. To get a calendar in either jCal or xCal format add extension .json or .xml:
+iCal: .../calendars/766e8a162f82
+jCal: .../calendars/766e8a162f82.json
+xCal: .../calendars/766e8a162f82.xml
 
 ##Unique anonymous user identifier
 Before you can offer calendar to your users you need to append the calendar url client side with a unique anonymous user identifier: &u={unique_anonymous_user_identifier}. We use this for statistical purposes and for detecting and preventing of misuse of our content.
