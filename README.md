@@ -78,9 +78,9 @@ Do your clients, yourself and us a favor and cache where you can. It will speed 
 The calendars are by default in the iCalendar data format ([RFC5545](https://tools.ietf.org/html/rfc5545)) but we also provide calendars in jCal ([RFC7265](https://tools.ietf.org/html/rfc7265)) and xCal ([RFC6321](https://tools.ietf.org/html/rfc6321)). Many OS's and calendar clients parse calendar files but, of course, you can also write your own parser.
 
 As said the default calendar format is .ics. To get a calendar in either jCal or xCal format add extension .json or .xml:
-iCal: .../calendars/766e8a162f82
-jCal: .../calendars/766e8a162f82.json
-xCal: .../calendars/766e8a162f82.xml
+* iCal: .../calendars/766e8a162f82
+* jCal: .../calendars/766e8a162f82.json
+* xCal: .../calendars/766e8a162f82.xml
 
 ##Unique anonymous user identifier
 Before you can offer calendar to your users you need to append the calendar url client side with a unique anonymous user identifier: &u={unique_anonymous_user_identifier}. We use this for statistical purposes and for detecting and preventing of misuse of our content.
