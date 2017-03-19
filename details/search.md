@@ -1,8 +1,8 @@
-##Search
+## Search
 
 Our API supports two search calls: by calendar name and by identifier. Both calls return the [pages](https://github.com/schedjoules/calendar-store-api/blob/master/details/pages.md) JSON structure.
 
-###By calendar name
+### By calendar name
 You can use the search funtion to let users find calendars via free text search
 
 ```
@@ -23,7 +23,7 @@ Optional GET parameters
 See [countries](https://github.com/schedjoules/calendar-store-api/blob/master/details/countries.md) for the country_id.
 The categories to choose from are: 1. Holidays, 2. Sports, 3. Weather, 4. Finance, 5. Miscellaneous, 6. TV
 
-###By product identifier
+### By product identifier
 You can use this search call to combine calendars with the same identifier or find a page based on the identifier.
 
 ```

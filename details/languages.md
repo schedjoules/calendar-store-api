@@ -1,4 +1,4 @@
-##Languages
+## Languages
 
 We defined 16 cores languages. The API and (most of) the calendar content is translated in those languages. These core languages are:
 

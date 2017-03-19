@@ -1,4 +1,4 @@
-##Alarms
+## Alarms
 
 The events in the calendars in the different categories have different default alarms:
 * holidays - 720m (12h)

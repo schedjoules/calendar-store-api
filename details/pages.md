@@ -1,4 +1,4 @@
-##Pages
+## Pages
 
 Pages are the foundation of the API. Pages are the scaffolds of the views your users will interact with. You need
 to add the UX and UI for the pages.
@@ -56,8 +56,8 @@ When requesting a page the response might look like this:
 }
 ```
 
-###Elements
-####Page
+### Elements
+#### Page
 ```
 Required labels
 - item_id                           integer
@@ -73,7 +73,7 @@ A page can have one or more page_sections.
 The app_subscription_identifier is unique for the api_key and can be used for applications using the subscription price model.
 
 
-####Page Sections
+#### Page Sections
 ```
 Required labels
 - name                              string (may be nil)
@@ -82,7 +82,7 @@ Required labels
 Optional labels
 ```
 
-####Items
+#### Items
 ```
 Required labels
 - item_class                        string ('page' or 'calendar')
@@ -91,7 +91,7 @@ Required labels
 Optional labels
 ```
 
-####Page item
+#### Page item
 ```
 Required labels
 - item_id                           integer
@@ -114,7 +114,7 @@ An item can have a icon and related icon_etag.
 The page_identifier indicates that all children of this page item have the mentioned page_identifier as identifier.
 An identifier is unique for the combination of api_key and page. If identifiers need to shared accross different api_keys these identifiers are mentioned as related_identifiers.
 
-####Calendar item
+#### Calendar item
 ```
 Required labels
 - item_id                           integer

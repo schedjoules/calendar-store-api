@@ -1,4 +1,4 @@
-##Weather
+## Weather
 
 ### Calendar requests
 
@@ -36,7 +36,7 @@ The weather information returned in the user's calendar is:
 * Daily UV index
 * Per 6 hours: temperature, wind speed, wind direction
 
-###Plot locations based on the user's location
+### Plot locations based on the user's location
 Your app can access the {location} parameter by making a request to
 
 ```
