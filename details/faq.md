@@ -13,16 +13,16 @@ We offer calendar content for:
 250 countries (13 with school holidays), 360 regions, official and notable days, 8 religions and UN, including background of holidays (if available).
 
 ##### Sports schedules
-31 sports, 600+ competitions, 20.000+ calendars (teams, athletes), including results, scorers, lineups, substitutions, referee, tables (if and when available).
+39 sports, 600+ competitions, 20.000+ teams and athletes, including results, scorers, lineups, substitutions, referee, tables (if and when available).
 
 ##### TV Shows
-20k+ channels, 700k+ calendars available for North America and Western Europe, including show details (episode descriptions, cast lists and premiers/rerun).
+20.000+ channels available for North America and Western Europe, including show details (episode descriptions, cast lists and premiers/rerun).
 
 ##### Weather forecasts
 150.000 cities, always 14 days ahead, including weather details (temperature, description, wind speed, precipitation, sunset/sunrise, uv index).
 
 ##### Company Events
-28 indices and 2000 companies. GSMs, publications, results, including company information (website, IR page, IR contact), presentations, webcasts (if and when available).
+35 indices and 2000 companies. GSMs, publications, results, including company information (website, IR page, IR contact), presentations, webcasts (if and when available).
 
 ##### Lifestyle
 Moon Phases, Name Days, Week Numbers.
