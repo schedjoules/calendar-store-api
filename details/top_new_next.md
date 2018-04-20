@@ -14,11 +14,11 @@ The 'top' call will return the in-app purchases that were most popular. The in-a
 GET /pages?top={nr_of_items}
 
 Required GET parameters
-- nr_of_items				  	integer
+- nr_of_items             integer
 
 Optional GET parameters
-- locale 						string  (default: 'en')
-- location 						string  (default: 'us')
+- locale                  string  (default: 'en')
+- location                string  (default: 'us')
 ```
 
 ### New
@@ -28,10 +28,10 @@ The 'new' call will return the in-app purchases that were added latest. The in-a
 GET /pages?new={nr_of_items}
 
 Required GET parameters
-- nr_of_items	  				integer
+- nr_of_items             integer
 
 Optional GET parameters
-- locale 						string  (default: 'en')
+- locale                  string  (default: 'en')
 ```
 
 ### Next
@@ -41,8 +41,8 @@ The 'next' call will return the in-app purchases that start next. The in-app pur
 GET /pages?next={nr_of_items}
 
 Required GET parameters
-- nr_of_items		  			integer
+- nr_of_items             integer
 
 Optional GET parameters
-- locale 						string  (default: 'en')
+- locale                  string  (default: 'en')
 ```
