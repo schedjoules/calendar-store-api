@@ -11,10 +11,10 @@ All three calls return the [pages](https://github.com/schedjoules/calendar-store
 The 'top' call will return the in-app purchases that were most popular. The in-app purchase that was most popular over the last week is at the top.
 
 ```
-GET /pages?top={nr_of_IAPs}
+GET /pages?top={nr_of_items}
 
 Required GET parameters
-- nr_of_IAPs					integer
+- nr_of_items				  	integer
 
 Optional GET parameters
 - locale 						string  (default: 'en')
@@ -25,10 +25,10 @@ Optional GET parameters
 The 'new' call will return the in-app purchases that were added latest. The in-app purchase that was added latest is at the top. An extra label 'first_event' shows the date and time (UTC) of the first event of that in-app purchase.
 
 ```
-GET /pages?new={nr_of_IAPs}
+GET /pages?new={nr_of_items}
 
 Required GET parameters
-- nr_of_IAPs					integer
+- nr_of_items	  				integer
 
 Optional GET parameters
 - locale 						string  (default: 'en')
@@ -38,10 +38,10 @@ Optional GET parameters
 The 'next' call will return the in-app purchases that start next. The in-app purchase that starts first is at the top. An extra label 'first_event' shows the date and time (UTC) of the first event of that in-app purchase.
 
 ```
-GET /pages?next={nr_of_IAPs}
+GET /pages?next={nr_of_items}
 
 Required GET parameters
-- nr_of_IAPs					integer
+- nr_of_items		  			integer
 
 Optional GET parameters
 - locale 						string  (default: 'en')
