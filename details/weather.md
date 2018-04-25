@@ -12,10 +12,10 @@ Required GET parameters
 
 Optional GET parameters
 - l 	locale			ISO 639-1 language code (default: 'en')
-- d		temperature		c, f (default: 'c')
+- d	temperature		c, f (default: 'c')
 - p 	precipitation	mm, in (default: 'mm')	
-- w		wind speed		kmh, kts, ms, mph (default: 'kmh')
-- t		time format		12, 24 (default: 24)
+- w	wind speed		kmh, kts, ms, mph (default: 'kmh')
+- t	time format		12, 24 (default: 24)
 ```
 
 You can access these (and localised) parameters via:
