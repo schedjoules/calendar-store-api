@@ -13,7 +13,7 @@ Required GET parameters
 Optional GET parameters
 - l 	locale			ISO 639-1 language code (default: 'en')
 - d	temperature		c, f (default: 'c')
-- p 	precipitation	mm, in (default: 'mm')	
+- p 	precipitation		mm, in (default: 'mm')	
 - w	wind speed		kmh, kts, ms, mph (default: 'kmh')
 - t	time format		12, 24 (default: 24)
 ```
@@ -24,7 +24,7 @@ You can access these (and localised) parameters via:
 GET /cities/weather_settings
 
 Optional GET parameters
-- locale 				(default: 'en')
+- locale 			(default: 'en')
 ```
 
 By using the location parameter the defaults for that location are returned. For example when requesting location=us the default temperature setting will be returned as Fahrenheit.
