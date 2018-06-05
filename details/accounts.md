@@ -15,7 +15,7 @@ curl -X POST https://api.schedjoules.com/accounts/{UUID}/licenses -H "Content-Ty
 * namespace: can be anything eg your company name
 * expiration_date: ISO8601 format UTC eg 2018-06-05T18:47:05Z
 
-### Other upcoming features
+### Upcoming features
 * freemium offerings
 * set number of calendars that user has access to within his purchased tier
 * sync calendars and settings (color, alarms) over multiple devices
