@@ -25,8 +25,8 @@ GET /languages
 
 Required labels
 - language_id					integer
-- name							string
-- iso_639_1						string
+- name						string
+- iso_639_1					string
 ```
 
 If you miss a language that is important for you or your users, please let us know
