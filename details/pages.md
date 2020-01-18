@@ -21,7 +21,6 @@ When requesting a page the response might look like this:
                     item_id: 92047,
                     name: "United States",
                     icon: "http://images.schedjoules.com/images/9783d4f3.png",
-                    icon_etag: "56648-2ea8-4ec94311ad680",
                     url: "https://api.schedjoules.com/pages/92047?locale=en",
                     country: "United States"
                 }
@@ -34,7 +33,6 @@ When requesting a page the response might look like this:
                     name: "Moon Phases",
                     identifier: "xxx_moonphases",
                     icon: "http://images.schedjoules.com/images/moonphases.png",
-                    icon_etag: "562b4-2502-4ec94215e8480",
                     url: "http://xxx.schedjoules.com/calendars/moon_phases/calendar.ics?l=en&x=xxx&u=uuu"
                 }
             },
@@ -45,11 +43,11 @@ When requesting a page the response might look like this:
                     item_id: 108836,
                     name: "NBA",
                     icon: "http://images.schedjoules.com/images/9783d4f3.png",
-                    icon_etag: "56648-2ea8-4ec94311ad680",
                     url: "https://api.schedjoules.com/pages/108836?locale=en",
                     sport: "Basketball",
+                    sport_id: 3
                     country: "United States",
-                    season: "2013-2014"
+                    season: "2019"
                 }
             }
         }
@@ -100,18 +98,16 @@ Required labels
 
 Optional labels
 - icon                              string (url)
-- icon_etag                         string
-- page_identifier					string
+- page_identifier                   string
 - sport                             string
 - sport_id                          string
 - country                           string
 - season                            string
-- related_identifiers				array of strings
+- related_identifiers               array of strings
 ```
 
 You need to append the calendar url client side with a unique anonymous user identifier: &u={unigue_anonymous_identifier}.
 
-An item can have a icon and related icon_etag.
 The page_identifier indicates that all children of this page item have the mentioned page_identifier as identifier.
 An identifier is unique for the combination of api_key and page. If identifiers need to shared accross different api_keys these identifiers are mentioned as related_identifiers.
 
@@ -125,7 +121,6 @@ Required labels
 Optional labels
 - identifier                        string
 - icon                              string (url)
-- icon_etag                         string
 - sport                             string
 - sport_id                          integer
 - country                           string
