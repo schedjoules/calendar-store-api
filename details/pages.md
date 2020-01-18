@@ -103,6 +103,7 @@ Optional labels
 - icon_etag                         string
 - page_identifier					string
 - sport                             string
+- sport_id                          string
 - country                           string
 - season                            string
 - related_identifiers				array of strings
@@ -126,6 +127,7 @@ Optional labels
 - icon                              string (url)
 - icon_etag                         string
 - sport                             string
+- sport_id                          integer
 - country                           string
 - season                            string
 ```
