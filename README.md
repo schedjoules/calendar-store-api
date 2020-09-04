@@ -3,10 +3,9 @@ With this API you can get access to the SchedJoules Public Calendar Service. Sch
 
 
 ## SDKs
-We provide 3 SDK's:
-* [iOS](https://github.com/schedjoules/iOS-SDK)
+We provide SDK's for iOS and Android:
+* [iOS](https://github.com/schedjoules/ios-public-calendars-sdk)
 * [Android](https://github.com/schedjoules/Android-SDK)
-* [js](https://github.com/schedjoules/Web-js-SDK)
 
 Follow the links above for the 5-minute-install documentation.
 
@@ -15,7 +14,7 @@ You can take a peek at the API by using our test user API key:
 ```
 curl 'https://api.schedjoules.com/pages/115673' -v -H 'Authorization: Token token="0443a55244bb2b6224fd48e0416f0d9c"'
 ```
-The test API key gives you access to the complete API but the calendar urls will contain dummy data. If you like what you see and want full access to the calendar content as well mail us at support@schedjoules.com and we'll provide you with your API key.
+The test API key gives you access to the complete API but the calendar urls will contain dummy data. If you like what you see and want full access to the calendar content as well you can send us an email at support@schedjoules.com and we'll provide you with your own dedicated API key.
 
 ## Making a request
 * All requests start with https://api.schedjoules.com/
