@@ -14,7 +14,7 @@ Required GET parameters
 - calendar_name					string
 
 Optional GET parameters
-- locale 						string  (default: 'en')
+- locale 					string  (default: 'en')
 - country_id 					integer 
 - category_id 					integer
 - nr_results 					integer (default: 20)
@@ -35,5 +35,5 @@ Required GET parameters
 - identifier					string
 
 Optional GET parameters
-- locale						string  (default: 'en')
+- locale					string  (default: 'en')
 ```
