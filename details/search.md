@@ -22,18 +22,3 @@ Optional GET parameters
 
 See [countries](https://github.com/schedjoules/calendar-store-api/blob/master/details/countries.md) for the country_id.
 The categories to choose from are: 1. Holidays, 2. Sports, 3. Weather, 4. Finance, 5. Miscellaneous, 6. TV
-
-### By product identifier
-You can use this search call to combine calendars with the same identifier or find a page based on the identifier.
-
-```
-GET /pages/search?i={identifier}
-
-eg /pages/search?i=xxxxxxx_92047_united_states_holidays
-
-Required GET parameters
-- identifier					string
-
-Optional GET parameters
-- locale					string  (default: 'en')
-```
