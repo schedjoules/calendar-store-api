@@ -80,7 +80,7 @@ Before you can offer calendar to your users you need to append the calendar url 
 Check out the following pages for more information:
 * [Pages](https://github.com/schedjoules/calendar-store-api/blob/master/details/pages.md)
 * [In-app Purchases and Accounts](https://github.com/schedjoules/calendar-store-api/edit/master/details/accounts.md)
-* [Calendars](https://github.com/schedjoules/calendar-store-api/edit/master/details/calendars.md)
+* [Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md)
 * [Countries](https://github.com/schedjoules/calendar-store-api/blob/master/details/countries.md)
 * [Languages/locales](https://github.com/schedjoules/calendar-store-api/blob/master/details/languages.md)
 * [Search](https://github.com/schedjoules/calendar-store-api/blob/master/details/search.md)
