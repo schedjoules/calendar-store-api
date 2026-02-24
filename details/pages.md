@@ -1,10 +1,10 @@
 ## Pages
 
-Pages are the foundation of the API. Pages are the scaffolds of the views your users will interact with. You need
-to add the UX and UI for the pages.
+Pages are the foundation of the API. They provide the structure for the views your users will interact with. Your application is responsible for providing the UX and UI for each page.
 
-Pages are localised so all items on the page that can be translated will be shown translated.
-When requesting a page the response might look like this:
+Pages are localised — all translatable items on a page will be returned in the requested language.
+
+When requesting a page, the response will look similar to the following:
 
 ```
 {
@@ -66,9 +66,9 @@ Optional labels
 - app_subscription_identifier       string
 
 ```
-The item_id is unique for the page.
-A page can have one or more page_sections.
-The app_subscription_identifier is unique for the api_key and can be used for applications using the subscription price model.
+The `item_id` is unique per page.
+A page may contain one or more `page_sections`.
+The `app_subscription_identifier` is unique per API key and can be used in applications that implement a subscription pricing model.
 
 
 #### Page Sections
@@ -106,10 +106,9 @@ Optional labels
 - related_identifiers               array of strings
 ```
 
-You need to append the calendar url client side with a unique anonymous user identifier: &u={unigue_anonymous_identifier}.
+The calendar URL must be appended client-side with a unique anonymous user identifier: `&u={unique_anonymous_identifier}`.
 
-The page_identifier indicates that all children of this page item have the mentioned page_identifier as identifier.
-An identifier is unique for the combination of api_key and page. If identifiers need to shared accross different api_keys these identifiers are mentioned as related_identifiers.
+The `page_identifier` indicates that all children of this page item share the specified identifier. An identifier is unique for a given combination of API key and page. If identifiers need to be shared across different API keys, they are listed under `related_identifiers`.
 
 #### Calendar item
 ```

@@ -1,4 +1,4 @@
-## Questions and Answers
+## Frequently Asked Questions
 
 #### What content do you offer via your API?
 We offer calendar content for:
@@ -10,68 +10,65 @@ We offer calendar content for:
 * Lifestyle
 
 ##### Holidays
-250 countries (13 with school holidays), 360 regions, official and notable days, 8 religions and UN, including background of holidays (if available).
+250 countries (13 with school holidays), 360 regions, official and notable days, 8 religions and the UN, including background information on holidays where available.
 
 ##### Sports schedules
-39 sports, 600+ competitions, 20.000+ teams and athletes, including results, scorers, lineups, substitutions, referee, tables (if and when available).
+39 sports, 600+ competitions, 20.000+ teams and athletes, including results, scorers, line-ups, substitutions, referees, and standings tables where available.
 
 ##### TV Shows
-20.000+ channels available for North America and Western Europe, including show details (episode descriptions, cast lists and premiers/rerun).
+20.000+ channels available for North America and Western Europe, including show details such as episode descriptions, cast lists, and premiere/rerun information.
 
 ##### Weather forecasts
-150.000 cities, always 14 days ahead, including weather details (temperature, description, wind speed, precipitation, sunset/sunrise, uv index).
+150,000 cities, always 14 days ahead, including detailed weather data: temperature, description, wind speed, precipitation, sunrise/sunset times, and UV index.
 
 ##### Company Events
-35 indices and 2000 companies. GSMs, publications, results, including company information (website, IR page, IR contact), presentations, webcasts (if and when available).
+35 indices and 2.000 companies. AGMs, publications, and results, including company information (website, IR page, IR contact), presentations, and webcasts where available.
 
 ##### Lifestyle
-Moon Phases, Name Days, Week Numbers.
+Moon phases, name days, and week numbers.
 
-#### What makes your content better/different from public calendars that are available?
-The quality and quantity of our content, the number of supported languages, the ease of implementation on all major platforms with the available API and SDK’s and the passionate editorial and customer support are just a few of the reasons that differentiate us from others.
+#### What makes your content different from publicly available calendars?
+The quality and breadth of our content, the number of supported languages, the ease of integration across all major platforms via our API and SDKs, and our dedicated editorial and customer support team are just a few of the factors that set us apart.
 
-If there is an error in the content we fix it as soon as possible. You can actually talk to someone ;-)
+Content errors are corrected as soon as they are identified, and our support team is always available to assist.
 
 #### Why would I add public calendars to my mobile or web application?
-From your users' perspective: you offer a great service which saves them time and gives them more control over their
-calendar.
-From your perspective: you offer your user a great service and you add an extra revenue stream.
+From your users' perspective: you provide a valuable service that saves them time and gives them greater control over their calendar.
+From your perspective: you enhance your product offering and introduce an additional revenue stream.
 
-#### What do I need to do to get a calendar service to work?
+#### What do I need to get a calendar service working?
 1. Request an API key
-2. Design UX/UI
-3. Integrate SchedJoules in your application
+2. Design your UX/UI
+3. Integrate SchedJoules into your application
 4. Test
 5. Publish
 
-To be honest that is the very short version. Especially step 2 will take your 'usual' time of developing a part of an application.
+Note that step 2 will typically require the same amount of effort as any other feature development in your application.
 
-#### Where do you get the calendar content?
-We collect content ourselves and work with 3rd parties that collect data for us.
+#### Where does the calendar content come from?
+We collect content directly and work with third-party data providers.
 
-#### What if I (or my users) find content in your API that is not correct?
-It happens. Please help us and yourself and report any errors via support@schedjoules.com. We'll respond swiftly.
+#### What should I do if I or my users find incorrect content?
+Please report any content errors to support@schedjoules.com. We will address them promptly.
 
-#### What if I have content that might interesting to offer via your API?
-We are very open for suggestions. Please contact us and we'll talk.
+#### What if I have content that might be suitable for your API?
+We welcome suggestions. Please contact us to discuss further.
 
-#### Do you give any uptime guarantees?
-We guarantee that we do anything reasonable in our power to keep the service up. The current numbers are very close
-to 100%. We have set up a highly scalable configuration. Uptime and reliability is one our main concerns.
+#### Do you provide uptime guarantees?
+We make every reasonable effort to maintain service availability. Our current uptime is very close to 100%. We operate a highly scalable infrastructure, and reliability is one of our core priorities.
 
-#### What languages do you offer your content in?
-The API is available in 16 languages: English, Spanish, German, Italian, French, Portuguese, Dutch, Chinese, Japanese, Korean, Russian, Swedish, Danish, Norwegian, Finnish, Turkish. Most of calendar content is too.
+#### What languages is the content available in?
+The API is available in 16 languages: English, Spanish, German, Italian, French, Portuguese, Dutch, Chinese, Japanese, Korean, Russian, Swedish, Danish, Norwegian, Finnish, and Turkish. Most calendar content is available in these languages as well.
 
-#### Can I store, resell or redistribute your content?
-Some of our content is proprietary, so no ..... unless you get our written approval. Only for performance purpose
-clients can store data locally.
+#### Can I store, resell, or redistribute your content?
+Some of our content is proprietary. Storage, resale, or redistribution is not permitted without our written approval. Clients may cache data locally for performance purposes only.
 
-#### What else is there to know?
-Unless you got very special needs there are no set up costs.
-Your users remain your users. They buy from you; we service them.
+#### Is there anything else I should know?
+Unless you have specific requirements, there are no setup costs.
+Your users remain your users. They transact with you; we provide the service behind the scenes.
 
 #### Where can I find more information about SchedJoules?
-You can check out [schedjoules.com](http://schedjoules.com) or send us an email at support@schedjoules.com
+Visit [schedjoules.com](http://schedjoules.com) or contact us at support@schedjoules.com.
 
-#### sWhat if my question is still unanswered?
-Send us an email at support@schedjoules.com or contact us via [Twitter](https://twitter.com/schedjoules), [Facebook](https://www.facebook.com/SchedJoules-259241530783344) or [G+](https://plus.google.com/+Schedjoules)
+#### What if my question is not answered here?
+Send us an email at support@schedjoules.com or reach out via [Twitter](https://twitter.com/schedjoules) or [Facebook](https://www.facebook.com/SchedJoules-259241530783344).

@@ -1,14 +1,14 @@
-## Top, new, next
+## Top, New, Next
 
-There are three calls returning the in-app purchases that:
-* are most populair
-* are newly added
-* will start next
+There are three endpoints that return in-app purchases based on the following criteria:
+* Most popular
+* Most recently added
+* Starting soonest
 
-All three calls return the [pages](https://github.com/schedjoules/calendar-store-api/blob/master/details/pages.md) JSON structure. For all three calls the maximum number of In App Purchases returned is 50.
+All three endpoints return the [pages](https://github.com/schedjoules/calendar-store-api/blob/master/details/pages.md) JSON structure. A maximum of 50 in-app purchases are returned per call.
 
 ### Top
-The 'top' call will return the in-app purchases that were most popular. The in-app purchase that was most popular over the last week is at the top.
+Returns the most popular in-app purchases, with the most popular item from the past week listed first.
 
 ```
 GET /pages?top={nr_of_items}
@@ -22,7 +22,7 @@ Optional GET parameters
 ```
 
 ### New
-The 'new' call will return the in-app purchases that were added latest. The in-app purchase that was added latest is at the top. An extra label 'first_event' shows the date and time (UTC) of the first event of that in-app purchase.
+Returns the most recently added in-app purchases, with the latest addition listed first. An additional `first_event` label indicates the date and time (UTC) of the first event for each in-app purchase.
 
 ```
 GET /pages?new={nr_of_items}
@@ -35,7 +35,7 @@ Optional GET parameters
 ```
 
 ### Next
-The 'next' call will return the in-app purchases that start next. The in-app purchase that starts first is at the top. An extra label 'first_event' shows the date and time (UTC) of the first event of that in-app purchase.
+Returns in-app purchases with the earliest upcoming start date, listed in ascending order. An additional `first_event` label indicates the date and time (UTC) of the first event for each in-app purchase.
 
 ```
 GET /pages?next={nr_of_items}

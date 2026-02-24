@@ -1,6 +1,6 @@
 ## Languages
 
-We defined 16 cores languages. The API and (most of) the calendar content is translated in those languages. These core languages are:
+We support 16 core languages. The API and most calendar content are translated into these languages:
 
 * Chinese
 * Danish
@@ -19,14 +19,14 @@ We defined 16 cores languages. The API and (most of) the calendar content is tra
 * Swedish
 * Turkish
 
-You can retrieve the list of core languages via:
+You can retrieve the list of supported languages via:
 ```
 GET /languages
 
 Required labels
-- language_id					integer
-- name						string
-- iso_639_1					string
+- language_id                   integer
+- name                          string
+- iso_639_1                     string
 ```
 
-If you miss a language that is important for you or your users, please let us know
+If a language that is important to you or your users is not listed, please contact us.

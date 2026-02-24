@@ -1,10 +1,11 @@
 ## Alarms
 
-The events in the calendars in the different categories have different default alarms:
-* holidays - 720m (12h)
-* sports - 30m
-* tv - 30m
-* finance - 720m (12h)
-* moon phases/name days - no alarm
+Calendar events in different categories have the following default alarm offsets:
 
-These defaults are based on our experience and user feedback. You can overwrite these defaults or let your end user overwrite them. To do so append the calendar url with &al={alarm_in_minutes} eg &al=48 to have an alarm go off 48 minutes before DTSTART. You can use negative values if you choose the alarm to sound after DTSTART or use &al=none to remove alarms.
+* Holidays — 720 minutes (12 hours)
+* Sports — 30 minutes
+* TV — 30 minutes
+* Finance — 720 minutes (12 hours)
+* Moon phases / name days — no alarm
+
+These defaults are based on user feedback and usage data. You can override these defaults, or allow your end-users to do so. To override, append the calendar URL with `&al={alarm_in_minutes}` — for example, `&al=48` will trigger an alarm 48 minutes before `DTSTART`. Negative values will trigger the alarm after `DTSTART`. To disable alarms entirely, append `&al=none`.
