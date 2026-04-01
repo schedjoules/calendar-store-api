@@ -57,20 +57,20 @@ Results are ordered by popularity (most-subscribed cities first) and limited to 
       "country": "NL",
       "latitude": 52.37,
       "longitude": 4.89,
-      "foreca_id": 100058597
+      "location_id": 100058597
     },
     {
       "name": "Amstelveen",
       "country": "NL",
       "latitude": 52.3,
       "longitude": 4.86,
-      "foreca_id": 100058598
+      "location_id": 100058598
     }
   ]
 }
 ```
 
-Use the `foreca_id` as the `loc` parameter in the calendar request URL.
+Use the `location_id` as the `loc` parameter in the calendar request URL.
 
 ### Plotting Locations Based on the User's Location
 Your app can retrieve available weather station locations by making the following request:
