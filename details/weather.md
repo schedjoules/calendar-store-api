@@ -8,7 +8,7 @@ We provide weather data for 150.000 locations worldwide, always 14 days ahead. S
 GET /calendars/weather/calendar.ics?l={locale}&loc={location}&d={temp}&p={rain}&w={wind}&t={time}
 
 Required GET parameters
-- loc   location        location_id returned by GET /cities/cities_within_bounds (see below)
+- loc   location        location_id returned by GET /cities/search or GET /cities/cities_within_bounds (see below)
 
 Optional GET parameters
 - l     locale          ISO 639-1 language code (default: 'en')
@@ -35,6 +35,42 @@ The weather information included in the calendar is:
 * Daily sunrise and sunset times
 * Daily UV index
 * Per 6-hour interval: temperature, wind speed, and wind direction
+
+### Searching Locations by City Name
+
+You can search for weather station locations by city name:
+
+```
+GET /cities/search?q={query}
+
+Required GET parameters
+- q     search query    minimum 2 characters
+```
+
+Results are ordered by popularity (most-subscribed cities first) and limited to 10. Example response:
+
+```json
+{
+  "cities": [
+    {
+      "name": "Amsterdam",
+      "country": "NL",
+      "latitude": 52.37,
+      "longitude": 4.89,
+      "foreca_id": 100058597
+    },
+    {
+      "name": "Amstelveen",
+      "country": "NL",
+      "latitude": 52.3,
+      "longitude": 4.86,
+      "foreca_id": 100058598
+    }
+  ]
+}
+```
+
+Use the `foreca_id` as the `loc` parameter in the calendar request URL.
 
 ### Plotting Locations Based on the User's Location
 Your app can retrieve available weather station locations by making the following request:
