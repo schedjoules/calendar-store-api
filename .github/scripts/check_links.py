@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 REPO = "github.com/schedjoules/calendar-store-api"
-LINK = re.compile(r"https?://" + re.escape(REPO) + r"(?:/(?:blob|edit|tree)/[^/\s)#]+)?/?([^\s)#'\"`]*)(?:#([^\s)'\"`]+))?")
+LINK = re.compile(r"https?://" + re.escape(REPO) + r"(?:/(blob|edit|tree)/[^/\s)#]+)?/?([^\s)#'\"`]*)(?:#([^\s)'\"`]+))?")
 HEADING = re.compile(r"^#{1,6}\s+(.*?)\s*#*\s*$")
 
 
@@ -47,10 +47,14 @@ for md in sorted(ROOT.rglob("*.md")):
         continue
     for lineno, line in enumerate(md.read_text(encoding="utf-8").splitlines(), 1):
         for m in LINK.finditer(line):
-            target_rel, fragment = m.group(1).rstrip("/"), m.group(2)
+            kind, target_rel, fragment = m.group(1), m.group(2).rstrip("/"), m.group(3)
             target = ROOT / target_rel if target_rel else ROOT / "README.md"
             where = f"{md.relative_to(ROOT)}:{lineno}"
-            if not target.exists():
+            if kind == "edit":
+                # An /edit/ link sends a reader who is not signed in to a
+                # sign-in or fork prompt instead of the page (issue #8).
+                errors.append(f"{where}: {m.group(0)} -> opens the GitHub editor, use /blob/")
+            elif not target.exists():
                 errors.append(f"{where}: {m.group(0)} -> missing file {target_rel}")
             elif fragment and target.is_file() and fragment.lower() not in anchors(target):
                 errors.append(f"{where}: {m.group(0)} -> no heading #{fragment} in {target.relative_to(ROOT)}")
