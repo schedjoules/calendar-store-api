@@ -123,5 +123,10 @@ Optional labels
 - sport                             string
 - sport_id                          integer
 - country                           string
+- country_id                        integer
+- region                            string
+- region_id                         integer
 - season                            string
 ```
+
+`region` is set on regional holiday calendars only: the state, province or other region the calendar covers, in the requested locale (falling back to English). `country` is the country it belongs to. A national calendar has no `region`. Outside a parent page a regional calendar is named like its national one ("Public Holidays and Observances"), so show `region` with it, for example as a subtitle: "California, United States".
