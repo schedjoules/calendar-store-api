@@ -14,8 +14,3 @@ curl -X POST https://api.schedjoules.com/accounts/{UUID}/licenses -H "Content-Ty
 * `unique_anonymous_user_identifier`: Must be unique per user within your implementation and must match the identifier appended to the [calendar URI](https://github.com/schedjoules/calendar-store-api#unique-anonymous-user-identifier).
 * `namespace`: Can be any string, such as your company name.
 * `expiration_date`: ISO 8601 format in UTC, e.g., `2018-06-05T18:47:05Z`.
-
-### Upcoming Features
-* Freemium offerings
-* Set the number of calendars accessible within a user's purchased tier
-* Sync calendars and settings (colour, alarms) across multiple devices
