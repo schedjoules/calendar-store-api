@@ -81,7 +81,7 @@ Before presenting a calendar to your users, you must append the calendar URL cli
 
 ## More Information
 * [Pages](https://github.com/schedjoules/calendar-store-api/blob/master/details/pages.md)
-* [In-app Purchases and Accounts](https://github.com/schedjoules/calendar-store-api/edit/master/details/accounts.md)
+* [In-app Purchases and Accounts](https://github.com/schedjoules/calendar-store-api/blob/master/details/accounts.md)
 * [Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md)
 * [Countries](https://github.com/schedjoules/calendar-store-api/blob/master/details/countries.md)
 * [Languages/Locales](https://github.com/schedjoules/calendar-store-api/blob/master/details/languages.md)
