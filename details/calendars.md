@@ -9,12 +9,7 @@ The default calendar format is `.ics`. To request a calendar in jCal or xCal for
 
 ### Date Range
 
-By default, the date range of events returned depends on the subscription status of the user:
-
-| Subscription | Events from | Events until |
-|---|---|---|
-| Premium | 1 year ago | 10 years from now |
-| Free | Now | 60 days from now |
+By default, the date range of events returned depends on your agreement with SchedJoules.
 
 You can override the date range using the following parameters:
 
