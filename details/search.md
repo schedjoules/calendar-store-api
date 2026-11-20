@@ -12,7 +12,7 @@ Required GET parameters
 
 Optional GET parameters
 - locale                string   (default: 'en')
-- nr_results            integer  number of results (default: 50)
+- nr_results            integer  number of results (default and maximum: 50)
 - country_id            integer  filter by country, see Countries
 - main_category_id      integer  filter by main category
 - sport_id              integer  filter by sport

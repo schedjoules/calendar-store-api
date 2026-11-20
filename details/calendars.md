@@ -14,17 +14,19 @@ Remember to append `&u={unique_anonymous_user_identifier}` to every calendar URL
 
 ### Date Range
 
-By default, the date range of events returned depends on your agreement with SchedJoules. You can move the start of the window:
+By default, the date range of events returned depends on your agreement with SchedJoules. You can narrow it:
 
 ```
-GET /calendars/766e8a162f82?start_at_or_after={datetime}
+GET /calendars/766e8a162f82?start_at_or_after={datetime}&start_before={datetime}
 
 Optional GET parameters
 - start_at_or_after     datetime    ISO 8601 (e.g. 2026-01-01T00:00:00Z). Only events
                                     starting at or after this moment are returned.
+- start_before          datetime    ISO 8601. Only events starting before this moment
+                                    are returned.
 ```
 
-The end of the window cannot be changed per request.
+`start_before` can only shorten the window: a value later than the end of the window your agreement gives has no effect. A value that cannot be parsed is ignored. The weather calendar ignores both parameters.
 
 ### Number of Events
 
