@@ -2,106 +2,103 @@
 
 ### Calendar Requests
 
-We provide weather data for 150.000 locations worldwide, always 14 days ahead. Since the data is presented within a calendar, all information is returned as plain text. In the JSON returned by the [pages resource](https://github.com/schedjoules/calendar-store-api/), you will find a URL in the following format:
+The weather calendar is a forecast for one location, 16 days ahead, with one all-day event per day. Its `url` in a pages response is a template your app fills in:
 
 ```
 GET /calendars/weather/calendar.ics?l={locale}&loc={location}&d={temp}&p={rain}&w={wind}&t={time}
 
 Required GET parameters
-- loc   location        location_id returned by GET /cities/search or GET /cities/cities_within_bounds (see below)
+- loc   location        location_id from GET /cities/search or GET /cities/cities_within_bounds (below)
 
 Optional GET parameters
 - l     locale          ISO 639-1 language code (default: 'en')
 - d     temperature     c, f (default: 'c')
-- p     precipitation   mm, in (default: 'mm')
 - w     wind speed      kmh, kts, ms, mph (default: 'kmh')
 - t     time format     12, 24 (default: 24)
+- p     precipitation   mm, in. Accepted, but has no effect: the calendar shows no precipitation
+- h     hourly          1 = one detail line per hour for the first 96 hours instead of one per 3 hours
 ```
 
-You can retrieve the available (and localised) parameter options via:
+Each day's event contains:
+* in the title: the day's minimum and maximum temperature and a short description of the weather;
+* in the description: a line every 3 hours (or every hour with `h=1`) with temperature, wind speed and conditions, followed by the day's temperature, humidity and wind range.
+
+### Weather Settings
+
+The units to offer, with localised names and the default for a country:
 
 ```
-GET /cities/weather_settings
+GET /cities/weather_settings?locale={locale}&location={ISO 3166 code}
 
 Optional GET parameters
-- locale            (default: 'en')
+- locale        (default: 'en')
+- location      country whose defaults to return. Only 'us' and 'gb' have their own defaults
 ```
 
-When the `location` parameter is provided, the defaults for that location are returned. For example, requesting `location=us` will return Fahrenheit as the default temperature unit.
+`GET /cities/weather_settings?locale=en&location=us` returns:
 
-The weather information included in the calendar is:
-* Daily maximum/minimum temperature
-* Daily rainfall amount and probability
-* Daily sunrise and sunset times
-* Daily UV index
-* Per 6-hour interval: temperature, wind speed, and wind direction
+```json
+{
+  "temp": {"title": "Temperature", "options": {"c": "ºC", "f": "ºF"}, "default": "f"},
+  "rain": {"title": "Precipitation", "options": {"mm": "mm", "in": "po"}, "default": "in"},
+  "wind": {"title": "Wind Speed", "options": {"kmh": "km/h", "kts": "Knots", "ms": "m/s", "mph": "mph"}, "default": "mph"},
+  "time": {"title": "Time format", "options": {"12": "12-hour", "24": "24-hour"}, "default": "12"}
+}
+```
 
 ### Searching Locations by City Name
-
-You can search for weather station locations by city name:
 
 ```
 GET /cities/search?q={query}
 
 Required GET parameters
-- q     search query    minimum 2 characters
+- q         search query, at least 2 characters
+
+Optional GET parameters
+- locale    returns city names in this language where available
 ```
 
-Results are ordered by popularity (most-subscribed cities first) and limited to 10. Example response:
+Every word of the query must match the start of a word in the city's name or one of its local names. At most 10 results, ordered by exact name match first, then names that start with the query, then popularity. A query shorter than 2 characters returns an empty array `[]`.
+
+`GET /cities/search?q=Amsterdam` returns (shortened):
 
 ```json
 {
   "cities": [
-    {
-      "name": "Amsterdam",
-      "country": "NL",
-      "latitude": 52.37,
-      "longitude": 4.89,
-      "location_id": 100058597
-    },
-    {
-      "name": "Amstelveen",
-      "country": "NL",
-      "latitude": 52.3,
-      "longitude": 4.86,
-      "location_id": 100058598
-    }
+    {"country": "nl", "latitude": 52.37, "longitude": 4.9, "name": "Amsterdam", "location_id": 102759794},
+    {"country": "ca", "latitude": 51.75, "longitude": -102.47, "name": "Amsterdam", "location_id": 105884628}
   ]
 }
 ```
 
-Use the `location_id` as the `loc` parameter in the calendar request URL.
+Use the `location_id` as the `loc` parameter of the calendar URL. `country` is a lowercase ISO 3166 code.
 
-### Plotting Locations Based on the User's Location
-Your app can retrieve available weather station locations by making the following request:
+### Locations on a Map
+
+To show weather locations on a map of the area the user is looking at:
 
 ```
-GET /cities/cities_within_bounds?ne=4.363991,-1.150881&sw=-1.567068,8.39353
+GET /cities/cities_within_bounds?ne={lat},{lng}&sw={lat},{lng}
 
 Required GET parameters
-- ne
-- sw
+- ne    north-east corner of the visible map, latitude first
+- sw    south-west corner of the visible map, latitude first
 ```
 
-The `ne` and `sw` parameters represent the north-east and south-west coordinates of the user's visible map area. The response will contain the 30 most popular weather stations within that area. Example response:
+The API takes the 100 most popular locations in the area and groups nearby ones, so you get at most 30 markers. A north-east longitude smaller than the south-west one is read as an area that crosses the 180° meridian.
 
-```
-...
-{
-    la: -1.4,
-    lo: 31.73,
-    fo: 100158179,
-    ty: "c",
-    to: "Katerero"
-},
-{
-    la: 2.57,
-    lo: -72.64,
-    fo: 103828545,
-    ty: "i",
-    to: "San Jose del Guaviare"
-}
-...
+`GET /cities/cities_within_bounds?ne=52.5,5.1&sw=52.2,4.7` returns (shortened):
+
+```json
+[
+  {"la": 52.37, "lo": 4.9, "fo": 102759794, "ty": "i", "to": "Amsterdam"},
+  {"la": 52.3, "lo": 4.86, "fo": 102759798, "ty": "i", "to": "Amstelveen"}
+]
 ```
 
-Each entry includes the location name (`to`), coordinates (`la`, `lo`), and location ID (`fo`). The `ty` label indicates whether the marker is (c)lustered or (i)ndividual. Clustered markers can be expanded by zooming in to reveal additional individual markers.
+| Field | |
+|---|---|
+| `la`, `lo` | Latitude and longitude |
+| `fo` | The `location_id` |
+| `to` | Location name |
+| `ty` | `i` for a single location, `c` for a cluster of several. A cluster carries the name and id of one of its locations; zoom in to split it |

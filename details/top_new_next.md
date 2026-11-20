@@ -1,48 +1,56 @@
 ## Top, New, Next
 
-There are three endpoints that return in-app purchases based on the following criteria:
-* Most popular
-* Most recently added
-* Starting soonest
+Three lists for discovery screens:
+* **Top:** the most popular items, most popular in the past week first
+* **New:** folders updated most recently, latest first
+* **Next:** folders whose first event is today or later, soonest first
 
-All three endpoints return the [pages](https://github.com/schedjoules/calendar-store-api/blob/master/details/pages.md) JSON structure. A maximum of 50 in-app purchases are returned per call.
+All three return the [pages](https://github.com/schedjoules/calendar-store-api/blob/master/details/pages.md) structure with a single section. At most 50 items are returned, and a list can hold fewer items than you ask for, or none.
 
 ### Top
-Returns the most popular in-app purchases, with the most popular item from the past week listed first.
 
 ```
-GET /pages?top={nr_of_items}
+GET /pages?top={nr_of_items}&location={ISO 3166 code}
 
 Required GET parameters
-- nr_of_items             integer
+- top           integer     number of items (maximum 50)
 
 Optional GET parameters
-- locale                  string  (default: 'en')
-- location                string  (default: 'us')
+- locale        string      (default: 'en')
+- location      string      the country to rank for. Without it only items that are
+                            popular worldwide are returned, so the list is shorter
 ```
 
 ### New
-Returns the most recently added in-app purchases, with the latest addition listed first. An additional `first_event` label indicates the date and time (UTC) of the first event for each in-app purchase.
 
 ```
 GET /pages?new={nr_of_items}
 
 Required GET parameters
-- nr_of_items             integer
+- new           integer     number of items (maximum 50)
 
 Optional GET parameters
-- locale                  string  (default: 'en')
+- locale        string      (default: 'en')
 ```
 
+The list is the same worldwide: `location` has no effect.
+
 ### Next
-Returns in-app purchases with the earliest upcoming start date, listed in ascending order. An additional `first_event` label indicates the date and time (UTC) of the first event for each in-app purchase.
 
 ```
 GET /pages?next={nr_of_items}
 
 Required GET parameters
-- nr_of_items             integer
+- next          integer     number of items (maximum 50)
 
 Optional GET parameters
-- locale                  string  (default: 'en')
+- locale        string      (default: 'en')
 ```
+
+The list is the same worldwide: `location` has no effect.
+
+### Extra fields
+
+Items in New and Next have a `first_event` field: the start of the folder's first event, in UTC, formatted as `"2026-11-20 00:30:00 UTC"` (not ISO 8601).
+
+Items in these lists also carry `icon_etag`, which is always `null`.

@@ -1,32 +1,34 @@
 ## Languages
 
-We support 16 core languages. The API and most calendar content are translated into these languages:
+The API and most calendar content are available in 18 languages:
 
-* Chinese
-* Danish
-* Dutch
-* English
-* Finnish
-* French
-* German
-* Italian
-* Japanese
-* Korean
-* Norwegian
-* Portuguese
-* Russian
-* Spanish
-* Swedish
-* Turkish
+| Code | Language | Code | Language |
+|---|---|---|---|
+| `ar` | Arabic | `ko` | Korean |
+| `da` | Danish | `nl` | Dutch |
+| `de` | German | `no` | Norwegian |
+| `en` | English | `pl` | Polish |
+| `es` | Spanish | `pt` | Portuguese |
+| `fi` | Finnish | `ru` | Russian |
+| `fr` | French | `sv` | Swedish |
+| `it` | Italian | `tr` | Turkish |
+| `ja` | Japanese | `zh` | Chinese |
 
-You can retrieve the list of supported languages via:
+The current list:
+
 ```
 GET /languages
-
-Required labels
-- language_id                   integer
-- name                          string
-- iso_639_1                     string
 ```
 
-If a language that is important to you or your users is not listed, please contact us.
+returns an array of (shortened):
+
+```json
+[
+  {"language_id": 1, "name": "Français", "iso_639_1": "fr"},
+  {"language_id": 15, "name": "Norsk bokmål", "iso_639_1": "no"}
+]
+```
+
+`name` is the language's own name, not its English name. How the API picks the response language is described in the [README](https://github.com/schedjoules/calendar-store-api#language).
+
+If a language that matters to you or your users is missing, please contact us.

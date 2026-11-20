@@ -1,0 +1,920 @@
+# SchedJoules Calendar Service API
+
+> REST API (JSON over HTTPS) for public calendars: holidays, sports, TV, weather, finance and more. Clients browse pages of calendars and subscribe users to calendar feed URLs (iCalendar, jCal or xCal). Every request needs an `Authorization: Token token="..."` header.
+
+Generated from the markdown files in this repository by .github/scripts/build_llms.py. Do not edit by hand.
+
+
+<!-- source: README.md -->
+
+## SchedJoules Calendar Service API
+
+This API provides access to the SchedJoules Public Calendar Service: public calendars for holidays, sports, TV, weather, financial events and more, for desktop, web and mobile applications, in 18 languages.
+
+Reading this with a coding agent? [llms.txt](https://github.com/schedjoules/calendar-store-api/blob/master/llms.txt) indexes every page, and [llms-full.txt](https://github.com/schedjoules/calendar-store-api/blob/master/llms-full.txt) holds all of them in one file.
+
+## SDKs
+
+We provide SDKs for iOS and Android:
+* [iOS](https://github.com/schedjoules/ios-public-calendars-sdk)
+* [Android](https://github.com/schedjoules/Android-SDK)
+
+## Set Yourself Up
+
+An API key is required. Request one at support@schedjoules.com.
+
+You can explore the API with our test API key:
+```
+curl 'https://api.schedjoules.com/pages/115673' -H 'Authorization: Token token="0443a55244bb2b6224fd48e0416f0d9c"'
+```
+The test key gives access to the complete API, but every calendar URL it returns points to the same placeholder calendar. Your own key returns the real calendars.
+
+## Request Basics
+
+| | |
+|---|---|
+| Base URL | `https://api.schedjoules.com/` |
+| Authentication | Header `Authorization: Token token="{YOUR_API_KEY}"` |
+| Format | JSON. Appending `.json` to a URL is not required |
+| Transport | HTTPS. A plain HTTP request is redirected to HTTPS |
+| Redirects | `GET /pages` answers with a `302` to the page it resolves to. Follow redirects |
+
+A missing or unknown API key returns `401`:
+```json
+{"errors": {"status": 401, "title": "Invalid API key", "detail": "https://github.com/schedjoules/calendar-store-api#set-yourself-up"}}
+```
+
+### Versioning
+There is one version, `v1`. You may send `Accept: application/vnd.schedjoules; version=1`, but it is optional and currently every request is served by v1.
+
+Fields may be added to responses without a version change, so make sure your client ignores fields it does not know.
+
+### Language
+The response language is taken from, in this order:
+1. the `locale` parameter
+2. the `x-locale` header
+3. the `Accept-Language` header
+
+Only the first two letters are used, so `de_DE` and `de-AT` both mean `de`. `nb` is read as `no`. A language the API does not support falls back to English. See [Languages](https://github.com/schedjoules/calendar-store-api/blob/master/details/languages.md) for the list.
+
+## Pages
+The API is built around pages. A page represents a view in your application: for example, a football page lists all teams in a league, so the user can pick a team and add its matches to their calendar.
+
+Start from the user's location:
+```
+GET /pages?locale={ISO 639-1 code}&location={ISO 3166 code}
+
+Optional GET parameters
+- locale        language of the response (see Language above)
+- location      ISO 3166-1 alpha-2 country code. Without it, or with an unknown one,
+                you get the default catalogue of your API key, or the general
+                "All Calendars" page
+```
+
+Or open a page by its id:
+```
+GET /pages/{page_id}?locale={ISO 639-1 code}
+```
+
+[ISO 639-1 language codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) · [ISO 3166 country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+
+A page has a name and a list of `page_sections`. A section works as a header or grouping within the page, and holds items whose `item_class` is either `page` or `calendar`:
+* A `page` item is a child page. For example, "English Football" is a child of "All Football", and "Premier League" is a child of "English Football".
+* A `calendar` item is the calendar itself: its `url` is the feed your user subscribes to.
+
+See [Pages](https://github.com/schedjoules/calendar-store-api/blob/master/details/pages.md) for the full response format.
+
+## Unique Anonymous User Identifier
+Before presenting a calendar URL to your users, append a unique anonymous user identifier to it: `&u={unique_anonymous_user_identifier}`. It is used for statistics and to detect and prevent misuse of our content. Use the same identifier for the same user everywhere, including the [Accounts API](https://github.com/schedjoules/calendar-store-api/blob/master/details/accounts.md).
+
+## Caching
+Cache responses wherever possible.
+* API responses carry an `ETag` and a `Last-Modified` header, and answer `304 Not Modified` to a matching `If-None-Match` or `If-Modified-Since`.
+* They are sent with `Cache-Control: max-age=0, private, must-revalidate`: keep your copy, but revalidate it before using it again.
+
+## More Information
+* [Pages](https://github.com/schedjoules/calendar-store-api/blob/master/details/pages.md)
+* [In-app Purchases and Accounts](https://github.com/schedjoules/calendar-store-api/blob/master/details/accounts.md)
+* [Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md)
+* [Pregnancy and Countdown Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/user_input_calendars.md)
+* [Countries](https://github.com/schedjoules/calendar-store-api/blob/master/details/countries.md)
+* [Languages](https://github.com/schedjoules/calendar-store-api/blob/master/details/languages.md)
+* [Search](https://github.com/schedjoules/calendar-store-api/blob/master/details/search.md)
+* [Top, New, Next](https://github.com/schedjoules/calendar-store-api/blob/master/details/top_new_next.md)
+* [Weather](https://github.com/schedjoules/calendar-store-api/blob/master/details/weather.md)
+* [Alarms](https://github.com/schedjoules/calendar-store-api/blob/master/details/alarms.md)
+* [Deprecations and Changes](https://github.com/schedjoules/calendar-store-api/blob/master/details/deprecation_and_changes.md)
+* [FAQ](https://github.com/schedjoules/calendar-store-api/blob/master/details/faq.md)
+
+## Rate Limits
+There are currently no rate limits. Requests are monitored, and we may reach out if we see a way to make your integration more efficient.
+
+## Data Usage and Restrictions
+By using this API, you acknowledge that all accessed data is proprietary. The data and images may not be used for any purpose beyond what has been agreed upon. Data may not be stored in any database other than on a user's client device for performance purposes.
+
+## Feedback and Support
+If you have a feature request or have found a bug, open a GitHub issue or email support@schedjoules.com.
+
+
+<!-- source: details/pages.md -->
+
+## Pages
+
+Pages are the foundation of the API. They provide the structure for the views your users interact with; your application provides the UX and UI for each page.
+
+Pages are localised: every translatable field is returned in the requested language.
+
+`GET /pages/115673?locale=en` returns (shortened to one item per section):
+
+```json
+{
+  "item_id": 115673,
+  "name": "United States",
+  "country": "United States",
+  "country_id": 79,
+  "icon": null,
+  "page_sections": [
+    {
+      "name": "Holidays",
+      "id": 2,
+      "items": [
+        {
+          "item_class": "calendar",
+          "item": {
+            "item_id": 50084,
+            "name": "Public Holidays",
+            "url": "https://holidays.schedjoules.com/calendars/766e8a162f82?l=en",
+            "category": "Holidays",
+            "category_id": 1,
+            "country": "United States",
+            "country_id": 79,
+            "holiday_kind": "public",
+            "icon": "https://cdn-images.schedjoules.com/assets/9783d4f3.png"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sports",
+      "id": 28,
+      "items": [
+        {
+          "item_class": "page",
+          "item": {
+            "item_id": 29230902,
+            "name": "NBA",
+            "url": "https://api.schedjoules.com/pages/29230902?locale=en",
+            "category": "Sports",
+            "category_id": 2,
+            "country": "United States",
+            "country_id": 79,
+            "sport": "Basketball",
+            "sport_id": 2,
+            "gender": "Men",
+            "gender_id": 1,
+            "icon": "https://cdn-images.schedjoules.com/assets/basketball.png"
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+An optional field without a value is usually left out rather than sent as `null`; `icon` is the exception and can be `null`.
+
+### Page
+
+| Field | Type | |
+|---|---|---|
+| `item_id` | integer | Always. Unique per page |
+| `name` | string | Always |
+| `page_sections` | array | Always. One or more sections |
+| `icon` | string (URL) or null | |
+| `description` | string | |
+| `url` | string (URL) | Only on a page that has no sections of its own |
+| `app_subscription_identifier` | string | Only for API keys on a subscription pricing model. The product identifier to offer this user. It can differ per user: it is chosen from the `u` parameter (or the `x-user-id` header) |
+
+A page also carries the same tag fields as an item (`category`, `country`, `sport` and so on, see below) when they apply.
+
+### Page Section
+
+| Field | Type | |
+|---|---|---|
+| `name` | string | Always. An empty string for the first, unnamed section |
+| `id` | integer | Not on the first, unnamed section |
+| `items` | array | The section's items |
+
+### Item
+
+| Field | Type | |
+|---|---|---|
+| `item_class` | string | `page` or `calendar` |
+| `item` | object | The page item or calendar item |
+
+### Page item and calendar item
+
+Both have the same fields. The difference is the `url`: a page item's `url` is the API URL of the child page, a calendar item's `url` is the calendar feed.
+
+| Field | Type | |
+|---|---|---|
+| `item_id` | integer | Always |
+| `name` | string | Always |
+| `url` | string (URL) | Always |
+| `icon` | string (URL) or null | |
+| `category`, `category_id` | string, integer | Main category, see [Search](https://github.com/schedjoules/calendar-store-api/blob/master/details/search.md) for the ids |
+| `country`, `country_id` | string, integer | The country the item belongs to, see [Countries](https://github.com/schedjoules/calendar-store-api/blob/master/details/countries.md) |
+| `region`, `region_id` | string, integer | Regional holiday calendars only |
+| `sport`, `sport_id` | string, integer | Sports only |
+| `gender`, `gender_id` | string, integer | Sports only: 1 Men, 2 Women, 3 Unspecified, 4 Mixed |
+| `holiday_kind` | string | Holiday calendars only, for example `public` |
+
+`region` is set on regional holiday calendars only: the state, province or other region the calendar covers, in the requested locale (falling back to English). `country` is the country it belongs to; a national calendar has no `region`. Outside its parent page a regional calendar is named like its national one ("Public Holidays and Observances"), so show `region` with it, for example as a subtitle: "California, United States".
+
+Before presenting a calendar item's `url` to your users, append the unique anonymous user identifier: `&u={unique_anonymous_user_identifier}` (see the [README](https://github.com/schedjoules/calendar-store-api#unique-anonymous-user-identifier)).
+
+A calendar `url` can be a template that your app must fill in first, such as the weather calendar's `{location}`. See [Weather](https://github.com/schedjoules/calendar-store-api/blob/master/details/weather.md) and [Pregnancy and Countdown Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/user_input_calendars.md).
+
+
+<!-- source: details/calendars.md -->
+
+## Calendars
+
+The `url` of a calendar item is the calendar feed. Calendars are served in iCalendar format ([RFC 5545](https://tools.ietf.org/html/rfc5545)) by default, which every major operating system and calendar client can subscribe to. jCal ([RFC 7265](https://tools.ietf.org/html/rfc7265)) and xCal ([RFC 6321](https://tools.ietf.org/html/rfc6321)) are also available: add the extension to the path.
+
+* iCalendar: `.../calendars/766e8a162f82`
+* jCal: `.../calendars/766e8a162f82.json`
+* xCal: `.../calendars/766e8a162f82.xml`
+
+Differences from the iCalendar feed:
+* jCal and xCal responses contain no alarms.
+* jCal property names use underscores where the RFC uses hyphens, for example `x_wr_calname` instead of `x-wr-calname`.
+
+Remember to append `&u={unique_anonymous_user_identifier}` to every calendar URL (see the [README](https://github.com/schedjoules/calendar-store-api#unique-anonymous-user-identifier)).
+
+### Date Range
+
+By default, the date range of events returned depends on your agreement with SchedJoules. You can move the start of the window:
+
+```
+GET /calendars/766e8a162f82?start_at_or_after={datetime}
+
+Optional GET parameters
+- start_at_or_after     datetime    ISO 8601 (e.g. 2026-01-01T00:00:00Z). Only events
+                                    starting at or after this moment are returned.
+```
+
+The end of the window cannot be changed per request.
+
+### Number of Events
+
+By default, every event in the date range is returned. To limit the response to the first N events:
+
+```
+GET /calendars/766e8a162f82?results={nr_of_events}
+
+Optional GET parameters
+- results               integer     Maximum number of events to return.
+```
+
+### Incremental Updates
+
+To fetch only the events that changed since a given moment:
+
+```
+GET /calendars/766e8a162f82?events_updated_since={timestamp}
+
+Optional GET parameters
+- events_updated_since  Returns only events updated after this moment.
+```
+
+The format currently depends on the calendar type:
+* **National holiday calendars:** Unix time in seconds, for example `1767225600`.
+* **Regional holiday calendars and most sport calendars:** an ISO 8601 datetime, for example `2026-01-01T00:00:00Z`.
+* **All other calendars:** the parameter is ignored, and you get the full calendar.
+
+When you ask a sport calendar for updates, events that were called off are included, so you can remove them on your side.
+
+### Hiding Sport Event Results
+Some users prefer not to see results in a sport event's title, for example because they will watch the match later. Use `show_result=false` to leave results out:
+
+```
+GET /calendars/d2b1e319a12a?show_result=false
+
+Optional GET parameters
+- show_result           Only the value 'false' has an effect. Results are shown by default.
+```
+
+### Alarms
+See [Alarms](https://github.com/schedjoules/calendar-store-api/blob/master/details/alarms.md).
+
+### Calendars Filled In by the User
+The weather, pregnancy and countdown calendars have a URL template that your app fills in with what the user enters (a location, a due date, or a name and a date). See [Weather](https://github.com/schedjoules/calendar-store-api/blob/master/details/weather.md) and [Pregnancy and Countdown Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/user_input_calendars.md).
+
+
+<!-- source: details/user_input_calendars.md -->
+
+## Calendars Filled In by the User
+
+Most calendar URLs in a pages response can be subscribed to as they are. A few calendars are built from something the user enters in your app before subscribing, the way the [weather calendar](https://github.com/schedjoules/calendar-store-api/blob/master/details/weather.md) needs a location. Their URL is a template with placeholders in curly braces, and your app replaces each placeholder with the user's input.
+
+There are two such calendars:
+
+| Calendar | Placeholders | What it shows |
+|---|---|---|
+| Pregnancy | `{due_date}` | One event per week of pregnancy, counted back from the due date, plus the due date itself |
+| Countdown | `{countdown_name}`, `{countdown_date}`, `{countdown_yearly}` | One all-day event per day up to a date the user picks, for example "12 days to Holiday" |
+
+SchedJoules stores none of this input. Everything the calendar needs is in the URL, and every request computes the events from it. Keep the filled URL as the subscription: changing the input means subscribing to a new URL (or replacing the old one).
+
+### Availability: announce the input step
+
+These pages only appear in API responses for apps that can fill the template. An app announces that with the `features` parameter on its API requests:
+
+```
+GET /pages/115673?locale=en&location=us&features=due_date,countdown
+
+Optional GET parameters
+- features      comma separated list of input steps the app supports
+                due_date    shows the pregnancy calendar
+                countdown   shows the countdown calendar
+```
+
+The parameter applies to every request that returns pages: `/pages`, `/pages/{page_id}`, search, and the top, new and next lists. A request without it never sees these pages, so an app that cannot fill the template does not show its users a calendar they cannot use.
+
+At the moment these pages are served to the SchedJoules apps only, whatever the `features` parameter says. Contact support@schedjoules.com if you would like to offer them in your app.
+
+### Recognising a template
+
+Check the calendar item's `url` for a placeholder before you present a subscribe action. A URL that still contains `{` and `}` (or their encoded form `%7B` and `%7D`) must never be subscribed to as it is: an unfilled template serves an empty calendar.
+
+Do not add these calendars through a one-tap path that skips the input step, such as a suggestion or onboarding list.
+
+### Pregnancy
+
+The calendar item's URL looks like this:
+
+```
+https://xxx.schedjoules.com/calendars/xxxxxxxxxxxx?l=en&due={due_date}&x=xxx
+```
+
+Replace `{due_date}` with the due date as `YYYY-MM-DD`, then append `&u={unique_anonymous_user_identifier}` as for any other calendar.
+
+| Parameter | Format | Notes |
+|---|---|---|
+| `due` | `YYYY-MM-DD` | Accepted from 365 days in the past up to 294 days (42 weeks) ahead |
+
+The calendar contains:
+* One all-day event per week, from week 4 to week 42. Weeks are completed weeks as midwives count them: week 12 runs from 12+0 to 12+6, and week 40 starts on the due date.
+* One all-day event on the due date itself.
+
+Each event has a title ("Week 12: ...") and a description of the baby's development in that week, written from the NHS week-by-week guide and translated into every API language. The descriptions are general information, not medical advice, and each ends with a disclaimer saying so.
+
+The due date is health data. Do not log the filled URL or send it to analytics.
+
+### Countdown
+
+The calendar item's URL looks like this:
+
+```
+https://xxx.schedjoules.com/calendars/xxxxxxxxxxxx?l=en&countdown_name={countdown_name}&countdown_date={countdown_date}&countdown_yearly={countdown_yearly}&x=xxx
+```
+
+Fill in the placeholders, append `countdown_repeat` (below) and `&u={unique_anonymous_user_identifier}`.
+
+| Parameter | Format | Notes |
+|---|---|---|
+| `countdown_name` | text, URL-encoded | What the user counts down to. Whitespace is collapsed and the name is cut at 60 characters |
+| `countdown_date` | `YYYY-MM-DD` | The day counted down to. Up to 10 years ahead |
+| `countdown_repeat` | `none`, `yearly`, `monthly`, `weekly` | How the countdown repeats. Not in the template yet: append it. Any other value means `none` |
+| `countdown_yearly` | `1` or `0` | The older form of `countdown_repeat`: `1` means yearly. Used only when `countdown_repeat` is missing. Fill it as well, so the URL works the same either way |
+
+The calendar is named after the countdown, so a user with several countdowns can tell them apart in their calendar app. Each event is an all-day event:
+
+* Every day before the date: "12 days to Holiday"
+* On the date itself: "Holiday is today"
+
+Which days get an event depends on the repeat:
+
+| Repeat | Events | After the date |
+|---|---|---|
+| `none` | The 365 days before the date, and the date | Nothing. A date more than 365 days in the past gives an empty calendar |
+| `yearly` | The 365 days before the next anniversary, and the anniversary | Rolls on to next year's anniversary |
+| `monthly` | From the day after the previous occurrence up to the next one | Rolls on to the next month. A 31st falls on the last day of a shorter month |
+| `weekly` | The 6 days before the next occurrence of that weekday, and the day itself | Rolls on to the next week |
+
+For a repeating countdown the date is the first occurrence and may lie in the past, so a birthday can be entered with the year of birth.
+
+The texts are available in en, ar, da, de, es, fi, fr, it, ja, ko, nl, no, pl, pt, ru, sv, tr and zh. Other languages get English.
+
+The name is text the user typed. Do not log the filled URL or send it to analytics.
+
+### Date Range
+
+Both calendars follow the same [date range](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#date-range) rules as every other calendar, and the `start_at_or_after` and `results` parameters work as usual.
+
+### Unusable Input
+
+A missing, malformed or out-of-range value never causes an error. The request succeeds with an empty calendar. Validate the input in your app before subscribing, using the ranges above, so the user is not left with a calendar that never shows anything.
+
+
+<!-- source: details/weather.md -->
+
+## Weather
+
+### Calendar Requests
+
+The weather calendar is a forecast for one location, 16 days ahead, with one all-day event per day. Its `url` in a pages response is a template your app fills in:
+
+```
+GET /calendars/weather/calendar.ics?l={locale}&loc={location}&d={temp}&p={rain}&w={wind}&t={time}
+
+Required GET parameters
+- loc   location        location_id from GET /cities/search or GET /cities/cities_within_bounds (below)
+
+Optional GET parameters
+- l     locale          ISO 639-1 language code (default: 'en')
+- d     temperature     c, f (default: 'c')
+- w     wind speed      kmh, kts, ms, mph (default: 'kmh')
+- t     time format     12, 24 (default: 24)
+- p     precipitation   mm, in. Accepted, but has no effect: the calendar shows no precipitation
+- h     hourly          1 = one detail line per hour for the first 96 hours instead of one per 3 hours
+```
+
+Each day's event contains:
+* in the title: the day's minimum and maximum temperature and a short description of the weather;
+* in the description: a line every 3 hours (or every hour with `h=1`) with temperature, wind speed and conditions, followed by the day's temperature, humidity and wind range.
+
+### Weather Settings
+
+The units to offer, with localised names and the default for a country:
+
+```
+GET /cities/weather_settings?locale={locale}&location={ISO 3166 code}
+
+Optional GET parameters
+- locale        (default: 'en')
+- location      country whose defaults to return. Only 'us' and 'gb' have their own defaults
+```
+
+`GET /cities/weather_settings?locale=en&location=us` returns:
+
+```json
+{
+  "temp": {"title": "Temperature", "options": {"c": "ºC", "f": "ºF"}, "default": "f"},
+  "rain": {"title": "Precipitation", "options": {"mm": "mm", "in": "po"}, "default": "in"},
+  "wind": {"title": "Wind Speed", "options": {"kmh": "km/h", "kts": "Knots", "ms": "m/s", "mph": "mph"}, "default": "mph"},
+  "time": {"title": "Time format", "options": {"12": "12-hour", "24": "24-hour"}, "default": "12"}
+}
+```
+
+### Searching Locations by City Name
+
+```
+GET /cities/search?q={query}
+
+Required GET parameters
+- q         search query, at least 2 characters
+
+Optional GET parameters
+- locale    returns city names in this language where available
+```
+
+Every word of the query must match the start of a word in the city's name or one of its local names. At most 10 results, ordered by exact name match first, then names that start with the query, then popularity. A query shorter than 2 characters returns an empty array `[]`.
+
+`GET /cities/search?q=Amsterdam` returns (shortened):
+
+```json
+{
+  "cities": [
+    {"country": "nl", "latitude": 52.37, "longitude": 4.9, "name": "Amsterdam", "location_id": 102759794},
+    {"country": "ca", "latitude": 51.75, "longitude": -102.47, "name": "Amsterdam", "location_id": 105884628}
+  ]
+}
+```
+
+Use the `location_id` as the `loc` parameter of the calendar URL. `country` is a lowercase ISO 3166 code.
+
+### Locations on a Map
+
+To show weather locations on a map of the area the user is looking at:
+
+```
+GET /cities/cities_within_bounds?ne={lat},{lng}&sw={lat},{lng}
+
+Required GET parameters
+- ne    north-east corner of the visible map, latitude first
+- sw    south-west corner of the visible map, latitude first
+```
+
+The API takes the 100 most popular locations in the area and groups nearby ones, so you get at most 30 markers. A north-east longitude smaller than the south-west one is read as an area that crosses the 180° meridian.
+
+`GET /cities/cities_within_bounds?ne=52.5,5.1&sw=52.2,4.7` returns (shortened):
+
+```json
+[
+  {"la": 52.37, "lo": 4.9, "fo": 102759794, "ty": "i", "to": "Amsterdam"},
+  {"la": 52.3, "lo": 4.86, "fo": 102759798, "ty": "i", "to": "Amstelveen"}
+]
+```
+
+| Field | |
+|---|---|
+| `la`, `lo` | Latitude and longitude |
+| `fo` | The `location_id` |
+| `to` | Location name |
+| `ty` | `i` for a single location, `c` for a cluster of several. A cluster carries the name and id of one of its locations; zoom in to split it |
+
+
+<!-- source: details/alarms.md -->
+
+## Alarms
+
+Events in the iCalendar feed carry a default alarm that depends on the type of calendar:
+
+| Calendar | Default alarm |
+|---|---|
+| Sports | 30 minutes before |
+| TV | 30 minutes before |
+| Moon phases, name days, week numbers, day numbers | 30 minutes before |
+| Finance | 720 minutes (12 hours) before |
+| Public holidays | none |
+| School holidays | 720 minutes before for most countries, 30 minutes before in the UK |
+| Weather, pregnancy, countdown | none |
+
+You can override the default, or let your users do so, with the `al` parameter on the calendar URL:
+
+| Value | Effect |
+|---|---|
+| `al=48` | Alarm 48 minutes before the start of each event |
+| `al=-15` | Alarm 15 minutes after the start |
+| `al=0` | Alarm at the start. Any value that is not a number has the same effect |
+| `al=none` | No alarms |
+
+`al` also adds alarms to calendars that have none by default. It only applies to the iCalendar format: jCal and xCal responses contain no alarms.
+
+
+<!-- source: details/search.md -->
+
+## Search
+
+Free-text search over calendars and pages:
+
+```
+GET /pages/search?q={query}
+
+e.g. /pages/search?q=Warriors
+
+Required GET parameters
+- q                     string   at least 3 characters. A shorter query returns no items
+
+Optional GET parameters
+- locale                string   (default: 'en')
+- nr_results            integer  number of results (default: 50)
+- country_id            integer  filter by country, see Countries
+- main_category_id      integer  filter by main category
+- sport_id              integer  filter by sport
+- gender_id             integer  filter by gender
+```
+
+Every filter takes one id or a comma-separated list, e.g. `main_category_id=1,2`. An unknown id returns no items, not an error.
+
+`main_category_id` values:
+
+| ID | Category |
+|---|---|
+| 1 | Holidays |
+| 2 | Sports |
+| 3 | Weather |
+| 4 | Finance |
+| 5 | Miscellaneous |
+| 6 | TV |
+
+`gender_id` values: 1 Men, 2 Women, 3 Unspecified, 4 Mixed.
+
+See [Countries](https://github.com/schedjoules/calendar-store-api/blob/master/details/countries.md) for `country_id`. To open a page whose id you already know, use `GET /pages/{page_id}`; there is no separate lookup endpoint.
+
+### Response
+
+The response has the [pages](https://github.com/schedjoules/calendar-store-api/blob/master/details/pages.md) structure, with `item_id` set to `null` and the query as `name`. Results are grouped into one section per main category. Search items carry one extra field, `original_name`: `name` may include a gender sign and a flag to tell similar teams apart, `original_name` does not.
+
+`GET /pages/search?q=Warriors&nr_results=1` returns:
+
+```json
+{
+  "item_id": null,
+  "name": "Warriors",
+  "page_sections": [
+    {
+      "name": "Sports",
+      "items": [
+        {
+          "item_class": "calendar",
+          "item": {
+            "item_id": 29139585,
+            "name": "Golden State Warriors ♂ 🇺🇸",
+            "original_name": "Golden State Warriors",
+            "url": "https://holidays.schedjoules.com/calendars/766e8a162f82?l=en",
+            "category": "Sports",
+            "category_id": 2,
+            "icon": "https://cdn-images.schedjoules.com/assets/basketball.png",
+            "country": "United States",
+            "country_id": 79,
+            "sport": "Basketball",
+            "sport_id": 2,
+            "gender": "Men",
+            "gender_id": 1
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+
+<!-- source: details/top_new_next.md -->
+
+## Top, New, Next
+
+Three lists for discovery screens:
+* **Top:** the most popular items, most popular in the past week first
+* **New:** folders updated most recently, latest first
+* **Next:** folders whose first event is today or later, soonest first
+
+All three return the [pages](https://github.com/schedjoules/calendar-store-api/blob/master/details/pages.md) structure with a single section. At most 50 items are returned, and a list can hold fewer items than you ask for, or none.
+
+### Top
+
+```
+GET /pages?top={nr_of_items}&location={ISO 3166 code}
+
+Required GET parameters
+- top           integer     number of items (maximum 50)
+
+Optional GET parameters
+- locale        string      (default: 'en')
+- location      string      the country to rank for. Without it only items that are
+                            popular worldwide are returned, so the list is shorter
+```
+
+### New
+
+```
+GET /pages?new={nr_of_items}
+
+Required GET parameters
+- new           integer     number of items (maximum 50)
+
+Optional GET parameters
+- locale        string      (default: 'en')
+```
+
+The list is the same worldwide: `location` has no effect.
+
+### Next
+
+```
+GET /pages?next={nr_of_items}
+
+Required GET parameters
+- next          integer     number of items (maximum 50)
+
+Optional GET parameters
+- locale        string      (default: 'en')
+```
+
+The list is the same worldwide: `location` has no effect.
+
+### Extra fields
+
+Items in New and Next have a `first_event` field: the start of the folder's first event, in UTC, formatted as `"2026-11-20 00:30:00 UTC"` (not ISO 8601).
+
+Items in these lists also carry `icon_etag`, which is always `null`.
+
+
+<!-- source: details/countries.md -->
+
+## Countries
+
+The supported countries, with their names in the requested language:
+
+```
+GET /countries?locale={ISO 639-1 code}
+
+Optional GET parameters
+- locale        (default: 'en')
+```
+
+`GET /countries?locale=de` returns an array of (shortened to one country):
+
+```json
+[
+  {
+    "country_id": 72,
+    "name": "Netherlands",
+    "iso_3166": "nl",
+    "icon": "https://cdn-images.schedjoules.com/assets/0604f0ff.png",
+    "icon_etag": null,
+    "name_translation": "Niederlande",
+    "translation_url": "https://api.schedjoules.com/countries?location=nl",
+    "page_id": 115676
+  }
+]
+```
+
+| Field | |
+|---|---|
+| `country_id` | Use it as `country_id` in [Search](https://github.com/schedjoules/calendar-store-api/blob/master/details/search.md) |
+| `name` | The name in English |
+| `name_translation` | The name in the requested language, English where no translation exists |
+| `iso_3166` | Lowercase ISO 3166-1 alpha-2 code. Use it as `location` on `/pages` |
+| `page_id` | The country's home page in the calendar store: `GET /pages/{page_id}` |
+| `translation_url` | Where to get the country's name in every language (below) |
+| `icon_etag` | Always `null` |
+
+### One country in every language
+
+```
+GET /countries?location={ISO 3166 code}
+```
+
+`GET /countries?location=nl` returns (shortened):
+
+```json
+{
+  "country_id": 72,
+  "name": "Netherlands",
+  "icon": "https://cdn-images.schedjoules.com/assets/0604f0ff.png",
+  "icon_etag": null,
+  "iso_3166": "nl",
+  "page_id": 115676,
+  "locales": [
+    {"locale": "de", "name_translation": "Niederlande"},
+    {"locale": "fr", "name_translation": "Pays-Bas"}
+  ]
+}
+```
+
+Use the country list to let users switch to the calendar store of another country than the one their device's region setting points to.
+
+
+<!-- source: details/languages.md -->
+
+## Languages
+
+The API and most calendar content are available in 18 languages:
+
+| Code | Language | Code | Language |
+|---|---|---|---|
+| `ar` | Arabic | `ko` | Korean |
+| `da` | Danish | `nl` | Dutch |
+| `de` | German | `no` | Norwegian |
+| `en` | English | `pl` | Polish |
+| `es` | Spanish | `pt` | Portuguese |
+| `fi` | Finnish | `ru` | Russian |
+| `fr` | French | `sv` | Swedish |
+| `it` | Italian | `tr` | Turkish |
+| `ja` | Japanese | `zh` | Chinese |
+
+The current list:
+
+```
+GET /languages
+```
+
+returns an array of (shortened):
+
+```json
+[
+  {"language_id": 1, "name": "Français", "iso_639_1": "fr"},
+  {"language_id": 15, "name": "Norsk bokmål", "iso_639_1": "no"}
+]
+```
+
+`name` is the language's own name, not its English name. How the API picks the response language is described in the [README](https://github.com/schedjoules/calendar-store-api#language).
+
+If a language that matters to you or your users is missing, please contact us.
+
+
+<!-- source: details/accounts.md -->
+
+## In-app Purchases and Accounts
+
+You can configure the API to require end-users to pay for calendar content. In that case, you will likely want to integrate In-App Purchases. We offer several approaches for handling this.
+
+The easiest approach is to use one of our [SDKs](https://github.com/schedjoules/calendar-store-api/blob/master/README.md#sdks). Payment processing and calendar management are handled entirely within the SDK, allowing you to get up and running quickly. If you choose not to use one of the SDKs, you gain more flexibility through the Account API. The Account API allows you to control calendar behaviour and user access across multiple devices.
+
+### Editing Subscriptions
+An important consideration when developing on iOS or macOS is that calendar subscriptions are managed by the operating system, not your application. The only way to prevent end-users from accessing calendar subscriptions after their subscription has expired is to notify the Account API of the expiration. You can set or update the expiration date with the following request:
+
+```
+curl -X POST https://api.schedjoules.com/accounts/{UNIQUE_ANONYMOUS_USER_IDENTIFIER}/licenses -H "Content-Type: application/json" -H 'Authorization: Token token="{YOUR_API_KEY}"' -d '{"product_id": "{PRODUCT_ID}", "expiration_date": "{EXPIRATION_DATE}"}'
+```
+
+* `{UNIQUE_ANONYMOUS_USER_IDENTIFIER}` (in the path): Must be unique per user within your implementation and must match the identifier appended to the [calendar URI](https://github.com/schedjoules/calendar-store-api#unique-anonymous-user-identifier). The account is created on the first request.
+* `product_id`: The identifier of the purchased product, such as its App Store or Google Play product ID. Posting the same `product_id` again for a user updates its expiration date.
+* `expiration_date`: ISO 8601 format in UTC, e.g., `2018-06-05T18:47:05Z`.
+
+The response lists all licenses of the user:
+
+```
+{"account_id": "{UNIQUE_ANONYMOUS_USER_IDENTIFIER}", "licenses": [{"license_id": "{PRODUCT_ID}", "expiration_date": "2018-06-05T18:47:05Z"}]}
+```
+
+`GET /accounts/{UNIQUE_ANONYMOUS_USER_IDENTIFIER}/licenses` returns the same response without changing anything. Your API key must be enabled for licenses; otherwise the POST returns `405`. Contact us to enable it.
+
+
+<!-- source: details/deprecation_and_changes.md -->
+
+## Deprecations and Changes
+
+Breaking changes and deprecated features of the API.
+
+### Done
+* **HTTPS only.** Plain HTTP requests are redirected to HTTPS.
+* **Location by country code.** `location` takes an ISO 3166 country code; looking a location up by numeric id is no longer supported.
+* **`country` parameter renamed to `location`.** The request parameter is `location`. Responses still have a `country` field with the country's name.
+* **`start_before` and the default of 500 results.** Calendar feeds no longer document a `start_before` parameter (it had no effect) or a default limit of 500 events: by default every event in the date range is returned. See [Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md).
+
+### Planned
+* **`icon_etag` removal.** The field is still sent in Countries and in Top, New and Next, but its value is always `null`. Do not rely on it.
+* **`events_updated_since` format.** National holiday calendars take Unix time, all others an ISO 8601 datetime. This will become one format; see [Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#incremental-updates).
+
+
+<!-- source: details/faq.md -->
+
+## Frequently Asked Questions
+
+#### What content do you offer via your API?
+We offer calendar content for:
+* Holidays
+* Sports schedules
+* TV Shows
+* Weather forecasts
+* Company Events
+* Lifestyle
+
+##### Holidays
+250 countries (13 with school holidays), 360 regions, official and notable days, 8 religions and the UN, including background information on holidays where available.
+
+##### Sports schedules
+39 sports, 600+ competitions, 20.000+ teams and athletes, including results, scorers, line-ups, substitutions, referees, and standings tables where available.
+
+##### TV Shows
+20.000+ channels available for North America and Western Europe, including show details such as episode descriptions, cast lists, and premiere/rerun information.
+
+##### Weather forecasts
+150,000 cities, 16 days ahead: daily minimum and maximum temperature, conditions, humidity and wind, with a detail line every 3 hours.
+
+##### Company Events
+35 indices and 2.000 companies. AGMs, publications, and results, including company information (website, IR page, IR contact), presentations, and webcasts where available.
+
+##### Lifestyle
+Moon phases, name days, week numbers and day numbers. In the SchedJoules apps also a pregnancy calendar and countdowns, see [Pregnancy and Countdown Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/user_input_calendars.md).
+
+#### What makes your content different from publicly available calendars?
+The quality and breadth of our content, the number of supported languages, the ease of integration across all major platforms via our API and SDKs, and our dedicated editorial and customer support team are just a few of the factors that set us apart.
+
+Content errors are corrected as soon as they are identified, and our support team is always available to assist.
+
+#### Why would I add public calendars to my mobile or web application?
+From your users' perspective: you provide a valuable service that saves them time and gives them greater control over their calendar.
+From your perspective: you enhance your product offering and introduce an additional revenue stream.
+
+#### What do I need to get a calendar service working?
+1. Request an API key
+2. Design your UX/UI
+3. Integrate SchedJoules into your application
+4. Test
+5. Publish
+
+Note that step 2 will typically require the same amount of effort as any other feature development in your application.
+
+#### Where does the calendar content come from?
+We collect content directly and work with third-party data providers.
+
+#### What should I do if I or my users find incorrect content?
+Please report any content errors to support@schedjoules.com. We will address them promptly.
+
+#### What if I have content that might be suitable for your API?
+We welcome suggestions. Please contact us to discuss further.
+
+#### Do you provide uptime guarantees?
+We make every reasonable effort to maintain service availability. Our current uptime is very close to 100%. We operate a highly scalable infrastructure, and reliability is one of our core priorities.
+
+#### What languages is the content available in?
+The API is available in 18 languages: English, Spanish, German, Italian, French, Portuguese, Dutch, Chinese, Japanese, Korean, Russian, Swedish, Danish, Norwegian, Finnish, Turkish, Polish and Arabic. Most calendar content is available in these languages as well. See [Languages](https://github.com/schedjoules/calendar-store-api/blob/master/details/languages.md).
+
+#### Can I store, resell, or redistribute your content?
+Some of our content is proprietary. Storage, resale, or redistribution is not permitted without our written approval. Clients may cache data locally for performance purposes only.
+
+#### Is there anything else I should know?
+Unless you have specific requirements, there are no setup costs.
+Your users remain your users. They transact with you; we provide the service behind the scenes.
+
+#### Where can I find more information about SchedJoules?
+Visit [schedjoules.com](http://schedjoules.com) or contact us at support@schedjoules.com.
+
+#### What if my question is not answered here?
+Send us an email at support@schedjoules.com or reach out via [Twitter](https://twitter.com/schedjoules) or [Facebook](https://www.facebook.com/SchedJoules-259241530783344).

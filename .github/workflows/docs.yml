@@ -12,3 +12,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python3 .github/scripts/check_links.py
+      - run: python3 .github/scripts/check_json_blocks.py
+      - run: python3 .github/scripts/build_llms.py --check
