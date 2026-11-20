@@ -1,0 +1,83 @@
+{
+  "item_id": 115673,
+  "name": "United States",
+  "country": "United States",
+  "country_id": 79,
+  "icon": null,
+  "page_sections": [
+    {
+      "items": [
+        {
+          "item": {
+            "item_id": 50084,
+            "name": "Public Holidays",
+            "url": "https://holidays.schedjoules.com/calendars/766e8a162f82?l=en",
+            "category": "Holidays",
+            "category_id": 1,
+            "country": "United States",
+            "country_id": 79,
+            "holiday_kind": "public",
+            "icon": "https://cdn-images.schedjoules.com/assets/9783d4f3.png"
+          },
+          "item_class": "calendar"
+        },
+        {
+          "item": {
+            "item_id": 49741,
+            "name": "Public Holidays and Observances",
+            "url": "https://holidays.schedjoules.com/calendars/766e8a162f82?l=en",
+            "category": "Holidays",
+            "category_id": 1,
+            "country": "United States",
+            "country_id": 79,
+            "holiday_kind": "observances",
+            "icon": "https://cdn-images.schedjoules.com/assets/00f2a418.png"
+          },
+          "item_class": "calendar"
+        }
+      ],
+      "name": "Holidays",
+      "id": 2
+    },
+    {
+      "items": [
+        {
+          "item": {
+            "item_id": 29401386,
+            "name": "NFL",
+            "url": "https://api.schedjoules.com/pages/29401386?locale=en",
+            "category": "Sports",
+            "category_id": 2,
+            "country": "United States",
+            "country_id": 79,
+            "sport": "American Football",
+            "sport_id": 16,
+            "gender": "Men",
+            "gender_id": 1,
+            "icon": "https://cdn-images.schedjoules.com/assets/us_football.png"
+          },
+          "item_class": "page"
+        },
+        {
+          "item": {
+            "item_id": 29230902,
+            "name": "NBA",
+            "url": "https://api.schedjoules.com/pages/29230902?locale=en",
+            "category": "Sports",
+            "category_id": 2,
+            "country": "United States",
+            "country_id": 79,
+            "sport": "Basketball",
+            "sport_id": 2,
+            "gender": "Men",
+            "gender_id": 1,
+            "icon": "https://cdn-images.schedjoules.com/assets/basketball.png"
+          },
+          "item_class": "page"
+        }
+      ],
+      "name": "Sports",
+      "id": 28
+    }
+  ]
+}

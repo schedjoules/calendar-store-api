@@ -1,0 +1,47 @@
+{
+  "item_id": null,
+  "name": "Warriors",
+  "page_sections": [
+    {
+      "name": "Sports",
+      "items": [
+        {
+          "item_class": "calendar",
+          "item": {
+            "item_id": 29139585,
+            "name": "Golden State Warriors ♂ 🇺🇸",
+            "original_name": "Golden State Warriors",
+            "url": "https://holidays.schedjoules.com/calendars/766e8a162f82?l=en",
+            "category": "Sports",
+            "category_id": 2,
+            "icon": "https://cdn-images.schedjoules.com/assets/basketball.png",
+            "country": "United States",
+            "country_id": 79,
+            "sport": "Basketball",
+            "sport_id": 2,
+            "gender": "Men",
+            "gender_id": 1
+          }
+        },
+        {
+          "item_class": "calendar",
+          "item": {
+            "item_id": 29134440,
+            "name": "Worcester Warriors ♂ 🇬🇧",
+            "original_name": "Worcester Warriors",
+            "url": "https://holidays.schedjoules.com/calendars/766e8a162f82?l=en",
+            "category": "Sports",
+            "category_id": 2,
+            "icon": "https://cdn-images.schedjoules.com/assets/rugby.png",
+            "country": "United Kingdom",
+            "country_id": 81,
+            "sport": "Rugby",
+            "sport_id": 12,
+            "gender": "Men",
+            "gender_id": 1
+          }
+        }
+      ]
+    }
+  ]
+}

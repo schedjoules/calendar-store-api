@@ -11,7 +11,7 @@ Generated from the markdown files in this repository by .github/scripts/build_ll
 
 This API provides access to the SchedJoules Public Calendar Service: public calendars for holidays, sports, TV, weather, financial events and more, for desktop, web and mobile applications, in 18 languages.
 
-Reading this with a coding agent? [llms.txt](https://github.com/schedjoules/calendar-store-api/blob/master/llms.txt) indexes every page, and [llms-full.txt](https://github.com/schedjoules/calendar-store-api/blob/master/llms-full.txt) holds all of them in one file.
+**New here? Start with the [Integration Guide](https://github.com/schedjoules/calendar-store-api/blob/master/details/integration_guide.md).** Reading this with a coding agent? Give it [AGENTS.md](https://github.com/schedjoules/calendar-store-api/blob/master/AGENTS.md) and [llms-full.txt](https://github.com/schedjoules/calendar-store-api/blob/master/llms-full.txt), which holds every page in one file. Example responses and feeds are in [examples/](https://github.com/schedjoules/calendar-store-api/tree/master/examples).
 
 ## SDKs
 
@@ -91,6 +91,9 @@ Cache responses wherever possible.
 * They are sent with `Cache-Control: max-age=0, private, must-revalidate`: keep your copy, but revalidate it before using it again.
 
 ## More Information
+* [Integration Guide](https://github.com/schedjoules/calendar-store-api/blob/master/details/integration_guide.md)
+* [Android](https://github.com/schedjoules/calendar-store-api/blob/master/details/android.md)
+* [iOS](https://github.com/schedjoules/calendar-store-api/blob/master/details/ios.md)
 * [Pages](https://github.com/schedjoules/calendar-store-api/blob/master/details/pages.md)
 * [In-app Purchases and Accounts](https://github.com/schedjoules/calendar-store-api/blob/master/details/accounts.md)
 * [Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md)
@@ -113,6 +116,213 @@ By using this API, you acknowledge that all accessed data is proprietary. The da
 
 ## Feedback and Support
 If you have a feature request or have found a bug, open a GitHub issue or email support@schedjoules.com.
+
+
+<!-- source: details/integration_guide.md -->
+
+## Integration Guide
+
+The shortest path from nothing to a calendar app that shows SchedJoules calendars. It ties the reference pages together and adds the rules that only show up once real users sync real feeds. Platform specifics: [Android](https://github.com/schedjoules/calendar-store-api/blob/master/details/android.md) and [iOS](https://github.com/schedjoules/calendar-store-api/blob/master/details/ios.md). Example responses and feeds: [examples/](https://github.com/schedjoules/calendar-store-api/tree/master/examples).
+
+### The model in one paragraph
+
+The API is a catalogue: pages of calendars, in the user's language and country. A calendar item has a `url`, which is an iCalendar feed. Your app shows the catalogue, the user picks a calendar, and from then on your app (or the operating system) fetches that feed regularly. All content lives in the feed; the API is only needed to browse.
+
+### Step 1: a key and the request basics
+
+Use the test key from the [README](https://github.com/schedjoules/calendar-store-api#set-yourself-up) to build everything; request your own key before you ship. Every API request needs:
+
+```
+Authorization: Token token="{YOUR_API_KEY}"
+```
+
+Send `locale` (the user's language) and `location` (the user's country) on page requests. Follow redirects. Ignore response fields you do not know.
+
+### Step 2: show the catalogue
+
+1. `GET /pages?locale=de&location=de` gives the home page for that user. It redirects to `/pages/{id}`.
+2. Render each section of `page_sections` as a header with its `items`.
+3. An item with `item_class: "page"` opens another page: `GET` its `url`.
+4. An item with `item_class: "calendar"` is subscribable.
+
+Add search with `GET /pages/search?q=...` (3 characters or more). See [Pages](https://github.com/schedjoules/calendar-store-api/blob/master/details/pages.md) and [Search](https://github.com/schedjoules/calendar-store-api/blob/master/details/search.md).
+
+Store the `item_id` of each calendar the user subscribes to: you need it later (step 6).
+
+### Step 3: build the feed URL
+
+Take the calendar item's `url` as it is, and append the user identifier:
+
+```
+{url}&u={unique_anonymous_user_identifier}
+```
+
+Rules:
+* `u` is a random identifier you create once per user (or install), at least 20 characters. A UUID works. Use the same value for every feed of that user, and as the account id in the [Accounts API](https://github.com/schedjoules/calendar-store-api/blob/master/details/accounts.md) if you use it.
+* Never remove or change the other parameters, `x` in particular: it identifies your API key on the feed.
+* A `url` that contains `{placeholders}` is a template. Fill every placeholder first (the weather calendar's `{location}` and units, see [Weather](https://github.com/schedjoules/calendar-store-api/blob/master/details/weather.md)). Never fetch or subscribe to a URL that still contains `{` or `%7B`.
+* The feed URL is per user. Do not log it or send it to analytics.
+
+### Step 4: fetch the feed
+
+`GET` the feed URL. It returns `text/calendar` (iCalendar, [RFC 5545](https://tools.ietf.org/html/rfc5545)).
+
+What a feed contains:
+* `X-WR-CALNAME`: the calendar's name. In your UI you can use the catalogue item's `name` instead (from search results, use `original_name`: search names can end in a gender sign and a flag to tell teams apart).
+* One `VEVENT` per event, with `UID`, `DTSTART`, `DTEND`, `SUMMARY`, `DESCRIPTION`, `LOCATION`, `URL`, `LAST-MODIFIED`, `CATEGORIES`, `STATUS`, `TRANSP:TRANSPARENT` and often a `VALARM` (see [Alarms](https://github.com/schedjoules/calendar-store-api/blob/master/details/alarms.md)).
+* All-day events use `DTSTART;VALUE=DATE` with an exclusive `DTEND`, as the RFC says. Some feeds, the placeholder events among them, send `DTEND` equal to `DTSTART`: treat that as a one-day event.
+* `UID` looks like `{item_id}_{language_id}_{rest}@schedjoules.com` and is stable: the same event keeps its UID across fetches. The language is part of it, so the same event in another language has another UID.
+
+**Check the body before you use it.** Only accept a response that starts with `BEGIN:VCALENDAR` and ends with `END:VCALENDAR`. A proxy error page or a cut-off download otherwise looks like a calendar with no events, and your sync deletes everything.
+
+### Step 5: recognise placeholder events
+
+A feed never answers an access problem with an HTTP error. It answers `200` with one placeholder event that explains the problem to the user. Recognise them by `UID`:
+
+| UID | Meaning | What your app should do |
+|---|---|---|
+| `no_access@schedjoules.com` | The URL is wrong: missing or invalid `x`, missing `u`, inactive key | A bug on your side. Do not show it as an event; log it and fix the URL |
+| `expired_subscription@schedjoules.com` | The user's access ended (for example an expired license in the [Accounts API](https://github.com/schedjoules/calendar-store-api/blob/master/details/accounts.md)) | Offer renewal; keep or hide the calendar |
+| `expired_{language}@schedjoules.com` | The calendar itself was retired | Remove the subscription, or offer a replacement (step 6) |
+| `empty_{item_id}@schedjoules.com` | The calendar has no events in the date range right now | A normal state. Show "no upcoming events" rather than the event |
+
+The placeholder events also carry `CATEGORIES:Expired` or `CATEGORIES:No access`. A placeholder feed also changes `X-WR-CALNAME` (for example to "You have no access to this calendar"): never copy it over the name you show for the calendar. Example feeds: [examples/feeds](https://github.com/schedjoules/calendar-store-api/tree/master/examples/feeds).
+
+### Step 6: keep it in sync
+
+**Refresh.** Fetch each feed every few hours. Send `If-None-Match` with the last `ETag`: an unchanged feed answers `304 Not Modified` with no body, which costs almost nothing. More often than hourly gains nothing for most calendars; live sport scores change during matches only.
+
+**Apply changes by UID.** Compare the new feed with what you stored:
+* a UID you do not have: add the event
+* a UID you have: update it if anything changed (`LAST-MODIFIED` helps)
+* a UID that is gone from a complete feed: delete the event
+
+**Incremental updates** with `events_updated_since` are optional (see [Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#incremental-updates)). They never tell you what was deleted, so still fetch the complete feed regularly, for example once a day, and delete only based on complete feeds.
+
+**Replaced calendars.** A calendar can be replaced by a newer one, for example a sport season by the next. The old feed URL keeps working and serves the new content, so nothing breaks. To update what you store and show:
+
+```
+GET /pages/{item_id}/info
+```
+
+returns the calendar's current `item` (name, `url`, icon) and the pages it is listed on, and
+
+```
+GET /pages/{calendar_id}/ultimate_successor
+```
+
+returns `{"requested_id": "...", "successor_id": "...", "in_api": true}` for the `calendar_id` in a feed URL (`/calendars/{calendar_id}`).
+
+### Step 7: errors
+
+API errors (not feeds) answer with an HTTP status and:
+
+```json
+{"errors": {"status": 401, "title": "Invalid API key", "detail": "https://github.com/schedjoules/calendar-store-api#set-yourself-up"}}
+```
+
+| Status | Title | Cause |
+|---|---|---|
+| 401 | Invalid API key | Missing or unknown key |
+| 403 | This API key is inactive | The key was switched off; contact us |
+| 404 | Nothing here | Unknown page or route |
+| 405 | This request is not allowed with this API key | The endpoint is not enabled for your key, for example licenses |
+| 500 | Something went wrong | On our side; retry later |
+
+### A v0.1 checklist
+
+- [ ] Every request sends the `Authorization` header; responses are parsed leniently
+- [ ] Catalogue browsing with `locale` and `location` from the device, following redirects
+- [ ] Feed URL = item `url` + `&u=`, templates filled, nothing else changed
+- [ ] Feed body checked for `BEGIN:VCALENDAR` ... `END:VCALENDAR` before use
+- [ ] Placeholder UIDs handled, not shown as events
+- [ ] Refresh with `If-None-Match`; changes applied by UID; deletions only from complete feeds
+- [ ] Feed URLs never logged
+
+
+<!-- source: details/android.md -->
+
+## Android
+
+Android has no built-in way to subscribe to an iCalendar feed. Your app fetches the feeds itself and writes the events into the system calendar through `CalendarContract`, so they show up in Google Calendar and every other calendar app on the device. This page lists what that takes, from the SchedJoules Android app's own implementation. Read the [Integration Guide](https://github.com/schedjoules/calendar-store-api/blob/master/details/integration_guide.md) first.
+
+### Architecture
+
+* **Fetching:** a `WorkManager` periodic job (with a network constraint) fetches every subscribed feed. Send `If-None-Match` and do nothing more on a `304`.
+* **Parsing:** an iCalendar library such as [biweekly](https://github.com/mangstadt/biweekly).
+* **Storage:** one local calendar per subscription in `CalendarContract.Calendars`, under your own account type, with events in `CalendarContract.Events`.
+
+You need the `READ_CALENDAR` and `WRITE_CALENDAR` permissions. Ask for them when the user subscribes to their first calendar, after explaining why, not at app start.
+
+### Writing calendars and events
+
+* Write as a sync adapter: append `CALLER_IS_SYNCADAPTER=true`, `ACCOUNT_NAME` and `ACCOUNT_TYPE` (your own, for example your package name) to the content URI. Use `ACCOUNT_TYPE_LOCAL` only if you accept that it behaves differently on some devices.
+* One calendar row per subscription. Put your subscription id in `Calendars._SYNC_ID`, and the feed's name in `CALENDAR_DISPLAY_NAME`.
+* Put the event `UID` in `Events._SYNC_ID`. On each sync, compare by `_SYNC_ID`: insert new UIDs, update changed ones, delete the ones a complete feed no longer has.
+* Apply the changes with `applyBatch`, in chunks of a few hundred operations: one Binder transaction is limited to about 1 MB, and a large sport or TV calendar can exceed it in one go.
+
+### Dates and times
+
+* **All-day events** (`DTSTART;VALUE=DATE`): set `ALL_DAY=1`, `EVENT_TIMEZONE=UTC`, and `DTSTART` at **UTC midnight** of the date. Many parsers, biweekly among them, read a date as midnight in the device's time zone; east of UTC that is the previous day in UTC, and every all-day event lands a day early. Convert to UTC midnight of the same calendar date.
+* **Timed events:** use the event's `TZID` for `EVENT_TIMEZONE`. If the feed has no matching `VTIMEZONE`, the TZID is usually an Olson name Android knows; fall back to UTC only if it is not.
+* **Recurring events** (`RRULE`): Android requires `DURATION` and forbids `DTEND` on them. Compute `DURATION` from the event's start and end.
+* `RECURRENCE-ID` overrides need a separate row with `ORIGINAL_SYNC_ID` and `ORIGINAL_INSTANCE_TIME`. Few SchedJoules feeds use them; skipping them keeps the main series intact.
+
+### Alarms
+
+A `VALARM` in the feed becomes a row in `CalendarContract.Reminders` (`MINUTES` before, `METHOD_ALERT`). See [Alarms](https://github.com/schedjoules/calendar-store-api/blob/master/details/alarms.md) for the defaults and the `al` parameter.
+
+### Google Calendar and other devices
+
+Events in a calendar under your own account type stay on the device. They show up in Google Calendar on that phone, but are not uploaded to the user's Google account, so they do not appear on the web or on other devices. That is how Android works for any calendar app that is not a Google account; tell your users rather than trying to work around it.
+
+### Refreshing
+
+* A periodic `WorkManager` job every few hours is enough. Android may delay it on low battery or in Doze; that is expected.
+* Run a sync right after a subscription is added, so the user sees events at once.
+* Keep the last `ETag` per feed and send it as `If-None-Match`.
+
+
+<!-- source: details/ios.md -->
+
+## iOS
+
+On iOS there are two ways to get a SchedJoules calendar into the user's calendar. Pick one before you write code: they lead to different apps. Read the [Integration Guide](https://github.com/schedjoules/calendar-store-api/blob/master/details/integration_guide.md) first.
+
+| | Subscribed calendar (webcal) | Your app writes events (EventKit) |
+|---|---|---|
+| How | Open the feed URL with the `webcal://` scheme; iOS asks the user to confirm and then owns the calendar | Your app fetches the feed and writes events into a calendar it created with EventKit |
+| Who refreshes | iOS, on its own schedule, without your app running | Your app, only when iOS lets it run |
+| Effort for a v0.1 | Very small | Substantial |
+| Freshness | Steady, independent of how often your app is opened | Depends on app opens, background refresh and pushes; can lag for users who rarely open your app |
+| Personalisation (hide events, own alarms, combine sources) | Not possible | Possible |
+| Removing the calendar | The user removes it in Settings or Calendar; your app cannot | Your app can |
+| Calendar permission | Not needed | Needed (full access) |
+
+For a v0.1, start with webcal: it works in an afternoon. Move to EventKit when you need personalisation.
+
+### Webcal subscription
+
+1. Build the feed URL as in the [Integration Guide](https://github.com/schedjoules/calendar-store-api/blob/master/details/integration_guide.md#step-3-build-the-feed-url) (item `url` plus `&u=`).
+2. Replace the scheme: `https://` becomes `webcal://`.
+3. Open it with `UIApplication.shared.open(url)`. iOS shows its subscribe dialog.
+
+Your app does not learn whether the user confirmed. To show "subscribed" in your UI, look for a calendar of type `.subscription` with the same title through EventKit afterwards, or simply keep your own list.
+
+### EventKit
+
+* Ask for calendar access (`requestFullAccessToEvents`) when the user subscribes to their first calendar, after explaining why; never at app start.
+* Create one `EKCalendar` per subscription, on a writable source (iCloud or local), and keep its `calendarIdentifier` with the subscription.
+* Map each feed event to an `EKEvent` and keep a map from the feed `UID` to the event's identifier. Apply changes by UID as the guide describes: add, update, delete only from complete feeds.
+* All-day events: set `isAllDay` and use the date as given; do not shift it through a time zone.
+
+**Refreshing.** iOS decides when your app may run in the background:
+* Sync when the app starts and when it comes to the foreground.
+* Schedule a `BGAppRefreshTask`. iOS runs it at its own discretion; do not count on a time.
+* Silent pushes (`content-available`, priority 5) can wake your app, but Apple does not guarantee their delivery and asks for no more than two or three per hour.
+* Nothing wakes your app when the user opens the Calendar app.
+
+So freshness for EventKit users depends on how often they open your app. Plan for that: it is the main reason to start with webcal.
 
 
 <!-- source: details/pages.md -->

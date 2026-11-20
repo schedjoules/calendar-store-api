@@ -5,6 +5,9 @@
 ## Docs
 
 - [Overview](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/README.md): Authentication, request basics, language, pages, the user identifier, caching
+- [Integration Guide](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/integration_guide.md): From nothing to a working app: feed URLs, placeholder events, sync rules, errors
+- [Android](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/android.md): Writing feeds into CalendarContract: account, dates, recurrence, batching, refresh
+- [iOS](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/ios.md): Webcal subscription vs EventKit, and how each refreshes
 - [Pages](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/pages.md): The page response: sections, page items and calendar items, every field
 - [Calendars](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/calendars.md): Calendar feeds: formats, date range, results, incremental updates, sport results
 - [Pregnancy and Countdown Calendars](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/user_input_calendars.md): Calendar URLs your app fills in with a due date or a countdown
@@ -22,3 +25,5 @@
 ## Optional
 
 - [All docs in one file](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/llms-full.txt)
+- [Instructions for coding agents](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/AGENTS.md)
+- [Example responses and feeds](https://github.com/schedjoules/calendar-store-api/tree/master/examples)

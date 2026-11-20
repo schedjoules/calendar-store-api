@@ -1,0 +1,7 @@
+{
+  "errors": {
+    "status": 401,
+    "title": "Invalid API key",
+    "detail": "https://github.com/schedjoules/calendar-store-api#set-yourself-up"
+  }
+}

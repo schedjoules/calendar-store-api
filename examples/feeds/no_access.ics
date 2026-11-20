@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SchedJoules.com//20180817
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:You have no access to this calendar
+BEGIN:VEVENT
+LAST-MODIFIED;VALUE=DATE-TIME:20261120T000000Z
+DTSTART;VALUE=DATE:20261120
+DTEND;VALUE=DATE:20261120
+URL:
+LOCATION:
+SUMMARY:You have no access to this calendar
+DESCRIPTION:Something must have gone wrong while subscribing to this calendar. If you think there is something wrong on our side please send us an email from the Settings page with the app (https://apps.apple.com/nl/app/agenda-kalenders-2024/id853708554). Please include the url of the calendar you are trying to subscribe to.
+CLASS:PUBLIC
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+DTSTAMP;VALUE=DATE-TIME:20261120T000001Z
+CATEGORIES:No access
+UID:no_access@schedjoules.com
+END:VEVENT
+END:VCALENDAR

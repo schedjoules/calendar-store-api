@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SchedJoules.com//20180817
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Public Holidays
+BEGIN:VEVENT
+LAST-MODIFIED;VALUE=DATE-TIME:20261120T000000Z
+DTSTART;VALUE=DATE:20261120
+DTEND;VALUE=DATE:20261120
+URL:
+LOCATION:
+SUMMARY:Your subscription has expired
+DESCRIPTION:You are getting this message because the subscription this calendar came with has expired.\n\nYou can renew it in the app you subscribed with. Or remove this calendar from your calendar app: that saves bandwidth and battery.
+CLASS:PUBLIC
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+DTSTAMP;VALUE=DATE-TIME:20261120T000001Z
+CATEGORIES:Expired
+UID:expired_subscription@schedjoules.com
+END:VEVENT
+END:VCALENDAR

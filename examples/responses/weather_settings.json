@@ -1,0 +1,36 @@
+{
+  "temp": {
+    "title": "Temperature",
+    "options": {
+      "c": "ºC",
+      "f": "ºF"
+    },
+    "default": "f"
+  },
+  "rain": {
+    "title": "Precipitation",
+    "options": {
+      "mm": "mm",
+      "in": "po"
+    },
+    "default": "in"
+  },
+  "wind": {
+    "title": "Wind Speed",
+    "options": {
+      "kmh": "km/h",
+      "kts": "Knots",
+      "ms": "m/s",
+      "mph": "mph"
+    },
+    "default": "mph"
+  },
+  "time": {
+    "title": "Time format",
+    "options": {
+      "12": "12-hour",
+      "24": "24-hour"
+    },
+    "default": "12"
+  }
+}
