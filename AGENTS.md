@@ -2,7 +2,7 @@
 
 You are integrating the SchedJoules Calendar API into an app.
 
-1. Read `llms-full.txt` in this repository: it is the whole API description in one file. Start with the Integration Guide section, then the Android or iOS section.
+1. Read `llms-full.txt` in this repository: it is the whole API description in one file. Start with the Integration Guide section, then the Android or iOS section, then A Basic UI for the screens.
 2. Do not use the SchedJoules SDKs or the Swift client library. They are deprecated. Call the REST API directly.
 3. Use `examples/` as test fixtures: real API responses and feeds, including the placeholder feeds.
 4. The rules that break integrations most often:

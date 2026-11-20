@@ -8,6 +8,7 @@
 - [Integration Guide](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/integration_guide.md): From nothing to a working app: feed URLs, placeholder events, sync rules, errors
 - [Android](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/android.md): Writing feeds into CalendarContract: account, dates, recurrence, batching, refresh
 - [iOS](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/ios.md): Webcal subscription vs EventKit, and how each refreshes
+- [A Basic UI](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/ui.md): The four screens of a v0.1: Browse, Calendar, My calendars, Settings, plus permissions and states
 - [Pages](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/pages.md): The page response: sections, page items and calendar items, every field
 - [Calendars](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/calendars.md): Calendar feeds: formats, date range, results, incremental updates, sport results
 - [Pregnancy and Countdown Calendars](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/user_input_calendars.md): Calendar URLs your app fills in with a due date or a countdown
