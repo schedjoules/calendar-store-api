@@ -22,6 +22,7 @@ PAGES = [
     ("details/android.md", "Android", "Writing feeds into CalendarContract: account, dates, recurrence, batching, refresh"),
     ("details/ios.md", "iOS", "Webcal subscription vs EventKit, and how each refreshes"),
     ("details/ui.md", "A Basic UI", "The four screens of a v0.1: Browse, Calendar, My calendars, Settings, plus permissions and states"),
+    ("details/embedding.md", "Embedding the Catalogue", "One switch, one branch or a source among sources: SchedJoules content inside an existing app, and drawing the events in your own views"),
     ("details/pages.md", "Pages", "The page response: sections, page items and calendar items, every field"),
     ("details/calendars.md", "Calendars", "Calendar feeds: formats, date range, results, incremental updates, sport results"),
     ("details/user_input_calendars.md", "Pregnancy and Countdown Calendars", "Calendar URLs your app fills in with a due date or a countdown"),

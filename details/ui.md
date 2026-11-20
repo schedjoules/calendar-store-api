@@ -1,6 +1,6 @@
 ## A Basic UI
 
-A v0.1 needs four screens. This is the structure the SchedJoules apps use on iOS and Android, reduced to what a first version needs. Build it with your platform's standard components (lists, tab or navigation bars, switches, sheets); nothing here needs a custom control. Read the [Integration Guide](https://github.com/schedjoules/calendar-store-api/blob/master/details/integration_guide.md) first for the API side.
+A v0.1 needs four screens. This is the structure the SchedJoules apps use on iOS and Android, reduced to what a first version needs. Build it with your platform's standard components (lists, tab or navigation bars, switches, sheets); nothing here needs a custom control. Adding SchedJoules to an app that already has its own screens? See [Embedding the Catalogue](https://github.com/schedjoules/calendar-store-api/blob/master/details/embedding.md) instead. Read the [Integration Guide](https://github.com/schedjoules/calendar-store-api/blob/master/details/integration_guide.md) first for the API side.
 
 | Screen | Shows | API |
 |---|---|---|
