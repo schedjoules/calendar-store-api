@@ -6,9 +6,7 @@ Reading this with a coding agent? [llms.txt](https://github.com/schedjoules/cale
 
 ## SDKs
 
-We provide SDKs for iOS and Android:
-* [iOS](https://github.com/schedjoules/ios-public-calendars-sdk)
-* [Android](https://github.com/schedjoules/Android-SDK)
+The iOS and Android SDKs are deprecated: integrate the REST API directly. See [SDKs](https://github.com/schedjoules/calendar-store-api/blob/master/details/sdks.md).
 
 ## Set Yourself Up
 
@@ -94,6 +92,7 @@ Cache responses wherever possible.
 * [Top, New, Next](https://github.com/schedjoules/calendar-store-api/blob/master/details/top_new_next.md)
 * [Weather](https://github.com/schedjoules/calendar-store-api/blob/master/details/weather.md)
 * [Alarms](https://github.com/schedjoules/calendar-store-api/blob/master/details/alarms.md)
+* [SDKs (deprecated)](https://github.com/schedjoules/calendar-store-api/blob/master/details/sdks.md)
 * [Deprecations and Changes](https://github.com/schedjoules/calendar-store-api/blob/master/details/deprecation_and_changes.md)
 * [FAQ](https://github.com/schedjoules/calendar-store-api/blob/master/details/faq.md)
 

@@ -15,9 +15,7 @@ Reading this with a coding agent? [llms.txt](https://github.com/schedjoules/cale
 
 ## SDKs
 
-We provide SDKs for iOS and Android:
-* [iOS](https://github.com/schedjoules/ios-public-calendars-sdk)
-* [Android](https://github.com/schedjoules/Android-SDK)
+The iOS and Android SDKs are deprecated: integrate the REST API directly. See [SDKs](https://github.com/schedjoules/calendar-store-api/blob/master/details/sdks.md).
 
 ## Set Yourself Up
 
@@ -103,6 +101,7 @@ Cache responses wherever possible.
 * [Top, New, Next](https://github.com/schedjoules/calendar-store-api/blob/master/details/top_new_next.md)
 * [Weather](https://github.com/schedjoules/calendar-store-api/blob/master/details/weather.md)
 * [Alarms](https://github.com/schedjoules/calendar-store-api/blob/master/details/alarms.md)
+* [SDKs (deprecated)](https://github.com/schedjoules/calendar-store-api/blob/master/details/sdks.md)
 * [Deprecations and Changes](https://github.com/schedjoules/calendar-store-api/blob/master/details/deprecation_and_changes.md)
 * [FAQ](https://github.com/schedjoules/calendar-store-api/blob/master/details/faq.md)
 
@@ -803,7 +802,7 @@ If a language that matters to you or your users is missing, please contact us.
 
 You can configure the API to require end-users to pay for calendar content. In that case, you will likely want to integrate In-App Purchases. We offer several approaches for handling this.
 
-The easiest approach is to use one of our [SDKs](https://github.com/schedjoules/calendar-store-api/blob/master/README.md#sdks). Payment processing and calendar management are handled entirely within the SDK, allowing you to get up and running quickly. If you choose not to use one of the SDKs, you gain more flexibility through the Account API. The Account API allows you to control calendar behaviour and user access across multiple devices.
+Use the Account API to control calendar access per user, across multiple devices. (The former SDKs, which handled payments themselves, are [deprecated](https://github.com/schedjoules/calendar-store-api/blob/master/details/sdks.md).)
 
 ### Editing Subscriptions
 An important consideration when developing on iOS or macOS is that calendar subscriptions are managed by the operating system, not your application. The only way to prevent end-users from accessing calendar subscriptions after their subscription has expired is to notify the Account API of the expiration. You can set or update the expiration date with the following request:
@@ -825,6 +824,24 @@ The response lists all licenses of the user:
 `GET /accounts/{UNIQUE_ANONYMOUS_USER_IDENTIFIER}/licenses` returns the same response without changing anything. Your API key must be enabled for licenses; otherwise the POST returns `405`. Contact us to enable it.
 
 
+<!-- source: details/sdks.md -->
+
+## SDKs (deprecated)
+
+SchedJoules used to publish SDKs for iOS and Android. Both are deprecated and no longer maintained:
+
+| SDK | Repository | Status |
+|---|---|---|
+| iOS | [ios-public-calendars-sdk](https://github.com/schedjoules/ios-public-calendars-sdk) | Deprecated, last updated March 2024 |
+| Android | [android-public-calendars-sdk](https://github.com/schedjoules/android-public-calendars-sdk) | Deprecated and archived, last updated April 2023 |
+
+Do not start a new integration on them. They do not follow later API changes and will not receive fixes.
+
+Integrate the REST API directly instead: start with the [README](https://github.com/schedjoules/calendar-store-api#request-basics), then [Pages](https://github.com/schedjoules/calendar-store-api/blob/master/details/pages.md) and [Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md).
+
+If you use a coding agent, point it at [llms-full.txt](https://github.com/schedjoules/calendar-store-api/blob/master/llms-full.txt), which holds the whole API description in one file, and tell it not to use the SDKs.
+
+
 <!-- source: details/deprecation_and_changes.md -->
 
 ## Deprecations and Changes
@@ -832,6 +849,7 @@ The response lists all licenses of the user:
 Breaking changes and deprecated features of the API.
 
 ### Done
+* **SDKs deprecated.** The iOS and Android SDKs are no longer maintained. See [SDKs](https://github.com/schedjoules/calendar-store-api/blob/master/details/sdks.md).
 * **HTTPS only.** Plain HTTP requests are redirected to HTTPS.
 * **Location by country code.** `location` takes an ISO 3166 country code; looking a location up by numeric id is no longer supported.
 * **`country` parameter renamed to `location`.** The request parameter is `location`. Responses still have a `country` field with the country's name.
@@ -874,7 +892,7 @@ We offer calendar content for:
 Moon phases, name days, week numbers and day numbers. In the SchedJoules apps also a pregnancy calendar and countdowns, see [Pregnancy and Countdown Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/user_input_calendars.md).
 
 #### What makes your content different from publicly available calendars?
-The quality and breadth of our content, the number of supported languages, the ease of integration across all major platforms via our API and SDKs, and our dedicated editorial and customer support team are just a few of the factors that set us apart.
+The quality and breadth of our content, the number of supported languages, the ease of integration across all major platforms via our API, and our dedicated editorial and customer support team are just a few of the factors that set us apart.
 
 Content errors are corrected as soon as they are identified, and our support team is always available to assist.
 
