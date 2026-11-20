@@ -95,7 +95,7 @@ The name is text the user typed. Do not log the filled URL or send it to analyti
 
 ### Date Range
 
-Both calendars follow the same [date range](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#date-range) rules as every other calendar, and the `start_at_or_after` and `results` parameters work as usual.
+Both calendars follow the same [date range](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#date-range) rules as every other calendar, and the `start_at_or_after`, `start_before` and `results` parameters work as usual.
 
 ### Unusable Input
 
