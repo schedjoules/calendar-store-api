@@ -1,132 +1,116 @@
 ## Pages
 
-Pages are the foundation of the API. They provide the structure for the views your users will interact with. Your application is responsible for providing the UX and UI for each page.
+Pages are the foundation of the API. They provide the structure for the views your users interact with; your application provides the UX and UI for each page.
 
-Pages are localised — all translatable items on a page will be returned in the requested language.
+Pages are localised: every translatable field is returned in the requested language.
 
-When requesting a page, the response will look similar to the following:
+`GET /pages/115673?locale=en` returns (shortened to one item per section):
 
-```
+```json
 {
-    item_id: 115673,
-    name: "United States calendar library",
-    app_subscription_identifier: "xxx",
-    page_sections: [
+  "item_id": 115673,
+  "name": "United States",
+  "country": "United States",
+  "country_id": 79,
+  "icon": null,
+  "page_sections": [
+    {
+      "name": "Holidays",
+      "id": 2,
+      "items": [
         {
-        name: "Holidays",
-        items: [
-            {
-                item_class: "page",
-                item: {
-                    item_id: 92047,
-                    name: "United States",
-                    icon: "http://images.schedjoules.com/images/9783d4f3.png",
-                    url: "https://api.schedjoules.com/pages/92047?locale=en",
-                    country: "United States"
-                }
-            },
-            ......
-            {
-                item_class: "calendar",
-                item: {
-                    item_id: 90734,
-                    name: "Moon Phases",
-                    identifier: "xxx_moonphases",
-                    icon: "http://images.schedjoules.com/images/moonphases.png",
-                    url: "http://xxx.schedjoules.com/calendars/moon_phases/calendar.ics?l=en&x=xxx&u=uuu"
-                }
-            },
-            .......
-            {
-                item_class: "page",
-                item: {
-                    item_id: 108836,
-                    name: "NBA",
-                    icon: "http://images.schedjoules.com/images/9783d4f3.png",
-                    url: "https://api.schedjoules.com/pages/108836?locale=en",
-                    sport: "Basketball",
-                    sport_id: 3
-                    country: "United States",
-                    season: "2019"
-                }
-            }
+          "item_class": "calendar",
+          "item": {
+            "item_id": 50084,
+            "name": "Public Holidays",
+            "url": "https://holidays.schedjoules.com/calendars/766e8a162f82?l=en",
+            "category": "Holidays",
+            "category_id": 1,
+            "country": "United States",
+            "country_id": 79,
+            "holiday_kind": "public",
+            "icon": "https://cdn-images.schedjoules.com/assets/9783d4f3.png"
+          }
         }
+      ]
+    },
+    {
+      "name": "Sports",
+      "id": 28,
+      "items": [
+        {
+          "item_class": "page",
+          "item": {
+            "item_id": 29230902,
+            "name": "NBA",
+            "url": "https://api.schedjoules.com/pages/29230902?locale=en",
+            "category": "Sports",
+            "category_id": 2,
+            "country": "United States",
+            "country_id": 79,
+            "sport": "Basketball",
+            "sport_id": 2,
+            "gender": "Men",
+            "gender_id": 1,
+            "icon": "https://cdn-images.schedjoules.com/assets/basketball.png"
+          }
+        }
+      ]
+    }
+  ]
 }
 ```
 
-### Elements
-#### Page
-```
-Required labels
-- item_id                           integer
-- name                              string
-- page_sections                     array
+An optional field without a value is usually left out rather than sent as `null`; `icon` is the exception and can be `null`.
 
-Optional labels
-- app_subscription_identifier       string
+### Page
 
-```
-The `item_id` is unique per page.
-A page may contain one or more `page_sections`.
-The `app_subscription_identifier` is unique per API key and can be used in applications that implement a subscription pricing model.
+| Field | Type | |
+|---|---|---|
+| `item_id` | integer | Always. Unique per page |
+| `name` | string | Always |
+| `page_sections` | array | Always. One or more sections |
+| `icon` | string (URL) or null | |
+| `description` | string | |
+| `url` | string (URL) | Only on a page that has no sections of its own |
+| `app_subscription_identifier` | string | Only for API keys on a subscription pricing model. The product identifier to offer this user. It can differ per user: it is chosen from the `u` parameter (or the `x-user-id` header) |
 
+A page also carries the same tag fields as an item (`category`, `country`, `sport` and so on, see below) when they apply.
 
-#### Page Sections
-```
-Required labels
-- name                              string (may be nil)
-- items                             array
+### Page Section
 
-Optional labels
-```
+| Field | Type | |
+|---|---|---|
+| `name` | string | Always. An empty string for the first, unnamed section |
+| `id` | integer | Not on the first, unnamed section |
+| `items` | array | The section's items |
 
-#### Items
-```
-Required labels
-- item_class                        string ('page' or 'calendar')
-- item                              hash
+### Item
 
-Optional labels
-```
+| Field | Type | |
+|---|---|---|
+| `item_class` | string | `page` or `calendar` |
+| `item` | object | The page item or calendar item |
 
-#### Page item
-```
-Required labels
-- item_id                           integer
-- name                              string
-- url                               string (url to child page)
+### Page item and calendar item
 
-Optional labels
-- icon                              string (url)
-- page_identifier                   string
-- sport                             string
-- sport_id                          string
-- country                           string
-- season                            string
-- related_identifiers               array of strings
-```
+Both have the same fields. The difference is the `url`: a page item's `url` is the API URL of the child page, a calendar item's `url` is the calendar feed.
 
-The calendar URL must be appended client-side with a unique anonymous user identifier: `&u={unique_anonymous_identifier}`.
+| Field | Type | |
+|---|---|---|
+| `item_id` | integer | Always |
+| `name` | string | Always |
+| `url` | string (URL) | Always |
+| `icon` | string (URL) or null | |
+| `category`, `category_id` | string, integer | Main category, see [Search](https://github.com/schedjoules/calendar-store-api/blob/master/details/search.md) for the ids |
+| `country`, `country_id` | string, integer | The country the item belongs to, see [Countries](https://github.com/schedjoules/calendar-store-api/blob/master/details/countries.md) |
+| `region`, `region_id` | string, integer | Regional holiday calendars only |
+| `sport`, `sport_id` | string, integer | Sports only |
+| `gender`, `gender_id` | string, integer | Sports only: 1 Men, 2 Women, 3 Unspecified, 4 Mixed |
+| `holiday_kind` | string | Holiday calendars only, for example `public` |
 
-The `page_identifier` indicates that all children of this page item share the specified identifier. An identifier is unique for a given combination of API key and page. If identifiers need to be shared across different API keys, they are listed under `related_identifiers`.
+`region` is set on regional holiday calendars only: the state, province or other region the calendar covers, in the requested locale (falling back to English). `country` is the country it belongs to; a national calendar has no `region`. Outside its parent page a regional calendar is named like its national one ("Public Holidays and Observances"), so show `region` with it, for example as a subtitle: "California, United States".
 
-#### Calendar item
-```
-Required labels
-- item_id                           integer
-- name                              string
-- url                               string (url to ics file)
+Before presenting a calendar item's `url` to your users, append the unique anonymous user identifier: `&u={unique_anonymous_user_identifier}` (see the [README](https://github.com/schedjoules/calendar-store-api#unique-anonymous-user-identifier)).
 
-Optional labels
-- identifier                        string
-- icon                              string (url)
-- sport                             string
-- sport_id                          integer
-- country                           string
-- country_id                        integer
-- region                            string
-- region_id                         integer
-- season                            string
-```
-
-`region` is set on regional holiday calendars only: the state, province or other region the calendar covers, in the requested locale (falling back to English). `country` is the country it belongs to. A national calendar has no `region`. Outside a parent page a regional calendar is named like its national one ("Public Holidays and Observances"), so show `region` with it, for example as a subtitle: "California, United States".
+A calendar `url` can be a template that your app must fill in first, such as the weather calendar's `{location}`. See [Weather](https://github.com/schedjoules/calendar-store-api/blob/master/details/weather.md) and [Pregnancy and Countdown Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/user_input_calendars.md).

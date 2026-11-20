@@ -1,7 +1,8 @@
 ## SchedJoules Calendar Service API
 
-This API provides access to the SchedJoules Public Calendar Service. SchedJoules delivers the most comprehensive public calendar service in the world for desktop, web, and mobile applications. We currently deliver over 560.000 complete, accurate, and up-to-date public calendars covering holidays, sports, weather, and financial events in 16 languages.
+This API provides access to the SchedJoules Public Calendar Service: public calendars for holidays, sports, TV, weather, financial events and more, for desktop, web and mobile applications, in 18 languages.
 
+Reading this with a coding agent? [llms.txt](https://github.com/schedjoules/calendar-store-api/blob/master/llms.txt) indexes every page, and [llms-full.txt](https://github.com/schedjoules/calendar-store-api/blob/master/llms-full.txt) holds all of them in one file.
 
 ## SDKs
 
@@ -9,94 +10,98 @@ We provide SDKs for iOS and Android:
 * [iOS](https://github.com/schedjoules/ios-public-calendars-sdk)
 * [Android](https://github.com/schedjoules/Android-SDK)
 
-Follow the links above for the 5-minute installation documentation.
+## Set Yourself Up
 
-## Getting Started
+An API key is required. Request one at support@schedjoules.com.
 
-You can explore the API using our test user API key:
+You can explore the API with our test API key:
 ```
-curl 'https://api.schedjoules.com/pages/115673' -v -H 'Authorization: Token token="0443a55244bb2b6224fd48e0416f0d9c"'
+curl 'https://api.schedjoules.com/pages/115673' -H 'Authorization: Token token="0443a55244bb2b6224fd48e0416f0d9c"'
 ```
-The test API key grants access to the complete API, but calendar URLs will contain placeholder data. To obtain full access to calendar content, contact us at support@schedjoules.com and we will provide you with a dedicated API key.
+The test key gives access to the complete API, but every calendar URL it returns points to the same placeholder calendar. Your own key returns the real calendars.
 
-## Making a Request
-* All requests start with `https://api.schedjoules.com/`
-* The API follows REST principles
-* All responses are in JSON format
-* Appending `.json` to URLs is not required
-* The API only accepts HTTPS requests
+## Request Basics
 
-Use the user's current location as an entry point:
+| | |
+|---|---|
+| Base URL | `https://api.schedjoules.com/` |
+| Authentication | Header `Authorization: Token token="{YOUR_API_KEY}"` |
+| Format | JSON. Appending `.json` to a URL is not required |
+| Transport | HTTPS. A plain HTTP request is redirected to HTTPS |
+| Redirects | `GET /pages` answers with a `302` to the page it resolves to. Follow redirects |
+
+A missing or unknown API key returns `401`:
+```json
+{"errors": {"status": 401, "title": "Invalid API key", "detail": "https://github.com/schedjoules/calendar-store-api#set-yourself-up"}}
 ```
-GET /pages?locale={ISO 639-1 code}&location={ISO_3166 code}
+
+### Versioning
+There is one version, `v1`. You may send `Accept: application/vnd.schedjoules; version=1`, but it is optional and currently every request is served by v1.
+
+Fields may be added to responses without a version change, so make sure your client ignores fields it does not know.
+
+### Language
+The response language is taken from, in this order:
+1. the `locale` parameter
+2. the `x-locale` header
+3. the `Accept-Language` header
+
+Only the first two letters are used, so `de_DE` and `de-AT` both mean `de`. `nb` is read as `no`. A language the API does not support falls back to English. See [Languages](https://github.com/schedjoules/calendar-store-api/blob/master/details/languages.md) for the list.
+
+## Pages
+The API is built around pages. A page represents a view in your application: for example, a football page lists all teams in a league, so the user can pick a team and add its matches to their calendar.
+
+Start from the user's location:
+```
+GET /pages?locale={ISO 639-1 code}&location={ISO 3166 code}
 
 Optional GET parameters
-- locale (if omitted, defaults to 'en')
-- location (if omitted, defaults to 'us' unless page_id is used)
+- locale        language of the response (see Language above)
+- location      ISO 3166-1 alpha-2 country code. Without it, or with an unknown one,
+                you get the default catalogue of your API key, or the general
+                "All Calendars" page
 ```
 
-Or navigate directly to a page using its page_id:
+Or open a page by its id:
 ```
-GET /pages/{page_id}&locale={ISO 639-1 code}
-
-Required GET parameters
-- page_id
-
-Optional GET parameters
-- locale                    string (if omitted, defaults to 'en')
+GET /pages/{page_id}?locale={ISO 639-1 code}
 ```
 
-[ISO 639-1 language codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
-[ISO 3166 country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+[ISO 639-1 language codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) · [ISO 3166 country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
 
-When using a region setting for the locale (e.g., `de_DE`), only the language portion (`de`) is used to determine the response language.
+A page has a name and a list of `page_sections`. A section works as a header or grouping within the page, and holds items whose `item_class` is either `page` or `calendar`:
+* A `page` item is a child page. For example, "English Football" is a child of "All Football", and "Premier League" is a child of "English Football".
+* A `calendar` item is the calendar itself: its `url` is the feed your user subscribes to.
 
-### Headers
-#### Versioning
-The API version must be specified in the request header. The current version is `v1`. If no version header is provided, the API defaults to version 1.
-```
-curl 'https://api.schedjoules.com/pages/115673' -v -H 'Authorization: Token token="0443a55244bb2b6224fd48e0416f0d9c"' -H "Accept: application/vnd.schedjoules; version=1"
-```
-Labels may be added without a version change, so ensure your client is flexible enough to handle new labels gracefully. Follow our [Twitter feed](http://twitter.com/schedjoules) for the latest SchedJoules news, including API updates. You will also be notified by email of API changes once your account is set up.
-
-#### Authentication
-An API key is required to use this API. You can obtain your API key by contacting us at support@schedjoules.com. The API key must be included in the request header.
-
-### Pages
-The API is primarily built around the concept of pages. A page represents a view in your application — for example, a football page would list all teams in a league, allowing users to select their favourite team and add its matches to their calendar.
-
-A page has a name and metadata including a `page_section`. Page sections function as headers or groupings within a page. Each page section contains items with an `item_class` of either `calendar` or `page`.
-
-A `page` item is a child page of the current page. For example, "English Football" is a sub-page of "All Football", and "Premier League" is a sub-page of "English Football".
-
-A `calendar` item represents the actual calendar content. This is where users can view event data and subscribe to a calendar in their calendar application.
-
-## Caching
-We strongly recommend caching responses wherever possible. This will improve your application's performance and reduce unnecessary bandwidth usage.
-* All responses include an `ETag` or `Last-Modified` header. Use `If-Modified-Since` and `If-None-Match` in your requests accordingly.
-* Icon URLs in the JSON response include their ETag in the response.
+See [Pages](https://github.com/schedjoules/calendar-store-api/blob/master/details/pages.md) for the full response format.
 
 ## Unique Anonymous User Identifier
-Before presenting a calendar to your users, you must append the calendar URL client-side with a unique anonymous user identifier: `&u={unique_anonymous_user_identifier}`. This is used for statistical purposes and to detect and prevent misuse of our content.
+Before presenting a calendar URL to your users, append a unique anonymous user identifier to it: `&u={unique_anonymous_user_identifier}`. It is used for statistics and to detect and prevent misuse of our content. Use the same identifier for the same user everywhere, including the [Accounts API](https://github.com/schedjoules/calendar-store-api/blob/master/details/accounts.md).
+
+## Caching
+Cache responses wherever possible.
+* API responses carry an `ETag` and a `Last-Modified` header, and answer `304 Not Modified` to a matching `If-None-Match` or `If-Modified-Since`.
+* They are sent with `Cache-Control: max-age=0, private, must-revalidate`: keep your copy, but revalidate it before using it again.
 
 ## More Information
 * [Pages](https://github.com/schedjoules/calendar-store-api/blob/master/details/pages.md)
 * [In-app Purchases and Accounts](https://github.com/schedjoules/calendar-store-api/blob/master/details/accounts.md)
 * [Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md)
+* [Pregnancy and Countdown Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/user_input_calendars.md)
 * [Countries](https://github.com/schedjoules/calendar-store-api/blob/master/details/countries.md)
-* [Languages/Locales](https://github.com/schedjoules/calendar-store-api/blob/master/details/languages.md)
+* [Languages](https://github.com/schedjoules/calendar-store-api/blob/master/details/languages.md)
 * [Search](https://github.com/schedjoules/calendar-store-api/blob/master/details/search.md)
 * [Top, New, Next](https://github.com/schedjoules/calendar-store-api/blob/master/details/top_new_next.md)
 * [Weather](https://github.com/schedjoules/calendar-store-api/blob/master/details/weather.md)
-* [Pregnancy and Countdown Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/user_input_calendars.md)
 * [Alarms](https://github.com/schedjoules/calendar-store-api/blob/master/details/alarms.md)
+* [Deprecations and Changes](https://github.com/schedjoules/calendar-store-api/blob/master/details/deprecation_and_changes.md)
 * [FAQ](https://github.com/schedjoules/calendar-store-api/blob/master/details/faq.md)
 
 ## Rate Limits
-There are currently no rate limits. Requests are monitored, and we may reach out if we identify opportunities to help you optimize your integration.
+There are currently no rate limits. Requests are monitored, and we may reach out if we see a way to make your integration more efficient.
 
 ## Data Usage and Restrictions
 By using this API, you acknowledge that all accessed data is proprietary. The data and images may not be used for any purpose beyond what has been agreed upon. Data may not be stored in any database other than on a user's client device for performance purposes.
 
 ## Feedback and Support
-If you have a feature request or have found a bug, please open a GitHub issue or send us an email at support@schedjoules.com.
+If you have a feature request or have found a bug, open a GitHub issue or email support@schedjoules.com.

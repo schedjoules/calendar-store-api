@@ -1,0 +1,23 @@
+# SchedJoules Calendar Service API
+
+> REST API (JSON over HTTPS) for public calendars: holidays, sports, TV, weather, finance and more. Clients browse pages of calendars and subscribe users to calendar feed URLs (iCalendar, jCal or xCal). Every request needs an `Authorization: Token token="..."` header.
+
+## Docs
+
+- [Overview](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/README.md): Authentication, request basics, language, pages, the user identifier, caching
+- [Pages](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/pages.md): The page response: sections, page items and calendar items, every field
+- [Calendars](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/calendars.md): Calendar feeds: formats, date range, results, incremental updates, sport results
+- [Pregnancy and Countdown Calendars](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/user_input_calendars.md): Calendar URLs your app fills in with a due date or a countdown
+- [Weather](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/weather.md): The weather calendar template, units, city search and map locations
+- [Alarms](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/alarms.md): Default alarms per calendar type and the al parameter
+- [Search](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/search.md): Free-text search with country, category, sport and gender filters
+- [Top, New, Next](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/top_new_next.md): Popular, recently updated and starting-soon lists
+- [Countries](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/countries.md): Supported countries, their ids, codes, home pages and translations
+- [Languages](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/languages.md): The 18 supported languages
+- [In-app Purchases and Accounts](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/accounts.md): Registering a user's license expiration
+- [Deprecations and Changes](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/deprecation_and_changes.md): What changed and what is planned
+- [FAQ](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/faq.md): Content coverage, languages, data usage
+
+## Optional
+
+- [All docs in one file](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/llms-full.txt)

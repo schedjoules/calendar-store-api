@@ -1,40 +1,62 @@
 ## Countries
 
-You can retrieve the list of supported and localised country names via:
+The supported countries, with their names in the requested language:
+
 ```
-GET /countries
+GET /countries?locale={ISO 639-1 code}
 
 Optional GET parameters
-- locale (default: 'en')
-- location
-
-Required labels
-- country_id                    integer
-- name                          string
-- icon                          string (url)
-- icon_etag                     string
-- iso_3166                      string
-- name_translation              string
-- translation_url               string (url)
-- page_id                       integer
+- locale        (default: 'en')
 ```
 
-You can also retrieve all available translations for a country by following the `country_translation_url`:
+`GET /countries?locale=de` returns an array of (shortened to one country):
+
+```json
+[
+  {
+    "country_id": 72,
+    "name": "Netherlands",
+    "iso_3166": "nl",
+    "icon": "https://cdn-images.schedjoules.com/assets/0604f0ff.png",
+    "icon_etag": null,
+    "name_translation": "Niederlande",
+    "translation_url": "https://api.schedjoules.com/countries?location=nl",
+    "page_id": 115676
+  }
+]
 ```
-Required labels
-- country_id                    integer
-- name                          string
-- icon                          string (url)
-- icon_etag                     string
-- iso_3166                      string
-- page_id                       integer
-- locales                       array
-    - locale                    string
-    - name_translation          string
+
+| Field | |
+|---|---|
+| `country_id` | Use it as `country_id` in [Search](https://github.com/schedjoules/calendar-store-api/blob/master/details/search.md) |
+| `name` | The name in English |
+| `name_translation` | The name in the requested language, English where no translation exists |
+| `iso_3166` | Lowercase ISO 3166-1 alpha-2 code. Use it as `location` on `/pages` |
+| `page_id` | The country's home page in the calendar store: `GET /pages/{page_id}` |
+| `translation_url` | Where to get the country's name in every language (below) |
+| `icon_etag` | Always `null` |
+
+### One country in every language
+
+```
+GET /countries?location={ISO 3166 code}
 ```
 
-The `page_id` refers to the home page of the country in the calendar store. You can navigate to it with `GET /pages/{page_id}`.
+`GET /countries?location=nl` returns (shortened):
 
-You can use the country list to allow users to override their default calendar store based on their device's region setting and switch to a calendar store from a different country.
+```json
+{
+  "country_id": 72,
+  "name": "Netherlands",
+  "icon": "https://cdn-images.schedjoules.com/assets/0604f0ff.png",
+  "icon_etag": null,
+  "iso_3166": "nl",
+  "page_id": 115676,
+  "locales": [
+    {"locale": "de", "name_translation": "Niederlande"},
+    {"locale": "fr", "name_translation": "Pays-Bas"}
+  ]
+}
+```
 
-All country names are currently available in English. We are working on translating all country names into the top 20 languages. If you require a translation that is missing, please let us know.
+Use the country list to let users switch to the calendar store of another country than the one their device's region setting points to.

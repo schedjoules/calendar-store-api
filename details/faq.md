@@ -19,13 +19,13 @@ We offer calendar content for:
 20.000+ channels available for North America and Western Europe, including show details such as episode descriptions, cast lists, and premiere/rerun information.
 
 ##### Weather forecasts
-150,000 cities, always 14 days ahead, including detailed weather data: temperature, description, wind speed, precipitation, sunrise/sunset times, and UV index.
+150,000 cities, 16 days ahead: daily minimum and maximum temperature, conditions, humidity and wind, with a detail line every 3 hours.
 
 ##### Company Events
 35 indices and 2.000 companies. AGMs, publications, and results, including company information (website, IR page, IR contact), presentations, and webcasts where available.
 
 ##### Lifestyle
-Moon phases, name days, and week numbers.
+Moon phases, name days, week numbers and day numbers. In the SchedJoules apps also a pregnancy calendar and countdowns, see [Pregnancy and Countdown Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/user_input_calendars.md).
 
 #### What makes your content different from publicly available calendars?
 The quality and breadth of our content, the number of supported languages, the ease of integration across all major platforms via our API and SDKs, and our dedicated editorial and customer support team are just a few of the factors that set us apart.
@@ -58,7 +58,7 @@ We welcome suggestions. Please contact us to discuss further.
 We make every reasonable effort to maintain service availability. Our current uptime is very close to 100%. We operate a highly scalable infrastructure, and reliability is one of our core priorities.
 
 #### What languages is the content available in?
-The API is available in 16 languages: English, Spanish, German, Italian, French, Portuguese, Dutch, Chinese, Japanese, Korean, Russian, Swedish, Danish, Norwegian, Finnish, and Turkish. Most calendar content is available in these languages as well.
+The API is available in 18 languages: English, Spanish, German, Italian, French, Portuguese, Dutch, Chinese, Japanese, Korean, Russian, Swedish, Danish, Norwegian, Finnish, Turkish, Polish and Arabic. Most calendar content is available in these languages as well. See [Languages](https://github.com/schedjoules/calendar-store-api/blob/master/details/languages.md).
 
 #### Can I store, resell, or redistribute your content?
 Some of our content is proprietary. Storage, resale, or redistribution is not permitted without our written approval. Clients may cache data locally for performance purposes only.

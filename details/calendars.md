@@ -1,57 +1,72 @@
 ## Calendars
 
-Calendars are provided in iCalendar format ([RFC 5545](https://tools.ietf.org/html/rfc5545)) by default. We also support jCal ([RFC 7265](https://tools.ietf.org/html/rfc7265)) and xCal ([RFC 6321](https://tools.ietf.org/html/rfc6321)). Most operating systems and calendar clients can parse calendar files natively, though you may also implement your own parser.
+The `url` of a calendar item is the calendar feed. Calendars are served in iCalendar format ([RFC 5545](https://tools.ietf.org/html/rfc5545)) by default, which every major operating system and calendar client can subscribe to. jCal ([RFC 7265](https://tools.ietf.org/html/rfc7265)) and xCal ([RFC 6321](https://tools.ietf.org/html/rfc6321)) are also available: add the extension to the path.
 
-The default calendar format is `.ics`. To request a calendar in jCal or xCal format, append the appropriate file extension:
-* iCal: `.../calendars/766e8a162f82`
+* iCalendar: `.../calendars/766e8a162f82`
 * jCal: `.../calendars/766e8a162f82.json`
 * xCal: `.../calendars/766e8a162f82.xml`
 
+Differences from the iCalendar feed:
+* jCal and xCal responses contain no alarms.
+* jCal property names use underscores where the RFC uses hyphens, for example `x_wr_calname` instead of `x-wr-calname`.
+
+Remember to append `&u={unique_anonymous_user_identifier}` to every calendar URL (see the [README](https://github.com/schedjoules/calendar-store-api#unique-anonymous-user-identifier)).
+
 ### Date Range
 
-By default, the date range of events returned depends on your agreement with SchedJoules.
-
-You can override the date range using the following parameters:
+By default, the date range of events returned depends on your agreement with SchedJoules. You can move the start of the window:
 
 ```
-GET /calendars/766e8a162f82?start_at_or_after={datetime}&start_before={datetime}
+GET /calendars/766e8a162f82?start_at_or_after={datetime}
 
 Optional GET parameters
-- start_at_or_after     datetime    ISO 8601 (e.g. 2026-01-01T00:00:00Z). Overrides the default start of the event window.
-- start_before          datetime    ISO 8601. Overrides the default end of the event window.
+- start_at_or_after     datetime    ISO 8601 (e.g. 2026-01-01T00:00:00Z). Only events
+                                    starting at or after this moment are returned.
 ```
 
-### Incremental Updates
-
-To fetch only events that have been updated since a given point in time — useful for syncing changes without re-fetching the full calendar — use the `events_updated_since` parameter:
-
-```
-GET /calendars/766e8a162f82?events_updated_since={datetime}
-
-Optional GET parameters
-- events_updated_since  datetime    ISO 8601. Returns only events with an updated_at timestamp after this value.
-```
+The end of the window cannot be changed per request.
 
 ### Number of Events
 
-By default, up to 500 events are returned per calendar request. You can request a different number using the `results` parameter:
+By default, every event in the date range is returned. To limit the response to the first N events:
 
 ```
 GET /calendars/766e8a162f82?results={nr_of_events}
 
 Optional GET parameters
-- results               integer     Maximum number of events to return (default: 500).
+- results               integer     Maximum number of events to return.
 ```
 
-### Hiding Sport Event Results
-Some users prefer not to see sport event results in their calendar summary — for example, if they intend to watch the event later and want to avoid spoilers. This behaviour can be controlled via the `show_result` parameter.
+### Incremental Updates
+
+To fetch only the events that changed since a given moment:
 
 ```
-GET /calendar/d2b1e319a12a?show_result=false
+GET /calendars/766e8a162f82?events_updated_since={timestamp}
 
 Optional GET parameters
-- show_result (if omitted, defaults to 'true')
+- events_updated_since  Returns only events updated after this moment.
 ```
 
+The format currently depends on the calendar type:
+* **National holiday calendars:** Unix time in seconds, for example `1767225600`.
+* **Regional holiday calendars and most sport calendars:** an ISO 8601 datetime, for example `2026-01-01T00:00:00Z`.
+* **All other calendars:** the parameter is ignored, and you get the full calendar.
+
+When you ask a sport calendar for updates, events that were called off are included, so you can remove them on your side.
+
+### Hiding Sport Event Results
+Some users prefer not to see results in a sport event's title, for example because they will watch the match later. Use `show_result=false` to leave results out:
+
+```
+GET /calendars/d2b1e319a12a?show_result=false
+
+Optional GET parameters
+- show_result           Only the value 'false' has an effect. Results are shown by default.
+```
+
+### Alarms
+See [Alarms](https://github.com/schedjoules/calendar-store-api/blob/master/details/alarms.md).
+
 ### Calendars Filled In by the User
-The pregnancy and countdown calendars have a URL template that your app fills in with what the user enters (a due date, or a name and a date). See [Pregnancy and Countdown Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/user_input_calendars.md).
+The weather, pregnancy and countdown calendars have a URL template that your app fills in with what the user enters (a location, a due date, or a name and a date). See [Weather](https://github.com/schedjoules/calendar-store-api/blob/master/details/weather.md) and [Pregnancy and Countdown Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/user_input_calendars.md).

@@ -1,11 +1,13 @@
-## Deprecations and Breaking Changes
+## Deprecations and Changes
 
-This document lists breaking changes and deprecated features in the API.
+Breaking changes and deprecated features of the API.
 
-### Upcoming Changes
-* **Weather URL** — The weather calendar URL structure will be updated.
-* **Categories, sport, and gender** — These fields will be consolidated into a single hash.
-* **Force SSL** — All requests will be required to use HTTPS.
-* **Icon ETag removal** — The `icon_etag` field will be removed from responses.
-* **Location by ID deprecated** — Looking up a location using a numeric ID is no longer supported. Use ISO 3166 country codes instead.
-* **`country` renamed to `location`** — The `country` parameter has been renamed to `location` for consistency.
+### Done
+* **HTTPS only.** Plain HTTP requests are redirected to HTTPS.
+* **Location by country code.** `location` takes an ISO 3166 country code; looking a location up by numeric id is no longer supported.
+* **`country` parameter renamed to `location`.** The request parameter is `location`. Responses still have a `country` field with the country's name.
+* **`start_before` and the default of 500 results.** Calendar feeds no longer document a `start_before` parameter (it had no effect) or a default limit of 500 events: by default every event in the date range is returned. See [Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md).
+
+### Planned
+* **`icon_etag` removal.** The field is still sent in Countries and in Top, New and Next, but its value is always `null`. Do not rely on it.
+* **`events_updated_since` format.** National holiday calendars take Unix time, all others an ISO 8601 datetime. This will become one format; see [Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#incremental-updates).
