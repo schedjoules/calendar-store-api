@@ -25,7 +25,7 @@ You can explore the API with our test API key:
 ```
 curl 'https://api.schedjoules.com/pages/115673' -H 'Authorization: Token token="0443a55244bb2b6224fd48e0416f0d9c"'
 ```
-The test key gives access to the complete API, but every calendar URL it returns points to the same placeholder calendar. Your own key returns the real calendars.
+The test key gives access to the complete API, but every calendar URL it returns serves the same feed (Moon Phases). Your own key returns the real calendars.
 
 ## Request Basics
 
@@ -331,7 +331,17 @@ So freshness for EventKit users depends on how often they open your app. Plan fo
 
 ## A Basic UI
 
-A v0.1 needs four screens. This is the structure the SchedJoules apps use on iOS and Android, reduced to what a first version needs. Build it with your platform's standard components (lists, tab or navigation bars, switches, sheets); nothing here needs a custom control. Adding SchedJoules to an app that already has its own screens? See [Embedding the Catalogue](https://github.com/schedjoules/calendar-store-api/blob/master/details/embedding.md) instead. Read the [Integration Guide](https://github.com/schedjoules/calendar-store-api/blob/master/details/integration_guide.md) first for the API side.
+A standalone v0.1 needs four screens. This is the structure the SchedJoules apps use on iOS and Android, reduced to what a first version needs. Build it with your platform's standard components (lists, tab or navigation bars, switches, sheets); nothing here needs a custom control. Read the [Integration Guide](https://github.com/schedjoules/calendar-store-api/blob/master/details/integration_guide.md) first for the API side.
+
+**Which screens to build:**
+
+| Your app | Build |
+|---|---|
+| Already shows calendars or events (a calendar, agenda or planner app) | Browse and Calendar from this page, opened from your existing "add calendar" entry, as in [Embedding, pattern 3](https://github.com/schedjoules/calendar-store-api/blob/master/details/embedding.md#pattern-3-a-source-among-sources). No My calendars or Settings screen: your own calendar list and settings do that job |
+| Has no calendar views of its own, or is a standalone catalogue | All four screens below |
+| Needs only one kind of content (public holidays, one sport) | No catalogue screens: [Embedding, pattern 1 or 2](https://github.com/schedjoules/calendar-store-api/blob/master/details/embedding.md) |
+
+The wireframes below show structure only: which elements, in which order. Draw them with your platform's own components and spacing.
 
 | Screen | Shows | API |
 |---|---|---|
@@ -343,6 +353,21 @@ A v0.1 needs four screens. This is the structure the SchedJoules apps use on iOS
 Put Browse and My calendars in a tab or navigation bar; Settings can be a third tab or sit behind an icon.
 
 ### Browse
+
+```
++--------------------------------------+
+| United States              (title)   |
+| [ Search calendars               ]   |
+|--------------------------------------|
+| [icon] Holidays                  >   |   first section: no header
+| [icon] Sports                    >   |
+| POPULAR                   (header)   |
+| [icon] Golden State Warriors  [on]   |   calendar row, subscribed
+| [    ] Moon Phases            [  ]   |   icon null: empty space kept
+|--------------------------------------|
+|  Browse  |  My calendars  |  Settings|
++--------------------------------------+
+```
 
 * Open on the user's home page: `GET /pages?locale={device language}&location={device country}`. Use the page's `name` as the screen title.
 * Render each entry of `page_sections` as a list section with its `name` as the header. The first section can have an empty name: show it without a header.
@@ -359,6 +384,20 @@ Optional for a later version: a "Top" tab with `GET /pages?top=20&location={coun
 
 What the user sees before and after subscribing to one calendar.
 
+```
++--------------------------------------+
+| <  Golden State Warriors             |
+|--------------------------------------|
+|          [ Subscribe ]               |   becomes "Subscribed"
+|--------------------------------------|
+| SAT 21 NOV                           |
+|   19:30  Warriors - Lakers           |
+| MON 23 NOV                           |
+|   04:00  Celtics - Warriors          |
+| ...                                  |   next 10 to 20 events
++--------------------------------------+
+```
+
 * Title: the item's `name` (`original_name` when it came from search).
 * A subscribe control at the top: a switch or a button that turns into "Subscribed". Subscribing must give feedback at once; on Android, start the first sync immediately so events appear in the calendar app within seconds.
 * Below it, the next events of the feed: fetch it, and list date, time and `SUMMARY` of the next 10 to 20 events, grouped by day. This lets users check that they picked the right team or region before they subscribe, and it is the place where an empty calendar shows "No upcoming events" instead of the placeholder event (see [Integration Guide, step 5](https://github.com/schedjoules/calendar-store-api/blob/master/details/integration_guide.md#step-5-recognise-placeholder-events)).
@@ -369,7 +408,21 @@ What the user sees before and after subscribing to one calendar.
 
   Use the platform's date picker and a sheet or a separate screen. Never subscribe to the template URL with its `{placeholders}` still in it.
 
+**With the test key** every calendar serves the same feed, "Moon Phases", so every Calendar screen previews the same moon events, and every feed's `X-WR-CALNAME` is "Moon Phases". That is expected and not a parsing bug. Keep the title from the catalogue item; if your screen says "Moon Phases" for a football team, the name comes from the feed and is wrong. To test the empty and placeholder states, load the files in [examples/feeds](https://github.com/schedjoules/calendar-store-api/tree/master/examples/feeds) instead of a live feed.
+
 ### My calendars
+
+```
++--------------------------------------+
+| My calendars                         |
+|--------------------------------------|
+| [icon] Golden State Warriors     (o) |   (o): colour in the system calendar
+| [icon] Public Holidays           (o) |
+| [icon] Moon Phases  Not syncing  (o) |   permission refused
+|--------------------------------------|
+|  Browse  |  My calendars  |  Settings|
++--------------------------------------+
+```
 
 * One row per subscription: icon, name, and on Android the colour of the calendar in the system calendar.
 * Tapping a row opens the Calendar screen for that subscription.
@@ -377,6 +430,16 @@ What the user sees before and after subscribing to one calendar.
 * Empty state: one sentence and a button that opens Browse.
 
 ### Settings
+
+```
++--------------------------------------+
+| Settings                             |
+|--------------------------------------|
+| Country                United States |
+| Language                     English |
+| Contact support                    > |
++--------------------------------------+
+```
 
 * Country and language, both defaulting to the device. A change reloads the home page in Browse.
 * Changing the language does not change existing subscriptions: their feeds stay in the language they were added in. Say so, or offer to re-add them.
@@ -400,6 +463,28 @@ What the user sees before and after subscribing to one calendar.
 ### Platform look
 
 Use the native look of each platform instead of one shared design: system fonts, system colours and dark mode, the standard back behaviour, standard switches. Users recognise those, and they keep working with accessibility settings (larger text, screen readers) without extra effort. The iOS and Android SchedJoules apps share the same screens and grouping, but each looks like its own platform.
+
+### A v0.1 UI checklist
+
+Check each item in the running app, not only in code. Leave out the My calendars and Settings items when your app's own screens do that job (see the table at the top).
+
+- [ ] Browse opens on the home page for the device's language and country, with the page `name` as title
+- [ ] Sections show their `name` as header; a section with an empty name shows none
+- [ ] Page rows open the child page with a working back action; calendar rows open the Calendar screen
+- [ ] Rows with `icon: null` or no icon keep the names aligned
+- [ ] Subscribed calendars are marked on their rows, matched by `item_id`, in Browse and in search results
+- [ ] Search starts at 3 characters after a short pause; results use `original_name` once opened
+- [ ] The Calendar screen title comes from the catalogue item, never from the feed's `X-WR-CALNAME`
+- [ ] The Calendar screen lists the next events grouped by day, and shows "No upcoming events" for `empty.ics`
+- [ ] No placeholder event is ever shown as an event (try every file in `examples/feeds/`)
+- [ ] Subscribing gives feedback at once; on Android the first sync starts immediately
+- [ ] Calendar access is asked at the first subscribe, not at app start; refusing it leaves the subscription visible as not syncing, with a link to the system settings
+- [ ] Weather, pregnancy and countdown calendars ask for their input before subscribing
+- [ ] Unsubscribing asks for confirmation and removes the events (Android) or explains the iOS Settings step (webcal)
+- [ ] My calendars has an empty state with a button to Browse
+- [ ] Changing country or language reloads Browse
+- [ ] Loading, offline, `5xx`, empty search and empty calendar each show their state from the table above
+- [ ] Dark mode and the largest system text size both work on every screen
 
 
 <!-- source: details/embedding.md -->
@@ -454,6 +539,7 @@ Show one page of the catalogue, and everything below it, inside your own screen:
 If your app already lets users add calendars (Google, iCloud, Exchange, a URL), add SchedJoules as one more source:
 
 * The entry opens the user's home page (`GET /pages?locale=...&location=...`) with search on top, in a sheet or a pushed screen.
+* Build the [Browse](https://github.com/schedjoules/calendar-store-api/blob/master/details/ui.md#browse) and [Calendar](https://github.com/schedjoules/calendar-store-api/blob/master/details/ui.md#calendar) screens from A Basic UI for this. Its My calendars and Settings screens are not needed: your calendar list and settings already do that job, and country and language become two of your settings.
 * A subscribed calendar becomes a normal calendar in your app, with your app's controls: colour, visibility, notifications, remove. Do not build a separate "SchedJoules calendars" area.
 * Show the calendar's name from the catalogue item (`original_name` from search), never from the feed's `X-WR-CALNAME`.
 * SchedJoules calendars are read-only: hide editing on their events, and say so if the user tries.

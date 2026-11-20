@@ -48,6 +48,7 @@ Show one page of the catalogue, and everything below it, inside your own screen:
 If your app already lets users add calendars (Google, iCloud, Exchange, a URL), add SchedJoules as one more source:
 
 * The entry opens the user's home page (`GET /pages?locale=...&location=...`) with search on top, in a sheet or a pushed screen.
+* Build the [Browse](https://github.com/schedjoules/calendar-store-api/blob/master/details/ui.md#browse) and [Calendar](https://github.com/schedjoules/calendar-store-api/blob/master/details/ui.md#calendar) screens from A Basic UI for this. Its My calendars and Settings screens are not needed: your calendar list and settings already do that job, and country and language become two of your settings.
 * A subscribed calendar becomes a normal calendar in your app, with your app's controls: colour, visibility, notifications, remove. Do not build a separate "SchedJoules calendars" area.
 * Show the calendar's name from the catalogue item (`original_name` from search), never from the feed's `X-WR-CALNAME`.
 * SchedJoules calendars are read-only: hide editing on their events, and say so if the user tries.
