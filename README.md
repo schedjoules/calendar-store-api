@@ -85,6 +85,7 @@ Cache responses wherever possible.
 * [Integration Guide](https://github.com/schedjoules/calendar-store-api/blob/master/details/integration_guide.md)
 * [Android](https://github.com/schedjoules/calendar-store-api/blob/master/details/android.md)
 * [iOS](https://github.com/schedjoules/calendar-store-api/blob/master/details/ios.md)
+* [A Basic UI](https://github.com/schedjoules/calendar-store-api/blob/master/details/ui.md)
 * [Pages](https://github.com/schedjoules/calendar-store-api/blob/master/details/pages.md)
 * [In-app Purchases and Accounts](https://github.com/schedjoules/calendar-store-api/blob/master/details/accounts.md)
 * [Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md)

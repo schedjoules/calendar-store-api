@@ -1,6 +1,6 @@
 ## Integration Guide
 
-The shortest path from nothing to a calendar app that shows SchedJoules calendars. It ties the reference pages together and adds the rules that only show up once real users sync real feeds. Platform specifics: [Android](https://github.com/schedjoules/calendar-store-api/blob/master/details/android.md) and [iOS](https://github.com/schedjoules/calendar-store-api/blob/master/details/ios.md). Example responses and feeds: [examples/](https://github.com/schedjoules/calendar-store-api/tree/master/examples).
+The shortest path from nothing to a calendar app that shows SchedJoules calendars. It ties the reference pages together and adds the rules that only show up once real users sync real feeds. Screens: [A Basic UI](https://github.com/schedjoules/calendar-store-api/blob/master/details/ui.md). Platform specifics: [Android](https://github.com/schedjoules/calendar-store-api/blob/master/details/android.md) and [iOS](https://github.com/schedjoules/calendar-store-api/blob/master/details/ios.md). Example responses and feeds: [examples/](https://github.com/schedjoules/calendar-store-api/tree/master/examples).
 
 ### The model in one paragraph
 
@@ -23,7 +23,7 @@ Send `locale` (the user's language) and `location` (the user's country) on page 
 3. An item with `item_class: "page"` opens another page: `GET` its `url`.
 4. An item with `item_class: "calendar"` is subscribable.
 
-Add search with `GET /pages/search?q=...` (3 characters or more). See [Pages](https://github.com/schedjoules/calendar-store-api/blob/master/details/pages.md) and [Search](https://github.com/schedjoules/calendar-store-api/blob/master/details/search.md).
+Add search with `GET /pages/search?q=...` (3 characters or more). For the screens around it, see [A Basic UI](https://github.com/schedjoules/calendar-store-api/blob/master/details/ui.md). See [Pages](https://github.com/schedjoules/calendar-store-api/blob/master/details/pages.md) and [Search](https://github.com/schedjoules/calendar-store-api/blob/master/details/search.md).
 
 Store the `item_id` of each calendar the user subscribes to: you need it later (step 6).
 
