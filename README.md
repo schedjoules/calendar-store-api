@@ -107,5 +107,13 @@ There are currently no rate limits. Requests are monitored, and we may reach out
 ## Data Usage and Restrictions
 By using this API, you acknowledge that all accessed data is proprietary. The data and images may not be used for any purpose beyond what has been agreed upon. Data may not be stored in any database other than on a user's client device for performance purposes.
 
+## Attribution
+Every screen where users browse, search or pick SchedJoules calendars shows the line **Calendars by SchedJoules**, unless your agreement with us says otherwise.
+
+* Plain text in your secondary text style is enough; a logo is not required. You may link it to `https://www.schedjoules.com`.
+* Translate "Calendars by" with the rest of your app; keep "SchedJoules" as it is.
+* It must be visible where the content is chosen: an About screen or a footer elsewhere in the app does not count.
+* Where it goes on each screen: [A Basic UI](https://github.com/schedjoules/calendar-store-api/blob/master/details/ui.md#attribution) and [Embedding the Catalogue](https://github.com/schedjoules/calendar-store-api/blob/master/details/embedding.md#attribution).
+
 ## Feedback and Support
 If you have a feature request or have found a bug, open a GitHub issue or email support@schedjoules.com.
