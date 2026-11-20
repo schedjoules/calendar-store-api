@@ -1,6 +1,6 @@
 ## Integration Guide
 
-The shortest path from nothing to a calendar app that shows SchedJoules calendars. It ties the reference pages together and adds the rules that only show up once real users sync real feeds. Screens: [A Basic UI](https://github.com/schedjoules/calendar-store-api/blob/master/details/ui.md). Platform specifics: [Android](https://github.com/schedjoules/calendar-store-api/blob/master/details/android.md) and [iOS](https://github.com/schedjoules/calendar-store-api/blob/master/details/ios.md). Example responses and feeds: [examples/](https://github.com/schedjoules/calendar-store-api/tree/master/examples).
+The shortest path from nothing to a calendar app that shows SchedJoules calendars. It ties the reference pages together and adds the rules that only show up once real users sync real feeds. Screens: [A Basic UI](https://github.com/schedjoules/calendar-store-api/blob/master/details/ui.md) for a separate catalogue, [Embedding](https://github.com/schedjoules/calendar-store-api/blob/master/details/embedding.md) to put it inside an existing app. Platform specifics: [Android](https://github.com/schedjoules/calendar-store-api/blob/master/details/android.md) and [iOS](https://github.com/schedjoules/calendar-store-api/blob/master/details/ios.md). Example responses and feeds: [examples/](https://github.com/schedjoules/calendar-store-api/tree/master/examples).
 
 ### The model in one paragraph
 
