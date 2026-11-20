@@ -65,6 +65,17 @@ Apps that draw their own calendar or agenda do not need the system calendar at a
 * `DESCRIPTION` holds the details users look for (scores, line-ups, TV channel, holiday explanation). Show it on your event view; it contains plain text with line breaks.
 * The data stays on the device: see [Data Usage and Restrictions](https://github.com/schedjoules/calendar-store-api#data-usage-and-restrictions). If your app syncs calendars through your own servers, agree that with us first.
 
+### Attribution
+
+Wherever users choose SchedJoules content, show **Calendars by SchedJoules** (see [Attribution](https://github.com/schedjoules/calendar-store-api#attribution)):
+
+| Pattern | Where |
+|---|---|
+| One switch | The setting's supporting text: "Public holidays for Germany" with "Calendars by SchedJoules" below it |
+| One branch | One line at the end of the branch's list, on every page of it |
+| A source among sources | On the entry ("Holidays, sports and more", with "Calendars by SchedJoules" as its subtitle) and in the catalogue sheet it opens |
+| Your own event view | On the detail view of a SchedJoules event, next to the calendar's name |
+
 ### What not to do
 
 * Do not copy catalogue data into your own build or backend. Fetch pages when the user opens them; they change (new seasons, new teams, translations).

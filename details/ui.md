@@ -33,6 +33,7 @@ Put Browse and My calendars in a tab or navigation bar; Settings can be a third 
 | POPULAR                   (header)   |
 | [icon] Golden State Warriors  [on]   |   calendar row, subscribed
 | [    ] Moon Phases            [  ]   |   icon null: empty space kept
+|        Calendars by SchedJoules      |   attribution, end of the list
 |--------------------------------------|
 |  Browse  |  My calendars  |  Settings|
 +--------------------------------------+
@@ -64,6 +65,7 @@ What the user sees before and after subscribing to one calendar.
 | MON 23 NOV                           |
 |   04:00  Celtics - Warriors          |
 | ...                                  |   next 10 to 20 events
+|        Calendars by SchedJoules      |   attribution
 +--------------------------------------+
 ```
 
@@ -114,6 +116,10 @@ What the user sees before and after subscribing to one calendar.
 * Changing the language does not change existing subscriptions: their feeds stay in the language they were added in. Say so, or offer to re-add them.
 * A link to your support channel.
 
+### Attribution
+
+Show **Calendars by SchedJoules** on Browse (every page and the search results) and on the Calendar screen: one line in your secondary text style, at the end of the list or under the title. My calendars and Settings do not need it. See [Attribution](https://github.com/schedjoules/calendar-store-api#attribution) for the rules.
+
 ### Permissions and first run
 
 * Do not ask for calendar access at app start. Ask when the user subscribes to the first calendar, after one line explaining why (Android: `READ_CALENDAR` and `WRITE_CALENDAR`; iOS with EventKit: full access; iOS with webcal: nothing).
@@ -153,4 +159,5 @@ Check each item in the running app, not only in code. Leave out the My calendars
 - [ ] My calendars has an empty state with a button to Browse
 - [ ] Changing country or language reloads Browse
 - [ ] Loading, offline, `5xx`, empty search and empty calendar each show their state from the table above
+- [ ] "Calendars by SchedJoules" shows on every Browse page, the search results and the Calendar screen
 - [ ] Dark mode and the largest system text size both work on every screen
