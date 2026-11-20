@@ -93,9 +93,9 @@ The texts are available in en, ar, da, de, es, fi, fr, it, ja, ko, nl, no, pl, p
 
 The name is text the user typed. Do not log the filled URL or send it to analytics.
 
-### Free and Premium Users
+### Date Range
 
-Both calendars follow the same [date range](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#date-range) as every other calendar: a free user sees the events of the next 60 days, a Premium user all of them. The `start_at_or_after` and `results` parameters work as usual.
+Both calendars follow the same [date range](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#date-range) rules as every other calendar, and the `start_at_or_after` and `results` parameters work as usual.
 
 ### Unusable Input
 
