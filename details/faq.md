@@ -28,7 +28,7 @@ We offer calendar content for:
 Moon phases, name days, week numbers and day numbers. In the SchedJoules apps also a pregnancy calendar and countdowns, see [Pregnancy and Countdown Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/user_input_calendars.md).
 
 #### What makes your content different from publicly available calendars?
-The quality and breadth of our content, the number of supported languages, the ease of integration across all major platforms via our API and SDKs, and our dedicated editorial and customer support team are just a few of the factors that set us apart.
+The quality and breadth of our content, the number of supported languages, the ease of integration across all major platforms via our API, and our dedicated editorial and customer support team are just a few of the factors that set us apart.
 
 Content errors are corrected as soon as they are identified, and our support team is always available to assist.
 

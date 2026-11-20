@@ -2,7 +2,7 @@
 
 You can configure the API to require end-users to pay for calendar content. In that case, you will likely want to integrate In-App Purchases. We offer several approaches for handling this.
 
-The easiest approach is to use one of our [SDKs](https://github.com/schedjoules/calendar-store-api/blob/master/README.md#sdks). Payment processing and calendar management are handled entirely within the SDK, allowing you to get up and running quickly. If you choose not to use one of the SDKs, you gain more flexibility through the Account API. The Account API allows you to control calendar behaviour and user access across multiple devices.
+Use the Account API to control calendar access per user, across multiple devices. (The former SDKs, which handled payments themselves, are [deprecated](https://github.com/schedjoules/calendar-store-api/blob/master/details/sdks.md).)
 
 ### Editing Subscriptions
 An important consideration when developing on iOS or macOS is that calendar subscriptions are managed by the operating system, not your application. The only way to prevent end-users from accessing calendar subscriptions after their subscription has expired is to notify the Account API of the expiration. You can set or update the expiration date with the following request:
