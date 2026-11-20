@@ -28,7 +28,7 @@ PAGES = [
     ("details/countries.md", "Countries", "Supported countries, their ids, codes, home pages and translations"),
     ("details/languages.md", "Languages", "The 18 supported languages"),
     ("details/accounts.md", "In-app Purchases and Accounts", "Registering a user's license expiration"),
-    ("details/sdks.md", "SDKs (deprecated)", "The iOS and Android SDKs are deprecated; integrate the REST API directly"),
+    ("details/sdks.md", "SDKs (deprecated)", "The iOS and Android SDKs and the Swift client are deprecated; integrate the REST API directly"),
     ("details/deprecation_and_changes.md", "Deprecations and Changes", "What changed and what is planned"),
     ("details/faq.md", "FAQ", "Content coverage, languages, data usage"),
 ]

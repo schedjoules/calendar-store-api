@@ -6,7 +6,7 @@ Reading this with a coding agent? [llms.txt](https://github.com/schedjoules/cale
 
 ## SDKs
 
-The iOS and Android SDKs are deprecated: integrate the REST API directly. See [SDKs](https://github.com/schedjoules/calendar-store-api/blob/master/details/sdks.md).
+The iOS and Android SDKs and the Swift client library are deprecated: integrate the REST API directly. See [SDKs](https://github.com/schedjoules/calendar-store-api/blob/master/details/sdks.md).
 
 ## Set Yourself Up
 

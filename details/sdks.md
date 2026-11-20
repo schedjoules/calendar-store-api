@@ -1,11 +1,12 @@
 ## SDKs (deprecated)
 
-SchedJoules used to publish SDKs for iOS and Android. Both are deprecated and no longer maintained:
+SchedJoules used to publish SDKs for iOS and Android, and a Swift client library. All are deprecated and no longer maintained:
 
 | SDK | Repository | Status |
 |---|---|---|
 | iOS | [ios-public-calendars-sdk](https://github.com/schedjoules/ios-public-calendars-sdk) | Deprecated, last updated March 2024 |
 | Android | [android-public-calendars-sdk](https://github.com/schedjoules/android-public-calendars-sdk) | Deprecated and archived, last updated April 2023 |
+| Swift client library (iOS, macOS) | [swift-api-client](https://github.com/schedjoules/swift-api-client) | Deprecated, last updated May 2023 |
 
 Do not start a new integration on them. They do not follow later API changes and will not receive fixes.
 

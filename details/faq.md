@@ -10,19 +10,19 @@ We offer calendar content for:
 * Lifestyle
 
 ##### Holidays
-250 countries (13 with school holidays), 360 regions, official and notable days, 8 religions and the UN, including background information on holidays where available.
+241 countries (13 with school holidays), 350 regions, official and notable days, 8 religions and the UN, including background information on holidays where available.
 
 ##### Sports schedules
-39 sports, 600+ competitions, 20.000+ teams and athletes, including results, scorers, line-ups, substitutions, referees, and standings tables where available.
+85 sports, 2,600+ competitions, 99,000+ teams and athletes, including results, scorers, line-ups, substitutions, referees, and standings tables where available.
 
 ##### TV Shows
-20.000+ channels available for North America and Western Europe, including show details such as episode descriptions, cast lists, and premiere/rerun information.
+14 days of listings for 2,500+ channels and 100,000+ programs in North America and Western Europe, including show details such as episode descriptions, cast lists, and premiere/rerun information.
 
 ##### Weather forecasts
 150,000 cities, 16 days ahead: daily minimum and maximum temperature, conditions, humidity and wind, with a detail line every 3 hours.
 
 ##### Company Events
-35 indices and 2.000 companies. AGMs, publications, and results, including company information (website, IR page, IR contact), presentations, and webcasts where available.
+28 indices and 2,000+ companies. AGMs, publications, and results, including company information (website, IR page, IR contact), presentations, and webcasts where available.
 
 ##### Lifestyle
 Moon phases, name days, week numbers and day numbers. In the SchedJoules apps also a pregnancy calendar and countdowns, see [Pregnancy and Countdown Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/user_input_calendars.md).

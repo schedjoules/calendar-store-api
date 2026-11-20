@@ -15,7 +15,7 @@
 - [Countries](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/countries.md): Supported countries, their ids, codes, home pages and translations
 - [Languages](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/languages.md): The 18 supported languages
 - [In-app Purchases and Accounts](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/accounts.md): Registering a user's license expiration
-- [SDKs (deprecated)](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/sdks.md): The iOS and Android SDKs are deprecated; integrate the REST API directly
+- [SDKs (deprecated)](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/sdks.md): The iOS and Android SDKs and the Swift client are deprecated; integrate the REST API directly
 - [Deprecations and Changes](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/deprecation_and_changes.md): What changed and what is planned
 - [FAQ](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/faq.md): Content coverage, languages, data usage
 
