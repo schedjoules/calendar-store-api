@@ -88,6 +88,7 @@ Before presenting a calendar to your users, you must append the calendar URL cli
 * [Search](https://github.com/schedjoules/calendar-store-api/blob/master/details/search.md)
 * [Top, New, Next](https://github.com/schedjoules/calendar-store-api/blob/master/details/top_new_next.md)
 * [Weather](https://github.com/schedjoules/calendar-store-api/blob/master/details/weather.md)
+* [Pregnancy and Countdown Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/user_input_calendars.md)
 * [Alarms](https://github.com/schedjoules/calendar-store-api/blob/master/details/alarms.md)
 * [FAQ](https://github.com/schedjoules/calendar-store-api/blob/master/details/faq.md)
 

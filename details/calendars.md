@@ -57,3 +57,6 @@ GET /calendar/d2b1e319a12a?show_result=false
 Optional GET parameters
 - show_result (if omitted, defaults to 'true')
 ```
+
+### Calendars Filled In by the User
+The pregnancy and countdown calendars have a URL template that your app fills in with what the user enters (a due date, or a name and a date). See [Pregnancy and Countdown Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/user_input_calendars.md).
