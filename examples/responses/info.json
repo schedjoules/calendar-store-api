@@ -1,0 +1,32 @@
+{
+  "parent_pages": [
+    {
+      "id": 115673,
+      "short_name": "us-Tree"
+    },
+    {
+      "id": 126018,
+      "short_name": "United States"
+    },
+    {
+      "id": 121927,
+      "short_name": ""
+    }
+  ],
+  "short_name": "United States",
+  "category": "Holidays",
+  "category_id": 1,
+  "country": "United States",
+  "country_id": 79,
+  "country_flag": "🇺🇸",
+  "item_class": "calendar",
+  "in_api": true,
+  "calendar_id": "4d26c6d53ae3",
+  "subscribers": 11415,
+  "item": {
+    "item_id": 50084,
+    "name": "Public Holidays",
+    "url": "https://holidays.schedjoules.com/calendars/766e8a162f82?l=en",
+    "icon": "https://cdn-images.schedjoules.com/assets/9783d4f3.png"
+  }
+}

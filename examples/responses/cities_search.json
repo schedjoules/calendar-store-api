@@ -1,0 +1,25 @@
+{
+  "cities": [
+    {
+      "country": "nl",
+      "latitude": 52.37,
+      "longitude": 4.9,
+      "name": "Amsterdam",
+      "location_id": 102759794
+    },
+    {
+      "country": "ca",
+      "latitude": 51.75,
+      "longitude": -102.47,
+      "name": "Amsterdam",
+      "location_id": 105884628
+    },
+    {
+      "country": "us",
+      "latitude": 42.94,
+      "longitude": -74.19,
+      "name": "Amsterdam",
+      "location_id": 105107152
+    }
+  ]
+}

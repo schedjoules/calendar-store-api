@@ -18,6 +18,9 @@ RAW = "https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/"
 # (path, title, one-line description), in reading order.
 PAGES = [
     ("README.md", "Overview", "Authentication, request basics, language, pages, the user identifier, caching"),
+    ("details/integration_guide.md", "Integration Guide", "From nothing to a working app: feed URLs, placeholder events, sync rules, errors"),
+    ("details/android.md", "Android", "Writing feeds into CalendarContract: account, dates, recurrence, batching, refresh"),
+    ("details/ios.md", "iOS", "Webcal subscription vs EventKit, and how each refreshes"),
     ("details/pages.md", "Pages", "The page response: sections, page items and calendar items, every field"),
     ("details/calendars.md", "Calendars", "Calendar feeds: formats, date range, results, incremental updates, sport results"),
     ("details/user_input_calendars.md", "Pregnancy and Countdown Calendars", "Calendar URLs your app fills in with a due date or a countdown"),
@@ -43,7 +46,9 @@ SUMMARY = (
 def index():
     lines = ["# SchedJoules Calendar Service API", "", f"> {SUMMARY}", "", "## Docs", ""]
     lines += [f"- [{title}]({RAW}{path}): {desc}" for path, title, desc in PAGES]
-    lines += ["", "## Optional", "", f"- [All docs in one file]({RAW}llms-full.txt)", ""]
+    lines += ["", "## Optional", "", f"- [All docs in one file]({RAW}llms-full.txt)",
+              f"- [Instructions for coding agents]({RAW}AGENTS.md)",
+              "- [Example responses and feeds](https://github.com/schedjoules/calendar-store-api/tree/master/examples)", ""]
     return "\n".join(lines)
 
 

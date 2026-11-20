@@ -27,6 +27,13 @@ for md in sorted(ROOT.rglob("*.md")):
         except json.JSONDecodeError as e:
             errors.append(f"{md.relative_to(ROOT)}:{line}: invalid JSON: {e}")
 
+for path in sorted((ROOT / "examples").rglob("*.json")):
+    count += 1
+    try:
+        json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as e:
+        errors.append(f"{path.relative_to(ROOT)}: invalid JSON: {e}")
+
 for e in errors:
     print(e)
 print(f"{count} json block(s), {len(errors)} invalid")

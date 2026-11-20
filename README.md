@@ -2,7 +2,7 @@
 
 This API provides access to the SchedJoules Public Calendar Service: public calendars for holidays, sports, TV, weather, financial events and more, for desktop, web and mobile applications, in 18 languages.
 
-Reading this with a coding agent? [llms.txt](https://github.com/schedjoules/calendar-store-api/blob/master/llms.txt) indexes every page, and [llms-full.txt](https://github.com/schedjoules/calendar-store-api/blob/master/llms-full.txt) holds all of them in one file.
+**New here? Start with the [Integration Guide](https://github.com/schedjoules/calendar-store-api/blob/master/details/integration_guide.md).** Reading this with a coding agent? Give it [AGENTS.md](https://github.com/schedjoules/calendar-store-api/blob/master/AGENTS.md) and [llms-full.txt](https://github.com/schedjoules/calendar-store-api/blob/master/llms-full.txt), which holds every page in one file. Example responses and feeds are in [examples/](https://github.com/schedjoules/calendar-store-api/tree/master/examples).
 
 ## SDKs
 
@@ -82,6 +82,9 @@ Cache responses wherever possible.
 * They are sent with `Cache-Control: max-age=0, private, must-revalidate`: keep your copy, but revalidate it before using it again.
 
 ## More Information
+* [Integration Guide](https://github.com/schedjoules/calendar-store-api/blob/master/details/integration_guide.md)
+* [Android](https://github.com/schedjoules/calendar-store-api/blob/master/details/android.md)
+* [iOS](https://github.com/schedjoules/calendar-store-api/blob/master/details/ios.md)
 * [Pages](https://github.com/schedjoules/calendar-store-api/blob/master/details/pages.md)
 * [In-app Purchases and Accounts](https://github.com/schedjoules/calendar-store-api/blob/master/details/accounts.md)
 * [Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md)
