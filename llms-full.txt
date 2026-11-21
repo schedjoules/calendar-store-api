@@ -1,6 +1,6 @@
 # SchedJoules Calendar Service API
 
-> REST API (JSON over HTTPS) for public calendars: holidays, sports, TV, weather, finance and more. Clients browse pages of calendars and subscribe users to calendar feed URLs (iCalendar, jCal or xCal). Every request needs an `Authorization: Token token="..."` header.
+> REST API (JSON over HTTPS) for public calendars: holidays, sports, TV, weather, finance and more. Clients browse pages of calendars and subscribe users to calendar feed URLs (iCalendar, jCal or xCal); a single event is also available as JSCalendar (RFC 8984) for detail screens. Every request needs an `Authorization: Token token="..."` header.
 
 Generated from the markdown files in this repository by .github/scripts/build_llms.py. Do not edit by hand.
 
