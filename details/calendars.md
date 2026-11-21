@@ -13,7 +13,7 @@ The `url` of a calendar item is the calendar feed. Remember to append `&u={uniqu
 
 **JSCalendar** is plain JSON with structured data: a match's line-ups, a race classification, a holiday's background, a company event's details. It is an IETF standard, built as the JSON successor to iCalendar, and the API is developing it further: new data arrives in JSCalendar first. See [A Calendar as a JSCalendar List](#a-calendar-as-a-jscalendar-list), [One Event as JSCalendar](#one-event-as-jscalendar-rfc-8984) and [Why JSCalendar](#why-jscalendar).
 
-**iCalendar** stays the format for subscribing users and syncing events into the device calendar. Every client reads it, and the sync rules in the [Integration Guide](https://github.com/schedjoules/calendar-store-api/blob/master/details/integration_guide.md) are written for it.
+**iCalendar** is the format we suggest for subscribing users and syncing events into the device calendar. JSCalendar can be used for subscribing and syncing too, but most calendar clients read only iCalendar, so the sync track of the [Integration Guide](https://github.com/schedjoules/calendar-store-api/blob/master/details/integration_guide.md#track-b-sync-into-a-calendar) is written for iCalendar.
 
 **jCal and xCal** are iCalendar mapped one to one into JSON and XML. They are still served and follow their RFCs, but they carry no more than the iCalendar feed: no structured data, and no alarms. Do not start a new integration on them. For JSON, use JSCalendar; for subscribing and syncing, use iCalendar.
 
@@ -31,7 +31,7 @@ The recommended pattern is a short list first, details per event:
 | Show a list of a calendar's events in your app: an agenda, upcoming matches | JSCalendar list |
 | Show an event in detail: a match with its line-ups, a race classification, a holiday's background | JSCalendar `Event`, one per request |
 
-JSCalendar does not replace the feed for syncing: the list has no descriptions, and calendar apps read iCalendar only.
+JSCalendar can be used for subscribing and syncing too, but most calendar clients read only iCalendar. That is why we suggest the iCalendar feed for syncing.
 
 ### One Event as JSCalendar (RFC 8984)
 
@@ -168,7 +168,7 @@ Accept: application/jscalendar+json
 * Errors, `ETag` and `304` work as for one event. The list has an `ETag` of its own.
 * It is much smaller than the feed. Measured on 2026-11-21: Eredivisie (500 events) 165 KB against 590 KB for the iCalendar feed, 9 KB against 70 KB gzipped.
 
-Do not sync the device calendar from the list. It has no descriptions, so events would show up there without their details, and iOS and other calendar apps read iCalendar only.
+The list alone is not enough to sync from: it has no descriptions, so events would arrive without their details. Syncing from JSCalendar takes the list plus each event's own document. To fill the device calendar, use the iCalendar feed: most calendar clients read only iCalendar.
 
 #### Why JSCalendar
 

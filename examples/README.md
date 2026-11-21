@@ -27,4 +27,4 @@ Captured on 2026-11-20 with the public test key; long lists are shortened.
 | `expired_calendar.ics` | Placeholder: the calendar was retired | Rebuilt from the server template |
 | `empty.ics` | Placeholder: no events in the date range | Rebuilt from the server template |
 
-The texts of the rebuilt placeholders can differ from what the server sends, and are translated. Recognise placeholders by `UID` only, never by text. See the [Integration Guide](https://github.com/schedjoules/calendar-store-api/blob/master/details/integration_guide.md#step-5-recognise-placeholder-events).
+The texts of the rebuilt placeholders can differ from what the server sends, and are translated. Recognise placeholders by `UID` only, never by text. See the [Integration Guide](https://github.com/schedjoules/calendar-store-api/blob/master/details/integration_guide.md#step-b2-recognise-placeholder-events).

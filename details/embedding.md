@@ -81,4 +81,4 @@ Wherever users choose SchedJoules content, show **Calendars by SchedJoules** (se
 
 * Do not copy catalogue data into your own build or backend. Fetch pages when the user opens them; they change (new seasons, new teams, translations).
 * Do not rewrite feed URLs or build them from ids. Always take the `url` from the item.
-* Do not hide that a calendar can end: when a feed answers with a placeholder (see [Integration Guide, step 5](https://github.com/schedjoules/calendar-store-api/blob/master/details/integration_guide.md#step-5-recognise-placeholder-events)), show the state in your own UI.
+* Do not hide that a calendar can end: when a feed answers with a placeholder (see [Integration Guide, step B2](https://github.com/schedjoules/calendar-store-api/blob/master/details/integration_guide.md#step-b2-recognise-placeholder-events)), show the state in your own UI.

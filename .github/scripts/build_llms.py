@@ -18,7 +18,7 @@ RAW = "https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/"
 # (path, title, one-line description), in reading order.
 PAGES = [
     ("README.md", "Overview", "Authentication, request basics, language, pages, the user identifier, caching"),
-    ("details/integration_guide.md", "Integration Guide", "From nothing to a working app: feed URLs, placeholder events, sync rules, errors"),
+    ("details/integration_guide.md", "Integration Guide", "From nothing to a working app: feed URLs, then two tracks (JSCalendar for your own event screens, iCalendar for syncing: placeholder events, sync rules), errors"),
     ("details/android.md", "Android", "Writing feeds into CalendarContract: account, dates, recurrence, batching, refresh"),
     ("details/ios.md", "iOS", "Webcal subscription vs EventKit, and how each refreshes"),
     ("details/ui.md", "A Basic UI", "The four screens of a v0.1: Browse, Calendar, My calendars, Settings, plus permissions and states"),
