@@ -24,6 +24,8 @@ Remember to append `&u={unique_anonymous_user_identifier}` to every calendar URL
 
 JSCalendar does not replace the feed. Keep syncing with iCalendar and fetch the JSCalendar document when the user opens an event.
 
+The JSCalendar format itself can hold a whole calendar (a `Group` of events), but the API serves it per event only: a request without `event` returns `400`. For a whole calendar as JSON, use jCal.
+
 ### One Event as JSCalendar (RFC 8984)
 
 ```
