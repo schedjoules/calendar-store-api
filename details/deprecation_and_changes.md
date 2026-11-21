@@ -3,6 +3,7 @@
 Breaking changes and deprecated features of the API.
 
 ### Done
+* **Competition on matches.** Since 2026-11-21 JSCalendar list entries and event documents of a match carry `schedjoules.com:competition`. See [Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#the-document).
 * **Real calendars with the test key.** Since 2026-11-21 the public test key gets each calendar's own feed URL, and every feed serves that calendar's real events, limited to the next 5. Before, every calendar URL it returned served the same Moon Phases feed. See the [README](https://github.com/schedjoules/calendar-store-api#set-yourself-up).
 * **JSCalendar recommended; jCal and xCal not recommended.** Since 2026-11-21 JSCalendar (RFC 8984) is the recommended format for new integrations: the list for event lists in your app, one event for detail screens. iCalendar remains the format for subscribing and syncing. jCal and xCal keep working but are not recommended: they carry no more than the iCalendar feed. See [Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#formats).
 * **jCal and xCal follow their RFCs.** Since 2026-11-21:

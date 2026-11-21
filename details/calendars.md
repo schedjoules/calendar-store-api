@@ -86,6 +86,7 @@ Structured data is in vendor properties, named under our domain as RFC 8984 sect
 | Property | Calendars | Content |
 |---|---|---|
 | `schedjoules.com:version` | all | `1`. Within a version, changes are additive only |
+| `schedjoules.com:competition` | sports, except motorsport and cycling | the competition the match belongs to, such as `Eredivisie`, as a string. Also on [list](#a-calendar-as-a-jscalendar-list) entries, to label rows |
 | `schedjoules.com:match` | football | `status`, `competition`, score, `home` and `away` with team, formation, starters and bench, and a timeline of goals, cards and substitutions |
 | `schedjoules.com:raceResults` | motorsport, cycling | rows of `position`, `name`, `points`, `time`, `status` (`DNF`, `DNS`, `DSQ`, ...) |
 | `schedjoules.com:holiday` | national and regional holidays | `observedIn` (list), `estimated` (bool), `text` |
@@ -109,6 +110,7 @@ Football:
   "locations": { "1": { "@type": "Location", "name": "Goffertstadion, Nijmegen", "coordinates": "geo:51.8231,5.83813" } },
   "links": { "1": { "@type": "Link", "href": "https://www.schedjoules.com/calendar/36254089?event=5781805&c=event", "rel": "alternate" } },
   "schedjoules.com:version": 1,
+  "schedjoules.com:competition": "Eredivisie",
   "schedjoules.com:match": { "id": 5781805, "status": "scheduled", "competition": "Eredivisie", "home": { "team": "NEC Nijmegen", "formation": "3-4-3", "starters": [], "bench": [] }, "away": { "team": "PSV Eindhoven", "starters": [], "bench": [] }, "events": [] }
 }
 ```
@@ -155,14 +157,15 @@ Accept: application/jscalendar+json
       "timeZone": "Etc/UTC",
       "duration": "PT1H45M",
       "status": "confirmed",
-      "locations": { "1": { "@type": "Location", "name": "Goffertstadion, Nijmegen", "coordinates": "geo:51.8231,5.83813" } }
+      "locations": { "1": { "@type": "Location", "name": "Goffertstadion, Nijmegen", "coordinates": "geo:51.8231,5.83813" } },
+      "schedjoules.com:competition": "Eredivisie"
     }
   ],
   "schedjoules.com:version": 1
 }
 ```
 
-* Each entry has the list properties only: `uid`, `updated`, `title`, `start`, `timeZone` or `showWithoutTime`, `duration`, `status`, `locations`. They have the same values as in the [event's own document](#the-document). For the description, links and structured data, fetch that document with the entry's event part when the user opens it.
+* Each entry has the list properties only: `uid`, `updated`, `title`, `start`, `timeZone` or `showWithoutTime`, `duration`, `status`, `locations` and, for a match, `schedjoules.com:competition`. They have the same values as in the [event's own document](#the-document). For the description, links and structured data, fetch that document with the entry's event part when the user opens it.
 * The entries are the events of the iCalendar feed, in the same order. [`start_at_or_after`, `start_before`](#date-range), [`results`](#number-of-events) and [`events_updated_since`](#incremental-updates) work as they do for the feed. A called-off match in an `events_updated_since` answer has `status: "cancelled"`.
 * A calendar without events gives `"entries": []`, never a placeholder event.
 * Errors, `ETag` and `304` work as for one event. The list has an `ETag` of its own.
