@@ -16,7 +16,7 @@ You can explore the API with our test API key:
 ```
 curl 'https://api.schedjoules.com/pages/115673' -H 'Authorization: Token token="0443a55244bb2b6224fd48e0416f0d9c"'
 ```
-The test key gives access to the complete API, but every calendar URL it returns serves the same feed (Moon Phases). Your own key returns the real calendars.
+The test key gives access to the complete API, and every calendar URL it returns serves that calendar's real events, limited to the next 5. Your own key returns the whole calendar, in the window your agreement gives.
 
 ## Request Basics
 

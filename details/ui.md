@@ -79,7 +79,7 @@ What the user sees before and after subscribing to one calendar.
 
   Use the platform's date picker and a sheet or a separate screen. Never subscribe to the template URL with its `{placeholders}` still in it.
 
-**With the test key** every calendar serves the same feed, "Moon Phases", so every Calendar screen previews the same moon events, and every feed's `X-WR-CALNAME` is "Moon Phases". That is expected and not a parsing bug. Keep the title from the catalogue item; if your screen says "Moon Phases" for a football team, the name comes from the feed and is wrong. To test the empty and placeholder states, load the files in [examples/feeds](https://github.com/schedjoules/calendar-store-api/tree/master/examples/feeds) instead of a live feed.
+**With the test key** every calendar serves its real events, but only the next 5, so a Calendar screen previews at most 5 events and a synced calendar holds 5. That is expected and not a sync bug; your own key returns the whole calendar. To test the empty and placeholder states, load the files in [examples/feeds](https://github.com/schedjoules/calendar-store-api/tree/master/examples/feeds) instead of a live feed.
 
 ### My calendars
 
