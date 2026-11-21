@@ -20,11 +20,10 @@ Remember to append `&u={unique_anonymous_user_identifier}` to every calendar URL
 |---|---|
 | Subscribe a user, or sync the events into the device calendar | iCalendar. Every client reads it, and it is the format the sync rules in the [Integration Guide](https://github.com/schedjoules/calendar-store-api/blob/master/details/integration_guide.md) are written for |
 | Read a whole calendar as JSON or XML | jCal or xCal. Same content as the iCalendar feed, one to one |
+| Show a list of a calendar's events in your own app: an agenda, upcoming matches | JSCalendar list: the whole calendar, titles and times only |
 | Show one event in detail: a match with its line-ups, a race classification, a holiday's background | JSCalendar, one event per request |
 
-JSCalendar does not replace the feed. Keep syncing with iCalendar and fetch the JSCalendar document when the user opens an event.
-
-The JSCalendar format itself can hold a whole calendar (a `Group` of events), but the API serves it per event only: a request without `event` returns `400`. For a whole calendar as JSON, use jCal.
+JSCalendar does not replace the feed. Keep syncing with iCalendar, show your own lists from the JSCalendar list, and fetch the event's JSCalendar document when the user opens an event.
 
 ### One Event as JSCalendar (RFC 8984)
 
@@ -48,7 +47,6 @@ Calendars whose UIDs do not start with the page id, such as weather, have no eve
 |---|---|---|
 | 200 | JSCalendar `Event`, `application/jscalendar+json` | The event is in the feed this URL serves |
 | 304 | none | `If-None-Match` matches. The ETag is per event |
-| 400 | `{"error":"missing_event"}` | No `event` parameter |
 | 403 | `{"error":"no_access"}` or `{"error":"expired_subscription"}` | Where the feed would serve a placeholder event |
 | 404 | `{"error":"event_not_found"}` | The event is not in this feed: outside the window, removed, or unknown |
 | 404 | `{"error":"expired_calendar"}` | The calendar is retired |
@@ -125,6 +123,45 @@ Holiday:
 }
 ```
 
+### A Calendar as a JSCalendar List
+
+Leave out `event` and the same request returns the whole calendar as a JSCalendar `Group` ([RFC 8984 section 5.3](https://www.rfc-editor.org/rfc/rfc8984#section-5.3)), for an event list in your app:
+
+```
+GET /calendars/766e8a162f82.jscalendar?{the feed's own parameters}
+Accept: application/jscalendar+json
+```
+
+```json
+{
+  "@type": "Group",
+  "uid": "36254089_1@schedjoules.com",
+  "title": "Eredivisie (Netherlands)",
+  "entries": [
+    {
+      "@type": "Event",
+      "uid": "36254089_1_5781805@schedjoules.com",
+      "updated": "2026-11-20T10:00:00Z",
+      "title": "NEC Nijmegen - PSV Eindhoven",
+      "start": "2026-11-21T19:00:00",
+      "timeZone": "Etc/UTC",
+      "duration": "PT1H45M",
+      "status": "confirmed",
+      "locations": { "1": { "@type": "Location", "name": "Goffertstadion, Nijmegen", "coordinates": "geo:51.8231,5.83813" } }
+    }
+  ],
+  "schedjoules.com:version": 1
+}
+```
+
+* Each entry has the list properties only: `uid`, `updated`, `title`, `start`, `timeZone` or `showWithoutTime`, `duration`, `status`, `locations`. They have the same values as in the [event's own document](#the-document). For the description, links and structured data, fetch that document with the entry's event part when the user opens it.
+* The entries are the events of the iCalendar feed, in the same order. [`start_at_or_after`, `start_before`](#date-range), [`results`](#number-of-events) and [`events_updated_since`](#incremental-updates) work as they do for the feed. A called-off match in an `events_updated_since` answer has `status: "cancelled"`.
+* A calendar without events gives `"entries": []`, never a placeholder event.
+* Errors, `ETag` and `304` work as for one event. The list has an `ETag` of its own.
+* It is much smaller than the feed. Measured on 2026-11-21: Eredivisie (500 events) 165 KB against 590 KB for the iCalendar feed, 9 KB against 70 KB gzipped.
+
+Do not sync the device calendar from the list. It has no descriptions, so events would show up there without their details, and iOS and other calendar apps read iCalendar only.
+
 #### Why JSCalendar for the Detail Screen
 
 * **No parsing of description text.** In iCalendar, a match's line-ups, a race classification or a holiday's background only exist as free text in `DESCRIPTION`, and the wording of that text is not a contract: it can change at any time. The vendor properties are a contract, versioned and changed additively only.
@@ -132,7 +169,7 @@ Holiday:
 * **Agrees with the user's calendar.** The standard properties come from the same code as the feed, so the detail screen never shows a different time or title than the event the user synced.
 * **A published standard, not a SchedJoules format.** JSCalendar is an IETF standard (RFC 8984), designed as a JSON alternative to iCalendar and the event format of JMAP for Calendars. jCal maps iCalendar one to one, so its `DESCRIPTION` is still text; JSCalendar is built to carry structured data.
 * **Safe to build on.** Unknown vendor properties are ignored and `description` is always there, so a new kind of data or a new field never breaks your app.
-* **Small and cacheable.** One event per request, with a per-event `ETag` for `If-None-Match`, instead of downloading the whole feed to show one event.
+* **Small and cacheable.** One event per request, with a per-event `ETag` for `If-None-Match`, instead of downloading the whole feed to show one event. For a list screen, the [JSCalendar list](#a-calendar-as-a-jscalendar-list) is a fraction of the feed's size.
 * **Clear errors.** Access problems are HTTP statuses, so there are no placeholder events to recognise.
 
 ### Date Range
