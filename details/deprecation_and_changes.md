@@ -3,6 +3,7 @@
 Breaking changes and deprecated features of the API.
 
 ### Done
+* **One event as JSCalendar.** Since 2026-11-21 a single event is available as a JSCalendar document (RFC 8984, see [Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#one-event-as-jscalendar-rfc-8984)), with structured match, race, holiday and finance data. The iCalendar, jCal and xCal feeds are unchanged.
 * **SDKs deprecated.** The iOS and Android SDKs and the Swift client library are no longer maintained. See [SDKs](https://github.com/schedjoules/calendar-store-api/blob/master/details/sdks.md).
 * **HTTPS only.** Plain HTTP requests are redirected to HTTPS.
 * **Location by country code.** `location` takes an ISO 3166 country code; looking a location up by numeric id is no longer supported.

@@ -72,7 +72,7 @@ What the user sees before and after subscribing to one calendar.
 * Title: the item's `name` (`original_name` when it came from search).
 * A subscribe control at the top: a switch or a button that turns into "Subscribed". Subscribing must give feedback at once; on Android, start the first sync immediately so events appear in the calendar app within seconds.
 * Below it, the next events of the feed: fetch it, and list date, time and `SUMMARY` of the next 10 to 20 events, grouped by day. This lets users check that they picked the right team or region before they subscribe, and it is the place where an empty calendar shows "No upcoming events" instead of the placeholder event (see [Integration Guide, step 5](https://github.com/schedjoules/calendar-store-api/blob/master/details/integration_guide.md#step-5-recognise-placeholder-events)).
-* Tapping an event can show its `DESCRIPTION`, `LOCATION` and `URL`; for sport this holds the scores and line-ups.
+* Tapping an event can show its `DESCRIPTION`, `LOCATION` and `URL`; for sport this holds the scores and line-ups. For a richer event screen, fetch the event as [JSCalendar](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#one-event-as-jscalendar-rfc-8984): line-ups, results and holiday details as structured JSON instead of text.
 * A calendar that needs input from the user asks for it here, before it can be subscribed:
   * weather: a city (with search) and units, see [Weather](https://github.com/schedjoules/calendar-store-api/blob/master/details/weather.md)
   * pregnancy: the due date; countdown: a name and a date, see [Pregnancy and Countdown Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/user_input_calendars.md)

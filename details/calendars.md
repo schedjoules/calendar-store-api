@@ -10,7 +10,130 @@ Differences from the iCalendar feed:
 * jCal and xCal responses contain no alarms.
 * jCal property names use underscores where the RFC uses hyphens, for example `x_wr_calname` instead of `x-wr-calname`.
 
+For a single event, for example the detail screen a user opens from an event, there is also a JSON document in JSCalendar format ([RFC 8984](https://www.rfc-editor.org/rfc/rfc8984)). See [One Event as JSCalendar](#one-event-as-jscalendar-rfc-8984).
+
 Remember to append `&u={unique_anonymous_user_identifier}` to every calendar URL (see the [README](https://github.com/schedjoules/calendar-store-api#unique-anonymous-user-identifier)).
+
+### Which Format to Use
+
+| You want to | Use |
+|---|---|
+| Subscribe a user, or sync the events into the device calendar | iCalendar. Every client reads it, and it is the format the sync rules in the [Integration Guide](https://github.com/schedjoules/calendar-store-api/blob/master/details/integration_guide.md) are written for |
+| Read a whole calendar as JSON or XML | jCal or xCal. Same content as the iCalendar feed, one to one |
+| Show one event in detail: a match with its line-ups, a race classification, a holiday's background | JSCalendar, one event per request |
+
+JSCalendar does not replace the feed. Keep syncing with iCalendar and fetch the JSCalendar document when the user opens an event.
+
+The JSCalendar format itself can hold a whole calendar (a `Group` of events), but the API serves it per event only: a request without `event` returns `400`. For a whole calendar as JSON, use jCal.
+
+### One Event as JSCalendar (RFC 8984)
+
+```
+GET /calendars/766e8a162f82.jscalendar?{the feed's own parameters}&event={event part}
+Accept: application/jscalendar+json
+```
+
+Take the calendar item's `url` exactly as you use it for the feed, including `&u=`, add `.jscalendar` to the path and append `&event=`. The request passes the same access checks and returns events from the same window as the feed.
+
+The **event part** comes from the event's `UID` in the feed. A UID has the form `{page id}_{language id}_{event part}@schedjoules.com`: drop the domain and the first two fields. The event part can itself contain underscores.
+
+* UID `49733_1_28_1__20261205@schedjoules.com` → `event=28_1__20261205`
+* UID `36254089_1_5781805@schedjoules.com` → `event=5781805`
+
+Calendars whose UIDs do not start with the page id, such as weather, have no event documents.
+
+#### Responses
+
+| Status | Body | When |
+|---|---|---|
+| 200 | JSCalendar `Event`, `application/jscalendar+json` | The event is in the feed this URL serves |
+| 304 | none | `If-None-Match` matches. The ETag is per event |
+| 400 | `{"error":"missing_event"}` | No `event` parameter |
+| 403 | `{"error":"no_access"}` or `{"error":"expired_subscription"}` | Where the feed would serve a placeholder event |
+| 404 | `{"error":"event_not_found"}` | The event is not in this feed: outside the window, removed, or unknown |
+| 404 | `{"error":"expired_calendar"}` | The calendar is retired |
+
+On any status other than 200 or 304, show what you already have from the feed (title, time, `DESCRIPTION`).
+
+Unlike the feed, access problems come back as HTTP errors, not as a `200` with a placeholder event.
+
+#### The Document
+
+Standard JSCalendar properties are written by the same code that writes the iCalendar feed, so for the same `UID` they always agree with it:
+
+| iCalendar | JSCalendar |
+|---|---|
+| `UID` | `uid` |
+| `SUMMARY` | `title` |
+| `DTSTART`, `DTEND` with a time (UTC) | `start` (local date-time), `timeZone: "Etc/UTC"`, `duration` |
+| `DTSTART`, `DTEND` as dates (all-day) | `start` at `T00:00:00`, `showWithoutTime: true`, `duration` in days, no `timeZone` |
+| `LOCATION`, `GEO` | `locations."1"` with `name` and `coordinates` (`geo:lat,lon`) |
+| `URL` | `links."1"` with `href`, `rel: "alternate"` |
+| `LAST-MODIFIED` | `updated` |
+| `STATUS` | `status`: `confirmed`, `tentative` or `cancelled` |
+| `DESCRIPTION` | `description`, with real line breaks |
+
+Empty properties are left out.
+
+Structured data is in vendor properties, named under our domain as RFC 8984 section 3.3 prescribes:
+
+| Property | Calendars | Content |
+|---|---|---|
+| `schedjoules.com:version` | all | `1`. Within a version, changes are additive only |
+| `schedjoules.com:match` | football | `status`, `competition`, score, `home` and `away` with team, formation, starters and bench, and a timeline of goals, cards and substitutions |
+| `schedjoules.com:raceResults` | motorsport, cycling | rows of `position`, `name`, `points`, `time`, `status` (`DNF`, `DNS`, `DSQ`, ...) |
+| `schedjoules.com:holiday` | national and regional holidays | `observedIn` (list), `estimated` (bool), `text` |
+| `schedjoules.com:finance` | company calendars | `company`, `bank`, `extraInfo`, `extraInfoUrl`, `speaker`, `webcast`, `irContact` (`name`, `email`, `phone`) |
+
+Other calendars (TV, school holidays, moon phases, week numbers, name days and more) have the standard properties only: show their `description`. More vendor properties will be added over time. Ignore the ones you do not know, as RFC 8984 requires, and fall back to `description` for any event you have no layout for.
+
+Football:
+
+```json
+{
+  "@type": "Event",
+  "uid": "36254089_1_5781805@schedjoules.com",
+  "updated": "2026-11-20T10:00:00Z",
+  "title": "NEC Nijmegen - PSV Eindhoven",
+  "start": "2026-11-21T19:00:00",
+  "timeZone": "Etc/UTC",
+  "duration": "PT1H45M",
+  "status": "confirmed",
+  "description": "Tournament: Eredivisie\n\n...",
+  "locations": { "1": { "@type": "Location", "name": "Goffertstadion, Nijmegen", "coordinates": "geo:51.8231,5.83813" } },
+  "links": { "1": { "@type": "Link", "href": "https://www.schedjoules.com/calendar/36254089?event=5781805&c=event", "rel": "alternate" } },
+  "schedjoules.com:version": 1,
+  "schedjoules.com:match": { "id": 5781805, "status": "scheduled", "competition": "Eredivisie", "home": { "team": "NEC Nijmegen", "formation": "3-4-3", "starters": [], "bench": [] }, "away": { "team": "PSV Eindhoven", "starters": [], "bench": [] }, "events": [] }
+}
+```
+
+Holiday:
+
+```json
+{
+  "@type": "Event",
+  "uid": "49733_1_28_1__20261205@schedjoules.com",
+  "title": "Saint Nicholas",
+  "start": "2026-12-05T00:00:00",
+  "showWithoutTime": true,
+  "duration": "P1D",
+  "status": "confirmed",
+  "description": "Saint Nicholas Day, celebrated on December 6th, ...",
+  "locations": { "1": { "@type": "Location", "name": "Netherlands" } },
+  "schedjoules.com:version": 1,
+  "schedjoules.com:holiday": { "estimated": false, "text": "Saint Nicholas Day, celebrated on December 6th, ..." }
+}
+```
+
+#### Why JSCalendar for the Detail Screen
+
+* **No parsing of description text.** In iCalendar, a match's line-ups, a race classification or a holiday's background only exist as free text in `DESCRIPTION`, and the wording of that text is not a contract: it can change at any time. The vendor properties are a contract, versioned and changed additively only.
+* **Plain JSON.** No iCalendar parser, line folding, escaping or `VTIMEZONE` handling for a screen that shows one event. Any JSON library reads it.
+* **Agrees with the user's calendar.** The standard properties come from the same code as the feed, so the detail screen never shows a different time or title than the event the user synced.
+* **A published standard, not a SchedJoules format.** JSCalendar is an IETF standard (RFC 8984), designed as a JSON alternative to iCalendar and the event format of JMAP for Calendars. jCal maps iCalendar one to one, so its `DESCRIPTION` is still text; JSCalendar is built to carry structured data.
+* **Safe to build on.** Unknown vendor properties are ignored and `description` is always there, so a new kind of data or a new field never breaks your app.
+* **Small and cacheable.** One event per request, with a per-event `ETag` for `If-None-Match`, instead of downloading the whole feed to show one event.
+* **Clear errors.** Access problems are HTTP statuses, so there are no placeholder events to recognise.
 
 ### Date Range
 
