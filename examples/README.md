@@ -15,6 +15,7 @@ Captured on 2026-11-20 with the public test key; long lists are shortened.
 | `cities_search.json` | `GET /cities/search?q=Amsterdam` (3 cities) |
 | `weather_settings.json` | `GET /cities/weather_settings?locale=en&location=us` |
 | `error_401.json` | Any request without an API key |
+| `event.jscalendar.json` | One event as JSCalendar: `GET {feed url}.jscalendar?...&event=20260531_` (captured 2026-11-21). The test key serves Moon Phases, so it has only the standard properties; a holiday with vendor properties is shown in [Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#one-event-as-jscalendar-rfc-8984) |
 
 ### feeds/
 

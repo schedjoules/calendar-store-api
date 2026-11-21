@@ -4,7 +4,7 @@ The shortest path from nothing to a calendar app that shows SchedJoules calendar
 
 ### The model in one paragraph
 
-The API is a catalogue: pages of calendars, in the user's language and country. A calendar item has a `url`, which is an iCalendar feed. Your app shows the catalogue, the user picks a calendar, and from then on your app (or the operating system) fetches that feed regularly. All content lives in the feed; the API is only needed to browse.
+The API is a catalogue: pages of calendars, in the user's language and country. A calendar item has a `url`, which is an iCalendar feed. Your app shows the catalogue, the user picks a calendar, and from then on your app (or the operating system) fetches that feed regularly to keep the events in sync. When your app shows events in its own screens, it reads them as JSCalendar (RFC 8984), the recommended format: a slim list of the calendar's events, and the full details of one event when the user opens it (step 7). See [Which Format to Use](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#which-format-to-use).
 
 ### Step 1: a key and the request basics
 
@@ -43,7 +43,7 @@ Rules:
 
 ### Step 4: fetch the feed
 
-`GET` the feed URL. It returns `text/calendar` (iCalendar, [RFC 5545](https://tools.ietf.org/html/rfc5545)).
+`GET` the feed URL. It returns `text/calendar` (iCalendar, [RFC 5545](https://tools.ietf.org/html/rfc5545)). iCalendar is the format for subscribing and syncing: every calendar client reads it, and steps 4 to 6 are written for it. Do not sync from jCal or xCal; they work but are not recommended. For your own event screens, use JSCalendar (step 7).
 
 What a feed contains:
 * `X-WR-CALNAME`: the calendar's name. In your UI you can use the catalogue item's `name` instead (from search results, use `original_name`: search names can end in a gender sign and a flag to tell teams apart).
@@ -91,7 +91,13 @@ GET /pages/{calendar_id}/ultimate_successor
 
 returns `{"requested_id": "...", "successor_id": "...", "in_api": true}` for the `calendar_id` in a feed URL (`/calendars/{calendar_id}`).
 
-### Step 7: errors
+### Step 7: show an event
+
+When the user opens an event in your app, fetch that event as JSCalendar instead of parsing `DESCRIPTION`: add `.jscalendar` to the feed URL's path and append `&event={event part}`, the part of the `UID` after `{item_id}_{language_id}_`. The document has the same title and time as the feed, plus structured data such as a match's line-ups, a race classification or a holiday's background. It answers access problems with HTTP errors, not placeholder events; on anything other than `200` or `304`, show what you have from the feed. See [One Event as JSCalendar](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#one-event-as-jscalendar-rfc-8984).
+
+For a list of a calendar's events in your own screens, use the [JSCalendar list](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#a-calendar-as-a-jscalendar-list): the whole calendar with titles and times only, a fraction of the feed's size. An empty calendar gives `"entries": []` instead of a placeholder event.
+
+### Step 8: errors
 
 API errors (not feeds) answer with an HTTP status and:
 
@@ -115,4 +121,5 @@ API errors (not feeds) answer with an HTTP status and:
 - [ ] Feed body checked for `BEGIN:VCALENDAR` ... `END:VCALENDAR` before use
 - [ ] Placeholder UIDs handled, not shown as events
 - [ ] Refresh with `If-None-Match`; changes applied by UID; deletions only from complete feeds
+- [ ] Event detail screens read the event as JSCalendar, falling back to the feed on any non-200
 - [ ] Feed URLs never logged

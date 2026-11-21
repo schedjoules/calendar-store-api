@@ -24,7 +24,7 @@ PAGES = [
     ("details/ui.md", "A Basic UI", "The four screens of a v0.1: Browse, Calendar, My calendars, Settings, plus permissions and states"),
     ("details/embedding.md", "Embedding the Catalogue", "One switch, one branch or a source among sources: SchedJoules content inside an existing app, and drawing the events in your own views"),
     ("details/pages.md", "Pages", "The page response: sections, page items and calendar items, every field"),
-    ("details/calendars.md", "Calendars", "Calendar feeds: formats, JSCalendar (RFC 8984) lists and single events, date range, results, incremental updates, sport results"),
+    ("details/calendars.md", "Calendars", "Formats: JSCalendar (RFC 8984, recommended: lists and single events), iCalendar (most widely used), jCal and xCal (not recommended); date range, results, incremental updates, sport results"),
     ("details/user_input_calendars.md", "Pregnancy and Countdown Calendars", "Calendar URLs your app fills in with a due date or a countdown"),
     ("details/weather.md", "Weather", "The weather calendar template, units, city search and map locations"),
     ("details/alarms.md", "Alarms", "Default alarms per calendar type and the al parameter"),
@@ -41,7 +41,7 @@ PAGES = [
 SUMMARY = (
     "REST API (JSON over HTTPS) for public calendars: holidays, sports, TV, weather, finance "
     "and more. Clients browse pages of calendars and subscribe users to calendar feed URLs "
-    "(iCalendar, jCal or xCal); a calendar is also available as a JSCalendar (RFC 8984) list, and a single event as a JSCalendar document for detail screens. Every request needs an `Authorization: Token token=\"...\"` header."
+    "(iCalendar); JSCalendar (RFC 8984), the recommended format for new integrations, gives a calendar as a slim list and a single event as a document for detail screens. jCal and xCal still work but are not recommended. Every request needs an `Authorization: Token token=\"...\"` header."
 )
 
 
