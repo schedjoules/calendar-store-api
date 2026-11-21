@@ -9,7 +9,7 @@ The API is a catalogue: pages of calendars, in the user's language and country. 
 * **JSCalendar** ([RFC 8984](https://www.rfc-editor.org/rfc/rfc8984)), the recommended format: plain JSON with structured data, a slim list of the calendar's events, and the full details of one event when the user opens it.
 * **iCalendar** ([RFC 5545](https://tools.ietf.org/html/rfc5545)), the most widely used format, and what the `url` returns as it is.
 
-JSCalendar can be used for subscribing and syncing too, but most calendar clients (the iOS and Android calendars, Google Calendar, Outlook) read only iCalendar. That is why this guide syncs into a device calendar from iCalendar. After step 3 it splits into two tracks, and many apps follow both. See [Which Format to Use](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#which-format-to-use).
+JSCalendar can be used for subscribing and syncing too, but most calendar clients (the iOS and Android calendars, Google Calendar, Outlook) read only iCalendar. That is why this guide syncs into a device calendar from iCalendar. If you do sync from JSCalendar, the list alone is not enough: it has titles and times but no descriptions, so you also need each event's own document. After step 3 it splits into two tracks, and many apps follow both. See [Which Format to Use](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#which-format-to-use).
 
 ### Step 1: a key and the request basics
 
