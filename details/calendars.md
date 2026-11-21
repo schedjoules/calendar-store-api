@@ -1,29 +1,37 @@
 ## Calendars
 
-The `url` of a calendar item is the calendar feed. Calendars are served in iCalendar format ([RFC 5545](https://tools.ietf.org/html/rfc5545)) by default, which every major operating system and calendar client can subscribe to. jCal ([RFC 7265](https://tools.ietf.org/html/rfc7265)) and xCal ([RFC 6321](https://tools.ietf.org/html/rfc6321)) are also available: add the extension to the path.
+The `url` of a calendar item is the calendar feed. Remember to append `&u={unique_anonymous_user_identifier}` to every calendar URL (see the [README](https://github.com/schedjoules/calendar-store-api#unique-anonymous-user-identifier)).
 
-* iCalendar: `.../calendars/766e8a162f82`
-* jCal: `.../calendars/766e8a162f82.json`
-* xCal: `.../calendars/766e8a162f82.xml`
+### Formats
 
-Differences from the iCalendar feed:
-* jCal and xCal responses contain no alarms.
-* jCal property names use underscores where the RFC uses hyphens, for example `x_wr_calname` instead of `x-wr-calname`.
+| Format | Status | URL |
+|---|---|---|
+| **JSCalendar** ([RFC 8984](https://www.rfc-editor.org/rfc/rfc8984)) | **Recommended.** Our newest format and the default choice for new integrations, for every event your app reads and shows itself | List: `.../calendars/766e8a162f82.jscalendar?...`<br>One event: `...&event={event part}` |
+| **iCalendar** ([RFC 5545](https://tools.ietf.org/html/rfc5545)) | **Most widely used.** What the feed URL returns. Every major operating system and calendar client can subscribe to it | `.../calendars/766e8a162f82` |
+| jCal ([RFC 7265](https://tools.ietf.org/html/rfc7265)) | Works, not recommended | `.../calendars/766e8a162f82.json` |
+| xCal ([RFC 6321](https://tools.ietf.org/html/rfc6321)) | Works, not recommended | `.../calendars/766e8a162f82.xml` |
 
-For a single event, for example the detail screen a user opens from an event, there is also a JSON document in JSCalendar format ([RFC 8984](https://www.rfc-editor.org/rfc/rfc8984)). See [One Event as JSCalendar](#one-event-as-jscalendar-rfc-8984).
+**JSCalendar** is plain JSON with structured data: a match's line-ups, a race classification, a holiday's background, a company event's details. It is an IETF standard, built as the JSON successor to iCalendar, and the API is developing it further: new data arrives in JSCalendar first. See [A Calendar as a JSCalendar List](#a-calendar-as-a-jscalendar-list), [One Event as JSCalendar](#one-event-as-jscalendar-rfc-8984) and [Why JSCalendar](#why-jscalendar).
 
-Remember to append `&u={unique_anonymous_user_identifier}` to every calendar URL (see the [README](https://github.com/schedjoules/calendar-store-api#unique-anonymous-user-identifier)).
+**iCalendar** stays the format for subscribing users and syncing events into the device calendar. Every client reads it, and the sync rules in the [Integration Guide](https://github.com/schedjoules/calendar-store-api/blob/master/details/integration_guide.md) are written for it.
+
+**jCal and xCal** are iCalendar mapped one to one into JSON and XML. They are still served and follow their RFCs, but they carry no more than the iCalendar feed: no structured data, and no alarms. Do not start a new integration on them. For JSON, use JSCalendar; for subscribing and syncing, use iCalendar.
 
 ### Which Format to Use
 
+The recommended pattern is a short list first, details per event:
+
+1. **Subscribe and sync with iCalendar.** Calendar apps, webcal subscriptions and the device calendar read the feed.
+2. **List events in your own screens from the [JSCalendar list](#a-calendar-as-a-jscalendar-list)**: the whole calendar with only what a list needs (title, time, duration, status, location), a fraction of the size of the iCalendar feed.
+3. **Fetch the full JSCalendar `Event` when the user opens one**: the description and the structured data. See [One Event as JSCalendar](#one-event-as-jscalendar-rfc-8984).
+
 | You want to | Use |
 |---|---|
-| Subscribe a user, or sync the events into the device calendar | iCalendar. Every client reads it, and it is the format the sync rules in the [Integration Guide](https://github.com/schedjoules/calendar-store-api/blob/master/details/integration_guide.md) are written for |
-| Read a whole calendar as JSON or XML | jCal or xCal. Same content as the iCalendar feed, one to one |
-| Show a list of a calendar's events in your own app: an agenda, upcoming matches | JSCalendar list: the whole calendar, titles and times only |
-| Show one event in detail: a match with its line-ups, a race classification, a holiday's background | JSCalendar, one event per request |
+| Subscribe a user, or sync the events into the device calendar | iCalendar |
+| Show a list of a calendar's events in your app: an agenda, upcoming matches | JSCalendar list |
+| Show an event in detail: a match with its line-ups, a race classification, a holiday's background | JSCalendar `Event`, one per request |
 
-JSCalendar does not replace the feed. Keep syncing with iCalendar, show your own lists from the JSCalendar list, and fetch the event's JSCalendar document when the user opens an event.
+JSCalendar does not replace the feed for syncing: the list has no descriptions, and calendar apps read iCalendar only.
 
 ### One Event as JSCalendar (RFC 8984)
 
@@ -162,7 +170,7 @@ Accept: application/jscalendar+json
 
 Do not sync the device calendar from the list. It has no descriptions, so events would show up there without their details, and iOS and other calendar apps read iCalendar only.
 
-#### Why JSCalendar for the Detail Screen
+#### Why JSCalendar
 
 * **No parsing of description text.** In iCalendar, a match's line-ups, a race classification or a holiday's background only exist as free text in `DESCRIPTION`, and the wording of that text is not a contract: it can change at any time. The vendor properties are a contract, versioned and changed additively only.
 * **Plain JSON.** No iCalendar parser, line folding, escaping or `VTIMEZONE` handling for a screen that shows one event. Any JSON library reads it.

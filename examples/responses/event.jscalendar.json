@@ -1,0 +1,11 @@
+{
+  "@type": "Event",
+  "uid": "90734_4_20260531_@schedjoules.com",
+  "updated": "2014-02-27T21:15:00Z",
+  "title": "Blue Moon",
+  "start": "2026-05-31T08:45:00",
+  "timeZone": "Etc/UTC",
+  "duration": "PT30M",
+  "status": "confirmed",
+  "schedjoules.com:version": 1
+}

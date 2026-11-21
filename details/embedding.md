@@ -62,7 +62,8 @@ Apps that draw their own calendar or agenda do not need the system calendar at a
 * All-day events (`DTSTART;VALUE=DATE`) are dates, not moments. Store and draw them as dates; converting them through a time zone moves them a day for some users.
 * Timed events carry a `TZID`: convert to the user's time zone when drawing.
 * Give each subscription its own colour and a visibility toggle, as you would for any other calendar.
-* `DESCRIPTION` holds the details users look for (scores, line-ups, TV channel, holiday explanation). Show it on your event view; it contains plain text with line breaks. To lay these details out yourself, fetch the event as [JSCalendar](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#one-event-as-jscalendar-rfc-8984) instead of parsing the text: its wording is not a contract.
+* When the user opens an event, fetch it as [JSCalendar](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#one-event-as-jscalendar-rfc-8984), the recommended format for your own event view: the details users look for (scores, line-ups, results, holiday explanation) as structured JSON. Do not parse `DESCRIPTION` for them: its wording is not a contract. On any status other than `200` or `304`, show `DESCRIPTION` as plain text with line breaks.
+* For a list screen that does not need the events stored (an agenda of one calendar, upcoming matches), read the [JSCalendar list](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#a-calendar-as-a-jscalendar-list) instead of the feed: titles and times only, a fraction of the size. Keep the layer in your calendar views synced from the feeds, as above.
 * The data stays on the device: see [Data Usage and Restrictions](https://github.com/schedjoules/calendar-store-api#data-usage-and-restrictions). If your app syncs calendars through your own servers, agree that with us first.
 
 ### Attribution

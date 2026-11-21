@@ -1,6 +1,6 @@
 # SchedJoules Calendar Service API
 
-> REST API (JSON over HTTPS) for public calendars: holidays, sports, TV, weather, finance and more. Clients browse pages of calendars and subscribe users to calendar feed URLs (iCalendar, jCal or xCal); a calendar is also available as a JSCalendar (RFC 8984) list, and a single event as a JSCalendar document for detail screens. Every request needs an `Authorization: Token token="..."` header.
+> REST API (JSON over HTTPS) for public calendars: holidays, sports, TV, weather, finance and more. Clients browse pages of calendars and subscribe users to calendar feed URLs (iCalendar); JSCalendar (RFC 8984), the recommended format for new integrations, gives a calendar as a slim list and a single event as a document for detail screens. jCal and xCal still work but are not recommended. Every request needs an `Authorization: Token token="..."` header.
 
 ## Docs
 
@@ -11,7 +11,7 @@
 - [A Basic UI](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/ui.md): The four screens of a v0.1: Browse, Calendar, My calendars, Settings, plus permissions and states
 - [Embedding the Catalogue](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/embedding.md): One switch, one branch or a source among sources: SchedJoules content inside an existing app, and drawing the events in your own views
 - [Pages](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/pages.md): The page response: sections, page items and calendar items, every field
-- [Calendars](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/calendars.md): Calendar feeds: formats, JSCalendar (RFC 8984) lists and single events, date range, results, incremental updates, sport results
+- [Calendars](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/calendars.md): Formats: JSCalendar (RFC 8984, recommended: lists and single events), iCalendar (most widely used), jCal and xCal (not recommended); date range, results, incremental updates, sport results
 - [Pregnancy and Countdown Calendars](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/user_input_calendars.md): Calendar URLs your app fills in with a due date or a countdown
 - [Weather](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/weather.md): The weather calendar template, units, city search and map locations
 - [Alarms](https://raw.githubusercontent.com/schedjoules/calendar-store-api/master/details/alarms.md): Default alarms per calendar type and the al parameter

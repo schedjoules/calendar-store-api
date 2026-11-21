@@ -17,6 +17,7 @@ You are integrating the SchedJoules Calendar API into an app.
    - Sync by `UID`; delete events only based on a complete feed; refresh with `If-None-Match`.
    - Never log feed URLs.
    - Sync from the iCalendar feed. For your own event list screen, use the JSCalendar list; for an event detail screen, fetch that event as JSCalendar (Calendars section) rather than parsing `DESCRIPTION` text, and fall back to `DESCRIPTION` on any non-200.
+   - Do not build on jCal (`.json`) or xCal (`.xml`). They still work but are not recommended: use JSCalendar for JSON and iCalendar for syncing.
    - Show "Calendars by SchedJoules" on every screen where users browse, search or pick calendars (README, Attribution). It is required.
 5. The public test key returns the real catalogue, but every calendar URL serves the same feed: "Moon Phases", a normal feed with upcoming events. So with the test key every calendar previews the same events and every feed's `X-WR-CALNAME` is "Moon Phases". That is expected, not a parsing bug; it is also why the shown name must come from the catalogue item. Test the other feed states with `examples/feeds/`. Real content needs a key from support@schedjoules.com.
 6. Check your screens against the UI checklist at the end of A Basic UI before you report the work as done.

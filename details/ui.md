@@ -71,8 +71,8 @@ What the user sees before and after subscribing to one calendar.
 
 * Title: the item's `name` (`original_name` when it came from search).
 * A subscribe control at the top: a switch or a button that turns into "Subscribed". Subscribing must give feedback at once; on Android, start the first sync immediately so events appear in the calendar app within seconds.
-* Below it, the next events of the feed: fetch it, and list date, time and `SUMMARY` of the next 10 to 20 events, grouped by day. This lets users check that they picked the right team or region before they subscribe, and it is the place where an empty calendar shows "No upcoming events" instead of the placeholder event (see [Integration Guide, step 5](https://github.com/schedjoules/calendar-store-api/blob/master/details/integration_guide.md#step-5-recognise-placeholder-events)).
-* Tapping an event can show its `DESCRIPTION`, `LOCATION` and `URL`; for sport this holds the scores and line-ups. For a richer event screen, fetch the event as [JSCalendar](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#one-event-as-jscalendar-rfc-8984): line-ups, results and holiday details as structured JSON instead of text.
+* Below it, the next events: fetch the [JSCalendar list](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#a-calendar-as-a-jscalendar-list) with `start_at_or_after` set to now and `results=20`, and list date, time and `title` of the entries, grouped by day. This lets users check that they picked the right team or region before they subscribe. An empty calendar gives `"entries": []`: show "No upcoming events". If you read the iCalendar feed here instead, never show its placeholder event (see [Integration Guide, step 5](https://github.com/schedjoules/calendar-store-api/blob/master/details/integration_guide.md#step-5-recognise-placeholder-events)).
+* Tapping an event opens its detail screen. Fetch the event as [JSCalendar](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#one-event-as-jscalendar-rfc-8984), the recommended format: line-ups, results and holiday details as structured JSON. On any status other than `200` or `304`, show the feed's `DESCRIPTION`, `LOCATION` and `URL` instead.
 * A calendar that needs input from the user asks for it here, before it can be subscribed:
   * weather: a city (with search) and units, see [Weather](https://github.com/schedjoules/calendar-store-api/blob/master/details/weather.md)
   * pregnancy: the due date; countdown: a name and a date, see [Pregnancy and Countdown Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/user_input_calendars.md)
@@ -150,8 +150,9 @@ Check each item in the running app, not only in code. Leave out the My calendars
 - [ ] Subscribed calendars are marked on their rows, matched by `item_id`, in Browse and in search results
 - [ ] Search starts at 3 characters after a short pause; results use `original_name` once opened
 - [ ] The Calendar screen title comes from the catalogue item, never from the feed's `X-WR-CALNAME`
-- [ ] The Calendar screen lists the next events grouped by day, and shows "No upcoming events" for `empty.ics`
+- [ ] The Calendar screen lists the next events grouped by day, and shows "No upcoming events" for an empty list (or `empty.ics` when it reads the feed)
 - [ ] No placeholder event is ever shown as an event (try every file in `examples/feeds/`)
+- [ ] Tapping an event shows its JSCalendar document (try `examples/responses/event.jscalendar.json`), and the feed's `DESCRIPTION` when that request fails
 - [ ] Subscribing gives feedback at once; on Android the first sync starts immediately
 - [ ] Calendar access is asked at the first subscribe, not at app start; refusing it leaves the subscription visible as not syncing, with a link to the system settings
 - [ ] Weather, pregnancy and countdown calendars ask for their input before subscribing
