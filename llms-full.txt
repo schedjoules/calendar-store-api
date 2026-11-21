@@ -25,7 +25,7 @@ You can explore the API with our test API key:
 ```
 curl 'https://api.schedjoules.com/pages/115673' -H 'Authorization: Token token="0443a55244bb2b6224fd48e0416f0d9c"'
 ```
-The test key gives access to the complete API, but every calendar URL it returns serves the same feed (Moon Phases). Your own key returns the real calendars.
+The test key gives access to the complete API, and every calendar URL it returns serves that calendar's real events, limited to the next 5. Your own key returns the whole calendar, in the window your agreement gives.
 
 ## Request Basics
 
@@ -425,7 +425,7 @@ What the user sees before and after subscribing to one calendar.
 
   Use the platform's date picker and a sheet or a separate screen. Never subscribe to the template URL with its `{placeholders}` still in it.
 
-**With the test key** every calendar serves the same feed, "Moon Phases", so every Calendar screen previews the same moon events, and every feed's `X-WR-CALNAME` is "Moon Phases". That is expected and not a parsing bug. Keep the title from the catalogue item; if your screen says "Moon Phases" for a football team, the name comes from the feed and is wrong. To test the empty and placeholder states, load the files in [examples/feeds](https://github.com/schedjoules/calendar-store-api/tree/master/examples/feeds) instead of a live feed.
+**With the test key** every calendar serves its real events, but only the next 5, so a Calendar screen previews at most 5 events and a synced calendar holds 5. That is expected and not a sync bug; your own key returns the whole calendar. To test the empty and placeholder states, load the files in [examples/feeds](https://github.com/schedjoules/calendar-store-api/tree/master/examples/feeds) instead of a live feed.
 
 ### My calendars
 
@@ -1503,6 +1503,7 @@ If you use a coding agent, point it at [llms-full.txt](https://github.com/schedj
 Breaking changes and deprecated features of the API.
 
 ### Done
+* **Real calendars with the test key.** Since 2026-11-21 the public test key gets each calendar's own feed URL, and every feed serves that calendar's real events, limited to the next 5. Before, every calendar URL it returned served the same Moon Phases feed. See the [README](https://github.com/schedjoules/calendar-store-api#set-yourself-up).
 * **JSCalendar recommended; jCal and xCal not recommended.** Since 2026-11-21 JSCalendar (RFC 8984) is the recommended format for new integrations: the list for event lists in your app, one event for detail screens. iCalendar remains the format for subscribing and syncing. jCal and xCal keep working but are not recommended: they carry no more than the iCalendar feed. See [Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#formats).
 * **jCal and xCal follow their RFCs.** Since 2026-11-21:
   * the calendar name property is `x-wr-calname`, not `x_wr_calname`;
