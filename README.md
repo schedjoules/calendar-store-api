@@ -19,7 +19,7 @@ curl 'https://api.schedjoules.com/pages/115673' -H 'Authorization: Token token="
 The test key gives access to the complete API, and every calendar URL it returns serves that calendar's real events, limited to the next 5. Your own key returns the whole calendar, in the window your agreement gives.
 
 ## Licensing
-The API is licensed per app. We agree one of two models with you: a revenue share on the payments your users make for calendar content, or a fee per user who has at least one SchedJoules calendar.
+The API is licensed per app. The standard price is **EUR 0.06 per active user per month, with a minimum of EUR 300 per month**. A user counts as active in a month when they have at least one SchedJoules calendar in your app that month; users who only browse are not counted. Instead of the per-user price, we can also agree a revenue share on the payments your users make for calendar content.
 
 The test key above is free and gives the complete API with the next 5 events per calendar, so you can build and test your integration before agreeing anything. For a production key, write to support@schedjoules.com with your app name, platforms and expected number of users.
 
