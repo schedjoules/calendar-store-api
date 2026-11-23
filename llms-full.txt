@@ -19,13 +19,18 @@ The iOS and Android SDKs and the Swift client library are deprecated: integrate 
 
 ## Set Yourself Up
 
-An API key is required. Request one at support@schedjoules.com.
+An API key is required. Request one at support@schedjoules.com; how keys are licensed is under [Licensing](#licensing).
 
 You can explore the API with our test API key:
 ```
 curl 'https://api.schedjoules.com/pages/115673' -H 'Authorization: Token token="0443a55244bb2b6224fd48e0416f0d9c"'
 ```
 The test key gives access to the complete API, and every calendar URL it returns serves that calendar's real events, limited to the next 5. Your own key returns the whole calendar, in the window your agreement gives.
+
+## Licensing
+The API is licensed per app. We agree one of two models with you: a revenue share on the payments your users make for calendar content, or a fee per user who has at least one SchedJoules calendar.
+
+The test key above is free and gives the complete API with the next 5 events per calendar, so you can build and test your integration before agreeing anything. For a production key, write to support@schedjoules.com with your app name, platforms and expected number of users.
 
 ## Request Basics
 
