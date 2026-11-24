@@ -26,7 +26,7 @@ Optional GET parameters
 
 The parameter applies to every request that returns pages: `/pages`, `/pages/{page_id}`, search, and the top, new and next lists. A request without it never sees these pages, so an app that cannot fill the template does not show its users a calendar they cannot use.
 
-At the moment these pages are served to the SchedJoules apps only, whatever the `features` parameter says. Contact support@schedjoules.com if you would like to offer them in your app.
+At the moment these pages are served only to the SchedJoules iOS and Android apps and to the [test key](https://github.com/schedjoules/calendar-store-api#set-yourself-up), and only when the request sends `features`. With the test key you can build and test the input step; with your own key the pages stay hidden, whatever the `features` parameter says. Contact support@schedjoules.com if you would like to offer them in your app.
 
 ### Recognising a template
 
