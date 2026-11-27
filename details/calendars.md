@@ -221,10 +221,9 @@ Optional GET parameters
 - events_updated_since  Returns only events updated after this moment.
 ```
 
-The format currently depends on the calendar type:
-* **National holiday calendars:** Unix time in seconds, for example `1767225600`.
-* **Regional holiday calendars and most sport calendars:** an ISO 8601 datetime, for example `2026-01-01T00:00:00Z`.
-* **All other calendars:** the parameter is ignored, and you get the full calendar.
+The timestamp is an ISO 8601 datetime, for example `2026-01-01T00:00:00Z`, or Unix time in seconds, for example `1767225600`. Both work on every calendar. A datetime without a time zone is read as UTC. A value that is neither is ignored, and you get the full calendar.
+
+Holiday calendars and most sport calendars return only the changed events. All other calendars ignore the parameter and return the full calendar.
 
 When you ask a sport calendar for updates, events that were called off are included, so you can remove them on your side.
 

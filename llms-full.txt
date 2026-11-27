@@ -982,10 +982,9 @@ Optional GET parameters
 - events_updated_since  Returns only events updated after this moment.
 ```
 
-The format currently depends on the calendar type:
-* **National holiday calendars:** Unix time in seconds, for example `1767225600`.
-* **Regional holiday calendars and most sport calendars:** an ISO 8601 datetime, for example `2026-01-01T00:00:00Z`.
-* **All other calendars:** the parameter is ignored, and you get the full calendar.
+The timestamp is an ISO 8601 datetime, for example `2026-01-01T00:00:00Z`, or Unix time in seconds, for example `1767225600`. Both work on every calendar. A datetime without a time zone is read as UTC. A value that is neither is ignored, and you get the full calendar.
+
+Holiday calendars and most sport calendars return only the changed events. All other calendars ignore the parameter and return the full calendar.
 
 When you ask a sport calendar for updates, events that were called off are included, so you can remove them on your side.
 
@@ -1545,6 +1544,7 @@ If you use a coding agent, point it at [llms-full.txt](https://github.com/schedj
 Breaking changes and deprecated features of the API.
 
 ### Done
+* **`events_updated_since` takes both formats everywhere.** Since 2026-11-27 every calendar accepts an ISO 8601 datetime or Unix time in seconds. Before, national holiday calendars read only Unix time and returned the whole calendar for a datetime, and the other calendars answered a Unix time with an error. See [Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#incremental-updates).
 * **Competition on matches.** Since 2026-11-21 JSCalendar list entries and event documents of a match carry `schedjoules.com:competition`. See [Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#the-document).
 * **Real calendars with the test key.** Since 2026-11-21 the public test key gets each calendar's own feed URL, and every feed serves that calendar's real events, limited to the next 5. Before, every calendar URL it returned served the same Moon Phases feed. See the [README](https://github.com/schedjoules/calendar-store-api#set-yourself-up).
 * **JSCalendar recommended; jCal and xCal not recommended.** Since 2026-11-21 JSCalendar (RFC 8984) is the recommended format for new integrations: the list for event lists in your app, one event for detail screens. iCalendar remains the format for subscribing and syncing. jCal and xCal keep working but are not recommended: they carry no more than the iCalendar feed. See [Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#formats).
@@ -1566,7 +1566,6 @@ Breaking changes and deprecated features of the API.
 
 ### Planned
 * **`icon_etag` removal.** The field is still sent in Countries and in Top, New and Next, but its value is always `null`. Do not rely on it.
-* **`events_updated_since` format.** National holiday calendars take Unix time, all others an ISO 8601 datetime. This will become one format; see [Calendars](https://github.com/schedjoules/calendar-store-api/blob/master/details/calendars.md#incremental-updates).
 
 
 <!-- source: details/faq.md -->
